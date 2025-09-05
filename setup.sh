@@ -109,9 +109,11 @@ validate_permissions() {
 
 clone_or_update_dotfiles() {
     if [ -d "$DOTFILES_DIR" ]; then
-        log_info "Dotfiles repository already exists, updating..."
+        log_info "Dotfiles repository already exists, force updating..."
         cd "$DOTFILES_DIR"
-        git pull
+        git fetch origin
+        git reset --hard origin/main
+        log_info "Local changes overwritten with latest version"
     else
         log_info "Cloning dotfiles repository..."
         git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
@@ -295,6 +297,30 @@ setup_fastfetch_config() {
     fi
 }
 
+setup_claude_config() {
+    local user_home
+    user_home=$(get_user_home)
+    local claude_dir="$user_home/.claude"
+    
+    mkdir -p "$claude_dir"
+    
+    if [ -f "$DOTFILES_DIR/.claude/CLAUDE.md" ]; then
+        ln -sf "$DOTFILES_DIR/.claude/CLAUDE.md" "$claude_dir/CLAUDE.md"
+        log_success "Claude Code CLAUDE.md linked"
+    else
+        log_warning "CLAUDE.md not found"
+    fi
+    
+    if [ -f "$DOTFILES_DIR/.claude/settings.local.json" ]; then
+        ln -sf "$DOTFILES_DIR/.claude/settings.local.json" "$claude_dir/settings.local.json"
+        log_success "Claude Code settings.local.json linked"
+    else
+        log_warning "settings.local.json not found"
+    fi
+    
+    log_info "Claude Code credentials.json preserved (if exists)"
+}
+
 setup_bash_config() {
     local user_home
     user_home=$(get_user_home)
@@ -352,6 +378,7 @@ main() {
     install_zoxide || exit 1
     
     setup_fastfetch_config
+    setup_claude_config
     setup_bash_config || exit 1
     
     log_success "Dotfiles setup completed successfully!"
