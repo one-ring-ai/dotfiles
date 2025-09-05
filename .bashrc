@@ -1,10 +1,21 @@
 #!/usr/bin/env bash
+
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 iatest=$(expr index "$-" i)
+
 #######################################################
-# SOURCED ALIAS'S AND SCRIPTS BY zachbrowne.me
+# DOTFILES CONFIGURATION
+# Repository: https://github.com/one-ring-ai/dotfiles
 #######################################################
-if [ -f /usr/bin/fastfetch ]; then
-	fastfetch
+if command -v fastfetch &> /dev/null; then
+    # Only run fastfetch if we're in an interactive shell
+    if [[ $- == *i* ]]; then
+        fastfetch
+    fi
 fi
 
 # Source global definitions
@@ -47,8 +58,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-# Seeing as other scripts will use it might as well export it
-export LINUXTOOLBOXDIR="$HOME/linuxtoolbox"
+# Export dotfiles directory for scripts that might need it
+export DOTFILESDIR="$HOME/dotfiles"
 
 # Allow ctrl-S for history navigation (with ctrl-R)
 [[ $- == *i* ]] && stty -ixon
@@ -61,11 +72,10 @@ if [[ $iatest -gt 0 ]]; then bind "set completion-ignore-case on"; fi
 if [[ $iatest -gt 0 ]]; then bind "set show-all-if-ambiguous On"; fi
 
 # Set the default editor
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=nano
+export VISUAL=nano
 alias spico='sudo pico'
 alias snano='sudo nano'
-alias vim='nvim'
 
 # To have colors for ls and all grep commands such as grep, egrep and zgrep
 export CLICOLOR=1
@@ -92,22 +102,17 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 #######################################################
-# MACHINE SPECIFIC ALIAS'S
+# MACHINE SPECIFIC ALIASES
 #######################################################
 
-# Alias's for SSH
+# aliases for SSH
 # alias SERVERNAME='ssh YOURWEBSITE.com -l USERNAME -p PORTNUMBERHERE'
 
-# Alias's to change the directory
-alias web='cd /var/www/html'
-
-# Alias's to mount ISO files
-# mount -o loop /home/NAMEOFISO.iso /home/ISOMOUNTDIR/
-# umount /home/NAMEOFISO.iso
-# (Both commands done as root only.)
+# aliases to change the directory
+alias appdata='cd /mnt/user/appdata'
 
 #######################################################
-# GENERAL ALIAS'S
+# GENERAL ALIASES
 #######################################################
 # To temporarily bypass an alias, we precede the command with a \
 # EG: the ls command is aliased, but to use the normal ls command you would type \ls
@@ -125,13 +130,16 @@ alias hlp='less ~/.bashrc_help'
 # alias to show the date
 alias da='date "+%Y-%m-%d %A %T %Z"'
 
-# Alias's to modified commands
+# aliases to modified commands
 alias cp='cp -i'
 alias mv='mv -i'
-alias rm='trash -v'
+if command -v trash &> /dev/null; then
+    alias rm='trash -v'
+else
+    alias rm='rm -i'  # fallback to interactive remove
+fi
 alias mkdir='mkdir -p'
 alias ps='ps auxf'
-alias ping='ping -c 10'
 alias less='less -R'
 alias cls='clear'
 alias apt-get='sudo apt-get'
@@ -140,7 +148,6 @@ alias freshclam='sudo freshclam'
 alias vi='nvim'
 alias svi='sudo vi'
 alias vis='nvim "+set si"'
-alias yayf="yay -Slq | fzf --multi --preview 'yay -Sii {1}' --preview-window=down:75% | xargs -ro yay -S"
 
 # Change directory aliases
 alias home='cd ~'
@@ -156,7 +163,7 @@ alias bd='cd "$OLDPWD"'
 # Remove a directory and all files
 alias rmd='/bin/rm  --recursive --force --verbose '
 
-# Alias's for multiple directory listing commands
+# aliases for multiple directory listing commands
 alias la='ls -Alh'                # show hidden files
 alias ls='ls -aFh --color=always' # add colors and file type extensions
 alias lx='ls -lXBh'               # sort by extension
@@ -202,11 +209,11 @@ alias checkcommand="type -t"
 # Show open ports
 alias openports='netstat -nape --inet'
 
-# Alias's for safe and forced reboots
+# aliases for safe and forced reboots
 alias rebootsafe='sudo shutdown -r now'
 alias rebootforce='sudo shutdown -r -n now'
 
-# Alias's to show disk space and space used in a folder
+# aliases to show disk space and space used in a folder
 alias diskspace="du -S | sort -n -r |more"
 alias folders='du -h --max-depth=1'
 alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
@@ -214,7 +221,7 @@ alias tree='tree -CAhF --dirsfirst'
 alias treed='tree -CAFd'
 alias mountedinfo='df -hT'
 
-# Alias's for archives
+# aliases for archives
 alias mktar='tar -cvf'
 alias mkbz2='tar -cvjf'
 alias mkgz='tar -cvzf'
@@ -231,11 +238,9 @@ alias sha1='openssl sha1'
 alias clickpaste='sleep 3; xdotool type "$(xclip -o -selection clipboard)"'
 
 # KITTY - alias to be able to use kitty features when connecting to remote servers(e.g use tmux on remote server)
-
 alias kssh="kitty +kitten ssh"
 
 # alias to cleanup unused docker containers, images, networks, and volumes
-
 alias docker-clean=' \
   docker container prune -f ; \
   docker image prune -f ; \
@@ -415,11 +420,13 @@ distribution () {
 
 
 DISTRIBUTION=$(distribution)
-if [ "$DISTRIBUTION" = "redhat" ] || [ "$DISTRIBUTION" = "arch" ]; then
-      alias cat='bat'
-else
-      alias cat='batcat'
-fi 
+if command -v bat &> /dev/null || command -v batcat &> /dev/null; then
+    if [ "$DISTRIBUTION" = "redhat" ] || [ "$DISTRIBUTION" = "arch" ]; then
+        alias cat='bat'
+    else
+        alias cat='batcat'
+    fi
+fi
 
 # Show the current version of the operating system
 ver() {
@@ -510,7 +517,7 @@ function whatsmyip () {
 
     # External IP Lookup
     echo -n "External IP: "
-    curl -4 ifconfig.me
+    curl -s ifconfig.me
 }
 
 # View Apache logs
@@ -583,43 +590,32 @@ trim() {
 	var="${var%"${var##*[![:space:]]}"}" # remove trailing whitespace characters
 	echo -n "$var"
 }
-# GitHub Titus Additions
 
+# GitHub Titus Additions
 gcom() {
 	git add .
 	git commit -m "$1"
 }
-lazyg() {
+gpush() {
 	git add .
 	git commit -m "$1"
 	git push
 }
 
-function hb {
-    if [ $# -eq 0 ]; then
-        echo "No file path specified."
-        return
-    elif [ ! -f "$1" ]; then
-        echo "File path does not exist."
-        return
-    fi
-
-    uri="http://bin.christitus.com/documents"
-    response=$(curl -s -X POST -d @"$1" "$uri")
-    if [ $? -eq 0 ]; then
-        hasteKey=$(echo $response | jq -r '.key')
-        echo "http://bin.christitus.com/$hasteKey"
-    else
-        echo "Failed to upload the document."
-    fi
+lg() {
+	if command -v lazygit &> /dev/null; then
+		lazygit
+	else
+		echo "lazygit not installed. Install with: brew install lazygit"
+	fi
 }
+
 
 #######################################################
 # Set the ultimate amazing command prompt
 #######################################################
 
-alias hug="systemctl --user restart hugo"
-alias lanm="systemctl --user restart lan-mouse"
+alias hug="hugo server -F --bind=10.0.0.97 --baseURL=http://10.0.0.97"
 
 # Check if the shell is interactive
 if [[ $- == *i* ]]; then
@@ -632,11 +628,18 @@ export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bi
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-
-exec startx
-
+# Auto-start DWM if we're on TTY1 and .xinitrc contains "exec dwm"
+if [[ "$(tty)" == "/dev/tty1" ]] && [ -f "$HOME/.xinitrc" ] && grep -q "^exec dwm" "$HOME/.xinitrc"; then
+    startx
 fi
 
+. "$HOME/.local/share/../bin/env"
 
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
+# opencode (if available)
+if [ -d "$HOME/.opencode/bin" ]; then
+    export PATH="$HOME/.opencode/bin:$PATH"
+fi

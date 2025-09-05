@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker build:*)",
+      "Bash(docker image:*)",
+      "Bash(docker logs:*)",
+      "Bash(docker ps:*)",
+      "Bash(find . :*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(npm install:*)",
+      "Bash(npm ls:*)",
+      "Bash(yamllint:*)",
+      "WebFetch(domain:coder.com)",
+      "WebFetch(domain:docs.dokploy.com)",
+      "WebFetch(domain:docs.hetzner.com)",
+      "WebFetch(domain:docs.mistral.ai)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:replicate.com)"
+    ],
+    "deny": []
+  }
+}
