@@ -14,6 +14,7 @@
       "Bash(npm install:*)",
       "Bash(npm ls:*)",
       "Bash(yamllint:*)",
+      "WebSearch",
       "WebFetch(domain:coder.com)",
       "WebFetch(domain:docs.dokploy.com)",
       "WebFetch(domain:docs.hetzner.com)",

@@ -303,6 +303,16 @@ setup_claude_config() {
         log_warning "settings.local.json not found"
     fi
     
+    if [ -d "$DOTFILES_DIR/.claude/agents" ]; then
+        if [ -d "$claude_dir/agents" ]; then
+            rm -rf "$claude_dir/agents"
+        fi
+        ln -sf "$DOTFILES_DIR/.claude/agents" "$claude_dir/agents"
+        log_success "Claude Code agents directory linked"
+    else
+        log_warning "agents directory not found"
+    fi
+    
     log_info "Claude Code credentials.json preserved (if exists)"
 }
 
