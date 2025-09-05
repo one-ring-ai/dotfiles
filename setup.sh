@@ -238,7 +238,7 @@ install_starship() {
     fi
     
     log_info "Installing Starship prompt..."
-    if curl -sS https://starship.rs/install.sh | sh -s -- -y; then
+    if curl -sS https://starship.rs/install.sh | $PRIVILEGE_CMD sh -s -- -y; then
         log_success "Starship installed successfully"
     else
         log_error "Failed to install Starship"
