@@ -1,121 +1,186 @@
-# ChrisTitusTech's `.bashrc` Configuration
+# One Ring AI Dotfiles
 
 ## Overview
 
-This repository provides a comprehensive `.bashrc` configuration along with supporting scripts and configuration files to enhance your terminal experience in Unix-like operating systems. It configures the shell session by setting up aliases, defining functions, customizing the prompt, and more, significantly improving the terminal's usability and power.
+This repository provides a comprehensive shell configuration system designed for VPS template deployment via Terraform. It includes a complete `.bashrc` configuration, Starship prompt, system tools installation, and Claude Code integration to create consistent development environments across multiple servers.
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Uninstallation](#uninstallation)
+- [Quick Installation](#quick-installation)
+- [Terraform Integration](#terraform-integration)
 - [Configuration Files](#configuration-files)
-  - [.bashrc](#bashrc)
-  - [starship.toml](#starshiptoml)
-  - [config.jsonc](#configjsonc)
 - [Key Features](#key-features)
-- [Advanced Functions](#advanced-functions)
-- [System-Specific Configurations](#system-specific-configurations)
-- [Conclusion](#conclusion)
+- [VPS Template Usage](#vps-template-usage)
+- [Development Tools](#development-tools)
+- [Uninstallation](#uninstallation)
 
-## Installation
+## Quick Installation
 
-To install the `.bashrc` configuration, execute the following commands in your terminal:
+For manual installation on a single server:
 
-```sh
-git clone --depth=1 https://github.com/dacrab/mybash.git
-cd mybash
+```bash
+curl -sSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/main/setup.sh | bash
+```
+
+Or clone and run:
+
+```bash
+git clone https://github.com/one-ring-ai/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 ./setup.sh
 ```
 
-The `setup.sh` script automates the installation process by:
+The setup script automatically:
+- Clones/updates the repository to `~/dotfiles`
+- Detects your package manager and installs dependencies
+- Installs MesloLGS Nerd Font
+- Sets up Starship prompt, FZF, and Zoxide
+- Creates symbolic links to configuration files
+- Configures Fastfetch for system information display
 
-- Creating necessary directories (`linuxtoolbox/mybash`)
-- Cloning the repository
-- Installing dependencies (bash-completion, neovim, starship, fzf, zoxide)
-- Installing the MesloLGS Nerd Font required for the prompt
-- Linking configuration files (`.bashrc` and `starship.toml`) to your home directory
-- Setting up additional utilities like `fastfetch`
+## Terraform Integration
 
-Ensure you have the required permissions and a supported package manager before running the script.
+This repository is designed for automated VPS provisioning. The setup script:
 
-## Uninstallation
+1. **Auto-clones**: Downloads the repository if not present
+2. **Updates automatically**: Runs `git pull` on existing installations  
+3. **User-agnostic**: Works for any user/environment
+4. **Idempotent**: Safe to run multiple times
+5. **Symbolic links**: Configuration updates propagate automatically
 
-To uninstall the `.bashrc` configuration, run:
+### Terraform Usage Example
 
-```sh
-cd mybash
-chmod +x uninstall.sh
-./uninstall.sh
+```hcl
+resource "null_resource" "setup_dotfiles" {
+  provisioner "remote-exec" {
+    inline = [
+      "curl -sSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/main/setup.sh | bash",
+      "source ~/.bashrc"
+    ]
+  }
+}
 ```
-
-The `uninstall.sh` script reverses the installation process by:
-
-- Removing installed dependencies
-- Uninstalling fonts
-- Removing symbolic links to configuration files
-- Deleting the `linuxtoolbox` directory
-- Cleaning up additional utilities like `starship`, `fzf`, and `zoxide`
-
-After running the script, it's recommended to restart your shell to apply the changes.
 
 ## Configuration Files
 
 ### `.bashrc`
-
-The `.bashrc` file defines aliases, functions, and environment variables to enhance your shell experience. Key features include:
-
-- **Aliases**: Shortcuts for common commands (e.g., `alias cp='cp -i'`)
-- **Functions**: Custom functions for tasks like extracting archives and copying files with progress
+- **200+ aliases** for enhanced productivity
+- **Custom functions** for file operations, system info, git workflows
+- **Enhanced navigation** with directory shortcuts and auto-ls on cd
+- **Development tools** integration (Docker, Git, package managers)
+- **Safety features** using trash-cli instead of rm
+- **Color-coded outputs** for better readability
 
 ### `starship.toml`
-
-The `starship.toml` file configures the [Starship](https://starship.rs/) prompt, providing a highly customizable and informative shell prompt. It includes:
-
-- **Theme Settings**: Defines colors and symbols for different prompt segments
-- **Module Configurations**: Customizes modules like `python`, `git`, `docker_context`, and various programming languages
-- **Format Customization**: Structures the layout and truncation of paths for a cleaner look
+- **Contextual prompt** showing git status, language versions, etc.
+- **Fast performance** with minimal latency
+- **Custom formatting** optimized for development workflows
 
 ### `config.jsonc`
+- **Fastfetch configuration** for system information display
+- **Organized sections** for hardware, software, and system details
+- **Color-coded output** matching the overall theme
 
-The `config.jsonc` file configures [fastfetch](https://github.com/AlexRogalskiy/fastfetch), a system information tool. It includes:
-
-- **Logo and Display Settings**: Customizes the appearance of system logos and separators
-- **Modules**: Defines which system information modules to display, such as CPU, GPU, OS, kernel, and uptime
-- **Custom Sections**: Adds custom formatted sections for hardware and software information
+### `.claude/` Directory
+- **Claude Code settings** for AI-assisted development
+- **Permission configurations** for secure tool usage
+- **Project-specific instructions** and conventions
 
 ## Key Features
 
-1. **Aliases and Functions**
-   - Shortcuts for common commands
-   - Custom functions for complex operations (e.g., extracting archives, copying with progress)
+### Shell Enhancements
+- **Smart aliases** that adapt based on available tools
+- **Conditional path exports** for user-specific tools
+- **History management** with timestamps and deduplication
+- **Auto-completion** improvements and case-insensitive matching
 
-2. **Prompt Customization and History Management**
-   - Configures PROMPT_COMMAND for automatic history saving
-   - Manages history file size and handles duplicates
+### Development Tools
+- **Git shortcuts** with `gcom()` and `gpush()` functions
+- **Docker cleanup** aliases for container management  
+- **Archive extraction** with universal `extract()` function
+- **Network utilities** for IP detection and port monitoring
 
-3. **Enhancements and Utilities**
-   - Improves command output readability with colors
-   - Introduces safer file operations (e.g., using `trash` instead of `rm`)
-   - Integrates Zoxide for easy directory navigation
+### System Administration
+- **Distribution detection** with automatic package manager selection
+- **Service management** shortcuts for common operations
+- **Log monitoring** with multitail integration
+- **Resource monitoring** aliases and functions
 
-4. **Installation and Configuration Helpers**
-   - Auto-installs necessary utilities based on system type
-   - Provides functions to edit important configuration files
+### Safety Features
+- **Interactive confirmations** for destructive operations
+- **Trash-cli integration** instead of permanent deletion
+- **Backup creation** before overwriting configurations
+- **Permission validation** before system modifications
 
-## Advanced Functions
+## VPS Template Usage
 
-- System information display
-- Networking utilities (e.g., IP address checks)
-- Resource monitoring tools
+### Folder Structure
+```
+~/dotfiles/
+├── .bashrc           # Main shell configuration
+├── setup.sh          # Installation script
+├── uninstall.sh      # Removal script
+├── config.jsonc      # Fastfetch configuration
+├── starship.toml     # Prompt configuration
+├── .claude/          # Claude Code settings
+│   ├── CLAUDE.md     # Development standards
+│   └── settings.local.json # Tool permissions
+└── .github/          # CI/CD configurations
+```
 
-## System-Specific Configurations
+### Environment Variables
+- `DOTFILESDIR`: Points to `~/dotfiles` for script usage
+- `XDG_*`: Standard directories for configuration files
+- Development tool paths automatically detected and configured
 
-- Editor settings (NeoVim as default)
-- Conditional aliases based on system type
-- Package manager-specific commands
+### Update Mechanism
+When Terraform re-runs the setup script:
+1. Repository is updated via `git pull`
+2. Symlinks automatically point to updated files
+3. No manual intervention required
+4. Changes take effect on next shell session
 
-## Conclusion
+## Development Tools
 
-This `.bashrc` configuration offers a powerful and customizable terminal environment suitable for various Unix-like systems. It enhances productivity through smart aliases, functions, and integrated tools while maintaining flexibility for system-specific needs. Whether you're a developer, system administrator, or power user, this setup aims to make your terminal experience more efficient and enjoyable.
+### Claude Code Integration
+- Pre-configured permissions for common operations
+- Project-specific coding standards and conventions
+- Docker and development tool access controls
 
-For any issues, suggestions, or contributions, please open an issue or pull request in this repository. We welcome community involvement to make this configuration even better!
+### Git Workflow
+- Conventional commit message format
+- Automated backup of existing configurations
+- Branch-aware prompt with status indicators
+
+### Package Management
+- Multi-distribution support (Ubuntu, Arch, Fedora, etc.)
+- Automatic dependency installation
+- AUR helper setup for Arch-based systems
+
+## Uninstallation
+
+To remove the configuration:
+
+```bash
+cd ~/dotfiles
+./uninstall.sh
+```
+
+This will:
+- Remove all symbolic links
+- Restore backed-up configurations
+- Uninstall optional dependencies
+- Clean up font installations
+- Remove the dotfiles directory
+
+## Contributing
+
+This repository follows conventional commit messages and includes automated dependency updates via Dependabot. All configurations are designed to be portable across different Unix-like systems.
+
+For issues or improvements, please open an issue or pull request.
+
+## Acknowledgments
+
+This dotfiles configuration is based on the excellent work by [Chris Titus](https://github.com/ChrisTitusTech) from his [mybash repository](https://github.com/ChrisTitusTech/mybash). We've adapted and extended his configurations for VPS template deployment and Terraform integration while maintaining the core functionality and philosophy of his original work.
+
+Special thanks to Chris for creating such a comprehensive and well-documented shell configuration that has served as the foundation for this project.
