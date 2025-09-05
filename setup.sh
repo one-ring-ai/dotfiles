@@ -130,7 +130,7 @@ setup_directories() {
 }
 
 install_packages() {
-    local packages="bash bash-completion tar bat tree fastfetch wget unzip fontconfig"
+    local packages="bash bash-completion tar bat tree wget unzip fontconfig"
     if ! command_exists nvim; then
         packages="$packages neovim"
         fi
@@ -152,7 +152,7 @@ install_packages() {
             $PRIVILEGE_CMD $PACKAGE_MANAGER install -y $packages
             ;;
         emerge)
-            local emerge_packages="app-shells/bash app-shells/bash-completion app-arch/tar sys-apps/bat app-text/tree app-misc/fastfetch app-misc/trash-cli"
+            local emerge_packages="app-shells/bash app-shells/bash-completion app-arch/tar sys-apps/bat app-text/tree app-misc/trash-cli"
             if ! command_exists nvim; then
                 emerge_packages="$emerge_packages app-editors/neovim"
     fi
@@ -162,7 +162,7 @@ install_packages() {
             $PRIVILEGE_CMD $PACKAGE_MANAGER -Sy $packages
             ;;
         nix-env)
-            local nix_packages="nixos.bash nixos.bash-completion nixos.gnutar nixos.bat nixos.tree nixos.fastfetch nixos.trash-cli"
+            local nix_packages="nixos.bash nixos.bash-completion nixos.gnutar nixos.bat nixos.tree nixos.trash-cli"
             if ! command_exists nvim; then
                 nix_packages="$nix_packages nixos.neovim"
         fi
@@ -281,21 +281,6 @@ install_zoxide() {
     fi
 }
 
-setup_fastfetch_config() {
-    local user_home
-    user_home=$(get_user_home)
-    local fastfetch_dir="$user_home/.config/fastfetch"
-    local config_file="$fastfetch_dir/config.jsonc"
-    
-    mkdir -p "$fastfetch_dir"
-    
-    if [ -f "$DOTFILES_DIR/config.jsonc" ]; then
-        ln -sf "$DOTFILES_DIR/config.jsonc" "$config_file"
-        log_success "Fastfetch config linked"
-    else
-        log_warning "Fastfetch config file not found"
-    fi
-}
 
 setup_claude_config() {
     local user_home
@@ -376,8 +361,6 @@ main() {
     install_starship || exit 1
     install_fzf || exit 1
     install_zoxide || exit 1
-    
-    setup_fastfetch_config
     setup_claude_config
     setup_bash_config || exit 1
     

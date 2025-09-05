@@ -11,12 +11,6 @@ iatest=$(expr index "$-" i)
 # DOTFILES CONFIGURATION
 # Repository: https://github.com/one-ring-ai/dotfiles
 #######################################################
-if command -v fastfetch &> /dev/null; then
-    # Only run fastfetch if we're in an interactive shell
-    if [[ $- == *i* ]]; then
-        fastfetch
-    fi
-fi
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -475,24 +469,16 @@ install_bashrc_support() {
 
 	case $dtype in
 		"redhat")
-			sudo yum install multitail tree zoxide trash-cli fzf bash-completion fastfetch
+			sudo yum install multitail tree zoxide trash-cli fzf bash-completion
 			;;
 		"suse")
-			sudo zypper install multitail tree zoxide trash-cli fzf bash-completion fastfetch
+			sudo zypper install multitail tree zoxide trash-cli fzf bash-completion
 			;;
 		"debian")
 			sudo apt-get install multitail tree zoxide trash-cli fzf bash-completion
-			# Fetch the latest fastfetch release URL for linux-amd64 deb file
-			FASTFETCH_URL=$(curl -s https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest | grep "browser_download_url.*linux-amd64.deb" | cut -d '"' -f 4)
-
-			# Download the latest fastfetch deb file
-			curl -sL $FASTFETCH_URL -o /tmp/fastfetch_latest_amd64.deb
-
-			# Install the downloaded deb file using apt-get
-			sudo apt-get install /tmp/fastfetch_latest_amd64.deb
 			;;
 		"arch")
-			sudo paru multitail tree zoxide trash-cli fzf bash-completion fastfetch
+			sudo paru multitail tree zoxide trash-cli fzf bash-completion
 			;;
 		"slackware")
 			echo "No install support for Slackware"
