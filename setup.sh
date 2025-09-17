@@ -282,38 +282,24 @@ install_zoxide() {
 }
 
 
-setup_claude_config() {
+setup_opencode_config() {
     local user_home
     user_home=$(get_user_home)
-    local claude_dir="$user_home/.claude"
-    
-    mkdir -p "$claude_dir"
-    
-    if [ -f "$DOTFILES_DIR/.claude/CLAUDE.md" ]; then
-        ln -sf "$DOTFILES_DIR/.claude/CLAUDE.md" "$claude_dir/CLAUDE.md"
-        log_success "Claude Code CLAUDE.md linked"
-    else
-        log_warning "CLAUDE.md not found"
-    fi
-    
-    if [ -f "$DOTFILES_DIR/.claude/settings.local.json" ]; then
-        ln -sf "$DOTFILES_DIR/.claude/settings.local.json" "$claude_dir/settings.local.json"
-        log_success "Claude Code settings.local.json linked"
-    else
-        log_warning "settings.local.json not found"
-    fi
-    
-    if [ -d "$DOTFILES_DIR/.claude/agents" ]; then
-        if [ -d "$claude_dir/agents" ]; then
-            rm -rf "$claude_dir/agents"
+    local opencode_dir="$user_home/.config/opencode"
+
+    if [ -d "$DOTFILES_DIR/.config/opencode" ]; then
+        log_info "Setting up OpenCode configuration..."
+        mkdir -p "$user_home/.config"
+
+        if [ -d "$opencode_dir" ]; then
+            rm -rf "$opencode_dir"
         fi
-        ln -sf "$DOTFILES_DIR/.claude/agents" "$claude_dir/agents"
-        log_success "Claude Code agents directory linked"
+
+        cp -r "$DOTFILES_DIR/.config/opencode" "$opencode_dir"
+        log_success "OpenCode configuration copied"
     else
-        log_warning "agents directory not found"
+        log_warning "OpenCode config not found in dotfiles"
     fi
-    
-    log_info "Claude Code credentials.json preserved (if exists)"
 }
 
 setup_bash_config() {
@@ -371,7 +357,7 @@ main() {
     install_starship || exit 1
     install_fzf || exit 1
     install_zoxide || exit 1
-    setup_claude_config
+    setup_opencode_config
     setup_bash_config || exit 1
     
     log_success "Dotfiles setup completed successfully!"

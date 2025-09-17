@@ -1,0 +1,107 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+ 
+  "model": "anthropic/claude-sonnet-4-20250514",
+  "small_model": "groq/openai/gpt-oss-120b",
+  "instructions": ["CODE_OF_CONDUCT.md", "PROJECT.md"],
+
+  "autoupdate": true,
+ 
+  "provider": {
+    "groq": {
+      "api": "https://api.groq.com/openai/v1",
+      "name": "Groq",
+      "env": ["GROQ_API_KEY"],
+      "id": "groq",
+      "models": {
+        "openai/gpt-oss-120b": {
+          "id": "openai/gpt-oss-120b",
+          "name": "GPT-OSS 120B",
+          "release_date": "2025-08-07",
+          "attachment": false,
+          "reasoning": true,
+          "tool_call": true,
+          "temperature": true,
+          "cost": {
+            "input": 0.15,
+            "output": 0.75
+          },
+          "limit": {
+            "context": 131072,
+            "output": 32766
+          }
+        }
+      },
+      "options": {
+        "apiKey": "{file:~/.config/opencode/.secrets/groq-key}",
+        "baseURL": "https://api.groq.com/openai/v1"
+      }
+    },
+    "openrouter": {
+      "api": "https://openrouter.ai/api/v1",
+      "name": "Openrouter",
+      "env": ["OPENAI_API_KEY"],
+      "id": "openrouter",
+      "models": {
+        "google/gemini-2.5-pro": {},
+        "openai/gpt-5": {},
+        "mistralai/devstral-medium": {}
+      },
+      "options": {
+        "apiKey": "{file:~/.config/opencode/.secrets/openrouter-key}"
+      }
+    },
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama",
+      "options": {
+        "baseURL": "http://192.168.188.97:11434/v1"
+      },
+      "models": {
+        "gpt-oss:latest": {
+          "name": "gpt-oss:latest"
+        }
+      }
+    }
+  },
+
+  "mcp": {
+    "figma": {
+      "type": "local",
+      "command": ["npx", "-y", "figma-developer-mcp", "--figma-api-key={file:~/.config/opencode/.secrets/figma-token}", "--stdio"],
+      "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "@playwright/mcp@latest"],
+      "environment": {
+        "PLAYWRIGHT_BROWSER": "chromium",
+        "PLAYWRIGHT_HEADLESS": "true"
+      },
+      "enabled": true
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    }
+  },
+  
+  "permission": {
+    "bash": {
+      "git status": "allow",
+      "git diff": "allow",
+      "git log": "allow",
+      "ls": "allow",
+      "pwd": "allow",
+      "cd": "allow",
+      "sed": "allow",
+      "find": "allow",
+      "grep": "allow",
+      "cat": "allow",
+      "docker ps":"allow",
+      "docker logs *":"allow",
+      "*": "ask"
+    }
+  }
+}
