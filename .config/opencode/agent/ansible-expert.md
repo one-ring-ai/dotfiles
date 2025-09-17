@@ -1,7 +1,7 @@
 ---
 description: Expert in Ansible automation, configuration management, and Infrastructure as Code following modern best practices
 mode: subagent
-model: groq/openai/gpt-oss-120b
+model: anthropic/claude-sonnet-4-20250514
 temperature: 0.1
 permission:
   bash: ask

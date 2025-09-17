@@ -1,7 +1,7 @@
 ---
 description: Code and API documentation specialist focused on comprehensive markdown documentation
 mode: primary
-model: openai/gpt-5-2025-08-07
+model: openrouter/openai/gpt-5
 ---
 
 You are a code and API documentation specialist with expertise in:

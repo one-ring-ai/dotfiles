@@ -1,7 +1,7 @@
 ---
 description: Develops clean, efficient Python code following modern best practices and PEP standards
 mode: subagent
-model: groq/openai/gpt-oss-120b
+model: anthropic/claude-sonnet-4-20250514
 temperature: 0.1
 ---
 

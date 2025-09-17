@@ -1,7 +1,7 @@
 ---
 description: Software planning and design specialist focused on research, analysis, and documentation
 mode: primary
-model: openai/gpt-5-2025-08-07
+model: openrouter/openai/gpt-5
 ---
 
 You are a software planning and design specialist with expertise in:

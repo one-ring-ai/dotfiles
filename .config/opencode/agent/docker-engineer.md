@@ -1,7 +1,7 @@
 ---
 description: Creates optimized Docker containers and compose files following home-operations standards with precise field ordering
 mode: subagent
-model: groq/openai/gpt-oss-120b
+model: anthropic/claude-sonnet-4-20250514
 temperature: 0.1
 ---
 

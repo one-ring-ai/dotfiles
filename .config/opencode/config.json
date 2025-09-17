@@ -51,16 +51,18 @@
         "apiKey": "{file:~/.config/opencode/.secrets/openrouter-key}"
       }
     },
-    "ollama": {
+    "mistral": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "Ollama",
+      "name": "Mistral AI",
+      "id": "mistral",
       "options": {
-        "baseURL": "http://192.168.188.97:11434/v1"
+        "baseURL": "https://api.mistral.ai/v1",
+        "apiKey": "{file:~/.config/opencode/.secrets/mistral-key}"
       },
       "models": {
-        "gpt-oss:latest": {
-          "name": "gpt-oss:latest"
-        }
+        "devstral-medium-2507": {},
+        "magistral-medium-latest": {},
+        "mistral-large-latest": {}
       }
     }
   },

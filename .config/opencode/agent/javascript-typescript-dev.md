@@ -1,7 +1,7 @@
 ---
 description: Develops modern JavaScript/TypeScript applications following ES2024+ standards and best practices
 mode: subagent
-model: groq/openai/gpt-oss-120b
+model: anthropic/claude-sonnet-4-20250514
 temperature: 0.1
 ---
 
