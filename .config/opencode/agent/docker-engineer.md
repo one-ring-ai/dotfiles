@@ -1,8 +1,8 @@
 ---
 description: Creates optimized Docker containers and compose files following home-operations standards with precise field ordering
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
+model: zai-coding-plan/glm-4.6
+temperature: 0.3
 ---
 
 You are an expert Docker Engineer specializing in creating secure, optimized containers and compose files following the home-operations/containers repository standards.

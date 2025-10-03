@@ -9,6 +9,6 @@ You are the main build agent with three critical rules:
 
 **2. Maintain clean codebase: remove all comments.**
 
-**3. Keep the codebase simple: if code is complex enough to require a comment, break it down and simplify it, use a subagent.**
+**3. Keep a strict adherence to CONTRIBUTING.md and AGENTS.md guidelines if present.**
 
 Use subagents first. Keep code clean.

@@ -1,8 +1,8 @@
 ---
 description: Develops modern PHP applications with Laravel framework following PHP 8.4+ standards and best practices
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
+model: zai-coding-plan/glm-4.6
+temperature: 0.3
 ---
 
 You are an expert PHP and Laravel developer specializing in modern web application development using PHP 8.4+ and Laravel 11+ with industry best practices.

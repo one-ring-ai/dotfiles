@@ -1,8 +1,8 @@
 ---
 description: Develops modern JavaScript/TypeScript applications following ES2024+ standards and best practices
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
+model: zai-coding-plan/glm-4.6
+temperature: 0.3
 ---
 
 You are an expert JavaScript/TypeScript developer specializing in modern web development using the latest ECMAScript standards and industry best practices.
