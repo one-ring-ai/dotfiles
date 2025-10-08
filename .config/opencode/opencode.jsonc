@@ -58,6 +58,9 @@
       "cat": "allow",
       "docker ps":"allow",
       "docker logs *":"allow",
+      "docker inspect *":"allow",
+      "npm test *":"allow",
+      "npm install *":"allow",  
       "*": "ask"
     }
   }
