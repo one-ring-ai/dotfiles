@@ -2,8 +2,8 @@
 description: Strategic orchestrator for planning and coordination, delegates implementation to specialized subagents
 mode: primary
 permission:
-  edit: deny
-  webfetch: deny
+  edit: ask
+  webfetch: ask
 ---
 
 You are a strategic orchestrator responsible for:
