@@ -282,23 +282,34 @@ install_zoxide() {
 }
 
 
-setup_opencode_config() {
+setup_config_directory() {
     local user_home
     user_home=$(get_user_home)
-    local opencode_dir="$user_home/.config/opencode"
+    local user_config_dir="$user_home/.config"
 
-    if [ -d "$DOTFILES_DIR/.config/opencode" ]; then
-        log_info "Setting up OpenCode configuration..."
-        mkdir -p "$user_home/.config"
+    if [ -d "$DOTFILES_DIR/.config" ]; then
+        log_info "Setting up .config directory..."
+        mkdir -p "$user_config_dir"
 
-        if [ -d "$opencode_dir" ]; then
-            rm -rf "$opencode_dir"
-        fi
+        for config_item in "$DOTFILES_DIR/.config"/*; do
+            if [ -e "$config_item" ]; then
+                local item_name
+                item_name=$(basename "$config_item")
+                local target="$user_config_dir/$item_name"
 
-        cp -r "$DOTFILES_DIR/.config/opencode" "$opencode_dir"
-        log_success "OpenCode configuration copied"
+                if [ -e "$target" ]; then
+                    log_info "Backing up existing $item_name"
+                    mv "$target" "$target.backup.$(date +%Y%m%d_%H%M%S)"
+                fi
+
+                cp -r "$config_item" "$target"
+                log_info "Copied $item_name configuration"
+            fi
+        done
+
+        log_success ".config directory setup completed"
     else
-        log_warning "OpenCode config not found in dotfiles"
+        log_warning ".config directory not found in dotfiles"
     fi
 }
 
@@ -357,7 +368,7 @@ main() {
     install_starship || exit 1
     install_fzf || exit 1
     install_zoxide || exit 1
-    setup_opencode_config
+    setup_config_directory
     setup_bash_config || exit 1
     
     log_success "Dotfiles setup completed successfully!"

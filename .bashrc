@@ -105,6 +105,9 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # aliases to change the directory
 alias appdata='cd /mnt/user/appdata'
 
+# alias to sync secrets
+alias copy-secrets='rsync -av --delete /mnt/user/.secrets/ /home/coder/.config/opencode/.secrets'
+
 #######################################################
 # GENERAL ALIASES
 #######################################################

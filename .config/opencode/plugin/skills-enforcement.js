@@ -9,8 +9,9 @@ const SKILLS_DIR = '/home/coder/.config/opencode/skills'
 const INDEX_FILE = join(SKILLS_DIR, '.index.json')
 const WEBHOOK_FILE = '/mnt/user/github/dotfiles/.config/opencode/.secrets/telegram-webhook'
 
-class SkillsEnforcement {
-  constructor() {
+class SkillsEnforcementClass {
+  constructor($) {
+    this.$ = $
     this.skillsIndex = null
     this.initialized = false
   }
@@ -36,7 +37,7 @@ class SkillsEnforcement {
       return
     }
 
-    const { stdout } = await $`find ${SKILLS_DIR} -name "SKILL.md" -type f`
+    const { stdout } = await this.$`find ${SKILLS_DIR} -name "SKILL.md" -type f`
     const skillFiles = stdout.trim().split('\n').filter(Boolean)
 
     const skills = []
@@ -65,6 +66,7 @@ class SkillsEnforcement {
       }
     }
 
+    console.log(`[Skills Plugin] Found ${skills.length} skills`)
     this.skillsIndex = {
       skills,
       lastUpdated: Date.now()
@@ -287,46 +289,54 @@ To add this skill:
   }
 }
 
-const skillsEnforcement = new SkillsEnforcement()
-
-await skillsEnforcement.initialize()
-
-export const list_skills = {
-  name: 'list_skills',
-  description: 'List all available skills with optional category filter',
-  parameters: {
-    category: {
-      type: 'string',
-      description: 'Optional category to filter skills by',
-      required: false
-    }
-  },
-  handler: async ({ category }) => {
-    return await skillsEnforcement.listSkills(category)
-  }
-}
-
-export const share_skill = {
-  name: 'share_skill',
-  description: 'Share a skill via Telegram webhook',
-  parameters: {
-    skill_id: {
-      type: 'string',
-      description: 'ID of the skill to share (category/slug format)',
-      required: true
+export const SkillsEnforcement = async ({ project, client, $, directory, worktree }) => {
+  console.log('[Skills Plugin] Loading skills enforcement plugin...')
+  const skillsEnforcement = new SkillsEnforcementClass($)
+  
+  return {
+    event: async ({ event }) => {
+      if (event.type === "session.start") {
+        console.log('[Skills Plugin] Session started, initializing skills...')
+        await skillsEnforcement.initialize()
+        console.log('[Skills Plugin] Skills initialized')
+      }
     },
-    test_results: {
-      type: 'string',
-      description: 'Test results to include in the message',
-      required: false
+    
+    tool: {
+      list_skills: {
+        description: 'List all available skills with optional category filter',
+        parameters: {
+          category: {
+            type: 'string',
+            description: 'Optional category to filter skills by',
+            required: false
+          }
+        },
+        handler: async ({ category }) => {
+          console.log('[Skills Plugin] list_skills tool called')
+          return await skillsEnforcement.listSkills(category)
+        }
+      },
+      
+      share_skill: {
+        description: 'Share a skill via Telegram webhook',
+        parameters: {
+          skill_id: {
+            type: 'string',
+            description: 'ID of the skill to share (category/slug format)',
+            required: true
+          },
+          test_results: {
+            type: 'string',
+            description: 'Test results to include in the message',
+            required: false
+          }
+        },
+        handler: async ({ skill_id, test_results }) => {
+          console.log('[Skills Plugin] share_skill tool called with:', skill_id)
+          return await skillsEnforcement.shareSkill(skill_id, test_results)
+        }
+      }
     }
-  },
-  handler: async ({ skill_id, test_results }) => {
-    return await skillsEnforcement.shareSkill(skill_id, test_results)
   }
-}
-
-export default {
-  initialize: () => skillsEnforcement.initialize(),
-  tools: [list_skills, share_skill]
 }
