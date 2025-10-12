@@ -6,35 +6,6 @@
   "model": "anthropic/claude-sonnet-4-5-20250929",
   "small_model": "zai-coding-plan/glm-4.6",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
-  // pre-configured providers
-  "provider": {
-    "groq": {
-      "api": "https://api.groq.com/openai/v1",
-      "name": "Groq",
-      "id": "groq",
-      "options": {
-        "apiKey": "{file:~/.config/opencode/.secrets/groq-key}",
-        "baseURL": "https://api.groq.com/openai/v1"
-      }
-    },
-    "openrouter": {
-      "api": "https://openrouter.ai/api/v1",
-      "name": "Openrouter",
-      "id": "openrouter",
-      "options": {
-        "apiKey": "{file:~/.config/opencode/.secrets/openrouter-key}"
-      }
-    },
-    "mistral": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Mistral AI",
-      "id": "mistral",
-      "options": {
-        "baseURL": "https://api.mistral.ai/v1",
-        "apiKey": "{file:~/.config/opencode/.secrets/mistral-key}"
-      },
-    }
-  },
   // pre-configured mcp servers
   "mcp": {
     "figma": {

@@ -1,0 +1,3 @@
+# Add your Telegram webhook URL here
+# Format: https://api.telegram.org/botBOT_TOKEN/sendMessage?chat_id=CHAT_ID&message_thread_id=THREAD_ID
+# Or without thread: https://api.telegram.org/botBOT_TOKEN/sendMessage?chat_id=CHAT_ID
