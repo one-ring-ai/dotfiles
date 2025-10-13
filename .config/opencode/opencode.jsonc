@@ -32,6 +32,7 @@
       "docker inspect *":"allow",
       "npm test *":"allow",
       "npm install *":"allow",  
+      "date *":"allow",
       "*": "ask"
     }
   }

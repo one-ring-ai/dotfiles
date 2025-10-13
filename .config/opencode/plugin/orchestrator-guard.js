@@ -29,7 +29,15 @@ function isOrchestratorOrBuildAgent(input) {
 }
 
 function createDelegationMessage() {
-  return 'You are the orchestrator agent. Please delegate this operation to a specialized subagent using the Task tool instead of performing direct actions.\n\nThis ensures proper separation of concerns and better code quality.';
+  return `You are the orchestrator agent. Delegate operations to specialized subagents using the Task tool.
+
+Key principles:
+1. **Delegate, don't execute**: Never perform direct actions yourself
+2. **One task per subagent session**: Each subagent session should handle a SINGLE, focused task to optimize context and concentration
+3. **Parallelize through multiple sessions**: Create multiple parallel subagent sessions for different tasks, but each session works on only one implementation
+4. **Coordinate and verify**: Monitor all sessions and verify that everything is executed correctly
+
+This approach optimizes subagent focus while maximizing execution speed through parallelization.`;
 }
 
 export const OrchestratorGuard = async ({ project, client, $, directory, worktree }) => {
