@@ -33,8 +33,6 @@ You are tasked with creating git commits for the changes made during this sessio
    - Never use `-A` or `.` with git add
    - Show the result with `git log --oneline -n [number]`
 
-5. Remind the user to run `git pull` to ensure there are no updates or conflicts
-
 ## Important:
 - **NEVER add co-author information or Claude attribution**
 - Commits should be authored solely by the user
