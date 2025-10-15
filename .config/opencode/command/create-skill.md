@@ -1,5 +1,6 @@
 ---
 description: Create and test a new skill through interactive dialogue
+model: zai-coding-plan/glm-4.6
 ---
 
 # Create Skill

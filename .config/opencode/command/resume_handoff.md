@@ -1,5 +1,6 @@
 ---
 description: Resume work from a handoff document
+model: zai-coding-plan/glm-4.6
 ---
 
 # Resume work from a handoff document
