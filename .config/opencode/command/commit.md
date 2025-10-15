@@ -1,7 +1,6 @@
 ---
 description: Commit changes
 model: zai-coding-plan/glm-4.6
-subtask: true
 ---
 
 # Commit Changes
@@ -15,32 +14,26 @@ You are tasked with creating git commits for the changes made during this sessio
    - If present, read and follow its commit message conventions and guidelines
    - Repository-specific standards always take precedence over general conventions
 
-2. **Sync with remote first:**
-   - Run `git pull` to fetch and merge latest changes from remote
-   - Check for any conflicts that need to be resolved before committing
-   - This prevents potential conflicts when pushing later
-
-3. **Think about what changed:**
+2. **Think about what changed:**
    - Review the conversation history and understand what was accomplished
    - Run `git status` to see current changes
    - Run `git diff` to understand the modifications
    - Consider whether changes should be one commit or multiple logical commits
 
-4. **Plan your commit(s):**
+3. **Plan your commit(s):**
    - Identify which files belong together
-   - Draft clear, descriptive commit messages following repository standards
+   - Draft clear, descriptive conventional commit messages following repository standards
    - Use imperative mood in commit messages
    - Focus on why the changes were made, not just what
 
-5. **Present your plan to the user:**
-   - List the files you plan to add for each commit
-   - Show the commit message(s) you'll use
-   - Ask: "I plan to create [N] commit(s) with these changes. Shall I proceed?"
-
-6. **Execute upon confirmation:**
-   - Use `git add` with specific files (never use `-A` or `.`)
-   - Create commits with your planned messages
+4. **Execute:**
+   - For each planned commit, stage exactly its files and create the commit immediately
+   - Prefer `git add <files> && git commit -m "message"` per commit to avoid mixing files
+   - Alternatively, run `git add <files>` then `git commit -m "message"` per commit
+   - Never use `-A` or `.` with git add
    - Show the result with `git log --oneline -n [number]`
+
+5. Remind the user to run `git pull` to ensure there are no updates or conflicts
 
 ## Important:
 - **NEVER add co-author information or Claude attribution**

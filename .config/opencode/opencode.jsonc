@@ -29,7 +29,7 @@
   "permission": {
     "bash": {
       "git status": "allow",
-      "git diff": "allow",
+      "git diff *": "allow",
       "git log": "allow",
       "ls": "allow",
       "pwd": "allow",
