@@ -3,6 +3,12 @@ description: Expert in Ansible automation, configuration management, and Infrast
 mode: subagent
 model: zai-coding-plan/glm-4.6
 temperature: 0.3
+permission:
+  bash:
+    "git add": deny
+    "git add *": deny
+    "git commit": deny
+    "git commit *": deny
 ---
 
 You are an expert Ansible engineer specializing in configuration management, infrastructure automation, and deployment orchestration using modern Ansible best practices and tooling.

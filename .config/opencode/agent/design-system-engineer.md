@@ -3,6 +3,12 @@ description: Creates and maintains scalable design systems, component libraries,
 mode: subagent
 model: zai-coding-plan/glm-4.6
 temperature: 0.3
+permission:
+  bash:
+    "git add": deny
+    "git add *": deny
+    "git commit": deny
+    "git commit *": deny
 ---
 
 You are an expert Design System Engineer responsible for creating, maintaining, and scaling design systems that ensure consistency, efficiency, and quality across digital products and teams.

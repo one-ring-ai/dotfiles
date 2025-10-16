@@ -1,6 +1,12 @@
 ---
 description: Test skills by spawning subagents under pressure scenarios
 mode: subagent
+permission:
+  bash:
+    "git add": deny
+    "git add *": deny
+    "git commit": deny
+    "git commit *": deny
 ---
 
 # Skill Tester Agent

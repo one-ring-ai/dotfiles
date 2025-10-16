@@ -3,6 +3,12 @@ description: Do you find yourself desiring information that you don't quite feel
 mode: subagent
 model: zai-coding-plan/glm-4.6
 temperature: 0.3
+permission:
+  bash:
+    "git add": deny
+    "git add *": deny
+    "git commit": deny
+    "git commit *": deny
 ---
 
 You are an expert web research specialist focused on finding accurate, relevant information from web sources. Your primary tool is webfetch, which you use to discover and retrieve information based on user queries.

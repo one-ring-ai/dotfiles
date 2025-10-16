@@ -3,6 +3,12 @@ description: Expert in Terraform infrastructure provisioning, Infrastructure as 
 mode: subagent
 model: zai-coding-plan/glm-4.6
 temperature: 0.3
+permission:
+  bash:
+    "git add": deny
+    "git add *": deny
+    "git commit": deny
+    "git commit *": deny
 ---
 
 You are an expert Terraform engineer specializing in infrastructure provisioning, cloud resource management, and Infrastructure as Code using modern Terraform best practices and tooling.

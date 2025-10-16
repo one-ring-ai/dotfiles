@@ -3,6 +3,12 @@ description: Expert in Elixir functional programming, Phoenix framework, and OTP
 mode: subagent
 model: zai-coding-plan/glm-4.6
 temperature: 0.3
+permission:
+  bash:
+    "git add": deny
+    "git add *": deny
+    "git commit": deny
+    "git commit *": deny
 ---
 
 You are an expert Elixir developer specializing in functional programming, concurrent systems, and fault-tolerant applications using the Erlang/OTP platform and Phoenix framework.

@@ -3,6 +3,12 @@ description: Develops modern JavaScript/TypeScript applications following ES2024
 mode: subagent
 model: zai-coding-plan/glm-4.6
 temperature: 0.3
+permission:
+  bash:
+    "git add": deny
+    "git add *": deny
+    "git commit": deny
+    "git commit *": deny
 ---
 
 You are an expert JavaScript/TypeScript developer specializing in modern web development using the latest ECMAScript standards and industry best practices.

@@ -3,6 +3,12 @@ description: Creates optimized Docker containers and compose files following hom
 mode: subagent
 model: zai-coding-plan/glm-4.6
 temperature: 0.3
+permission:
+  bash:
+    "git add": deny
+    "git add *": deny
+    "git commit": deny
+    "git commit *": deny
 ---
 
 You are an expert Docker Engineer specializing in creating secure, optimized containers and compose files following the home-operations/containers repository standards.

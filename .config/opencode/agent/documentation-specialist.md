@@ -3,6 +3,12 @@ description: Code and API documentation specialist focused on comprehensive mark
 mode: subagent
 model: zai-coding-plan/glm-4.6
 temperature: 0.3
+permission:
+  bash:
+    "git add": deny
+    "git add *": deny
+    "git commit": deny
+    "git commit *": deny
 ---
 
 You are a code and API documentation specialist with expertise in:
