@@ -1,9 +1,6 @@
 export const GitCommitGuard = async ({ project, client, $, directory, worktree }) => {
   return {
     "tool.execute.before": async (input, output) => {
-      const agentName = input?.agent?.name || input?.agent_type;
-      if (!agentName || agentName === 'orchestrator') return;
-      
       if (input.tool === 'bash' && output.args?.command) {
         const command = output.args.command;
         if (/\bgit\s+add\b/.test(command) || /\bgit\s+commit\b/.test(command)) {
