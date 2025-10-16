@@ -3,7 +3,7 @@
   "theme": "one-dark",
   "autoupdate": true,
   // model selection
-  "model": "openrouter/google/gemini-2.5-pro",
+  "model": "openrouter/anthropic/claude-sonnet-4.5",
   "small_model": "zai-coding-plan/glm-4.6",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
   // pre-configured providers
@@ -28,23 +28,6 @@
   // default CLI permissions
   "permission": {
     "bash": {
-      "git status": "allow",
-      "git status *": "allow",
-      "git diff": "allow",
-      "git diff *": "allow",
-      "git log": "allow",
-      "git log *": "allow",
-      "ls": "allow",
-      "pwd": "allow",
-      "cd": "allow",
-      "find": "allow",
-      "grep": "allow",
-      "docker ps":"allow",
-      "docker logs *":"allow",
-      "docker inspect *":"allow",
-      "npm test *":"allow",
-      "npm install *":"allow",  
-      "date *":"allow",
       "*": "ask"
     }
   }
