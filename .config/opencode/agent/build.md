@@ -1,6 +1,7 @@
 ---
 description: Strategic orchestrator for planning and coordination, delegates implementation to specialized subagents
 mode: primary
+model: zai-coding-plan/glm-4.6
 permission:
   edit: deny
   webfetch: deny
