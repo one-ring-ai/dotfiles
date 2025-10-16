@@ -1,6 +1,5 @@
 ---
 description: Create detailed implementation plans through interactive research and iterative refinement
-model: zai-coding-plan/glm-4.6
 ---
 
 # Implementation Plan

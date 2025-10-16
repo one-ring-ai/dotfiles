@@ -1,6 +1,5 @@
 ---
 description: Conduct comprehensive codebase research by spawning parallel sub-agents to document what exists
-model: zai-coding-plan/glm-4.6
 ---
 
 # Research Codebase

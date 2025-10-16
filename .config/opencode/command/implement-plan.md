@@ -1,6 +1,5 @@
 ---
 description: Implement an approved technical plan from thoughts/shared/plans/ with tracked progress
-model: zai-coding-plan/glm-4.6
 ---
 
 # Implement Plan
