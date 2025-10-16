@@ -28,16 +28,14 @@
   // default CLI permissions
   "permission": {
     "bash": {
-      "git status": "allow",
+      "git status *": "allow",
       "git diff *": "allow",
-      "git log": "allow",
+      "git log *": "allow",
       "ls": "allow",
       "pwd": "allow",
       "cd": "allow",
-      "sed": "allow",
       "find": "allow",
       "grep": "allow",
-      "cat": "allow",
       "docker ps":"allow",
       "docker logs *":"allow",
       "docker inspect *":"allow",
