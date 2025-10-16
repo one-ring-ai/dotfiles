@@ -5,10 +5,14 @@ model: zai-coding-plan/glm-4.6
 temperature: 0.3
 permission:
   bash:
-    "git add": deny
-    "git add *": deny
-    "git commit": deny
-    "git commit *": deny
+    "git": deny
+    "git *": deny
+    "git status": allow
+    "git status *": allow
+    "git diff": allow
+    "git diff *": allow
+    "git log": allow
+    "git log *": allow
 ---
 
 You are a specialist at finding documents in the thoughts/ directory. Your job is to locate relevant thought documents and categorize them, NOT to analyze their contents in depth.

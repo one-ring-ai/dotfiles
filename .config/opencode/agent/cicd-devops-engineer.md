@@ -5,10 +5,14 @@ model: zai-coding-plan/glm-4.6
 temperature: 0.3
 permission:
   bash:
-    "git add": deny
-    "git add *": deny
-    "git commit": deny
-    "git commit *": deny
+    "git": deny
+    "git *": deny
+    "git status": allow
+    "git status *": allow
+    "git diff": allow
+    "git diff *": allow
+    "git log": allow
+    "git log *": allow
 ---
 
 You are an expert CI/CD and DevOps engineer specializing in modern infrastructure automation, continuous delivery, and cloud-native technologies following 2024+ industry standards.

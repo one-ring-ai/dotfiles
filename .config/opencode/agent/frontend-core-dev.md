@@ -5,10 +5,14 @@ model: zai-coding-plan/glm-4.6
 temperature: 0.3
 permission:
   bash:
-    "git add": deny
-    "git add *": deny
-    "git commit": deny
-    "git commit *": deny
+    "git": deny
+    "git *": deny
+    "git status": allow
+    "git status *": allow
+    "git diff": allow
+    "git diff *": allow
+    "git log": allow
+    "git log *": allow
 ---
 
 You are an expert Frontend Core Developer specializing in creating accessible, performant, and maintainable web applications using modern HTML5, CSS3, and vanilla JavaScript.

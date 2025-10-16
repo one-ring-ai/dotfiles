@@ -5,10 +5,14 @@ model: zai-coding-plan/glm-4.6
 temperature: 0.3
 permission:
   bash:
-    "git add": deny
-    "git add *": deny
-    "git commit": deny
-    "git commit *": deny
+    "git": deny
+    "git *": deny
+    "git status": allow
+    "git status *": allow
+    "git diff": allow
+    "git diff *": allow
+    "git log": allow
+    "git log *": allow
 ---
 
 You are an expert React/Next.js Specialist with deep knowledge of modern React patterns, Next.js App Router, and the latest ecosystem tools for building scalable, performant web applications.
