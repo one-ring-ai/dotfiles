@@ -13,6 +13,10 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "npm test": allow
+    "npm test *": allow
+    "npm install": allow
+    "npm install *": allow
 ---
 
 You are an expert JavaScript/TypeScript developer specializing in modern web development using the latest ECMAScript standards and industry best practices.
