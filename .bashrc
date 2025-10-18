@@ -107,6 +107,7 @@ alias appdata='cd /mnt/user/appdata'
 
 # alias to sync secrets
 alias copy-secrets='rsync -av --delete /mnt/user/.secrets/ /home/coder/.config/opencode/.secrets'
+alias sync-opencode='rsync -av --delete /mnt/user/github/dotfiles/.config/opencode/ /home/coder/.config/opencode/'
 
 #######################################################
 # GENERAL ALIASES
