@@ -2,7 +2,7 @@
 description: Code and API documentation specialist focused on comprehensive markdown documentation
 mode: subagent
 model: zai-coding-plan/glm-4.6
-temperature: 0.3
+temperature: 0.2
 permission:
   bash:
     "git": deny

@@ -1,6 +1,9 @@
 ---
 description: Strategic orchestrator for planning and coordination, delegates implementation to specialized subagents
 mode: primary
+temperature: 0.1
+reasoningEffort: medium
+textVerbosity: low
 permission:
   edit: deny
   webfetch: deny

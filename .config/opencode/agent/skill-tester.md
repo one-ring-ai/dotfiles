@@ -1,6 +1,7 @@
 ---
 description: Test skills by spawning subagents under pressure scenarios
 mode: subagent
+temperature: 0.1
 permission:
   bash:
     "git": deny
