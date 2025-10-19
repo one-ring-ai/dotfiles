@@ -2,8 +2,6 @@
 description: Dedicated planning lead for research synthesis and plan authoring
 mode: primary
 temperature: 0.1
-reasoningEffort: medium
-textVerbosity: low
 permission:
   webfetch: deny
   bash:
