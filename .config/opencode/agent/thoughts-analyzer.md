@@ -1,7 +1,7 @@
 ---
 description: The research equivalent of codebase-analyzer. Use this subagent_type when wanting to deep dive on a research topic. Not commonly needed otherwise.
 mode: subagent
-model: zai-coding-plan/glm-4.6
+model: openrouter/z-ai/glm-4.6
 temperature: 0.3
 permission:
   bash:

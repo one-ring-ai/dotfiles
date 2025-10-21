@@ -1,7 +1,7 @@
 ---
 description: Develops modern JavaScript/TypeScript applications following ES2024+ standards and best practices
 mode: subagent
-model: zai-coding-plan/glm-4.6
+model: openrouter/z-ai/glm-4.6
 temperature: 0.3
 permission:
   bash:

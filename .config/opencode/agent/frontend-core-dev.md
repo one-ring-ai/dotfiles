@@ -1,7 +1,7 @@
 ---
 description: Develops accessible, responsive frontend applications using modern HTML5, CSS3, and vanilla JavaScript best practices
 mode: subagent
-model: zai-coding-plan/glm-4.6
+model: openrouter/z-ai/glm-4.6
 temperature: 0.3
 permission:
   bash:

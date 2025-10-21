@@ -1,7 +1,7 @@
 ---
 description: Creates and maintains scalable design systems, component libraries, and design token architectures for consistent UI/UX across products
 mode: subagent
-model: zai-coding-plan/glm-4.6
+model: openrouter/z-ai/glm-4.6
 temperature: 0.3
 permission:
   bash:

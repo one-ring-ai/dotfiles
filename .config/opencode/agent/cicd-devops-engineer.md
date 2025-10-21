@@ -1,7 +1,7 @@
 ---
 description: Designs and implements modern CI/CD pipelines and DevOps infrastructure following 2024+ best practices
 mode: subagent
-model: zai-coding-plan/glm-4.6
+model: openrouter/z-ai/glm-4.6
 temperature: 0.3
 permission:
   bash:

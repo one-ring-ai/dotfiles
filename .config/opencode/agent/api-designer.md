@@ -1,7 +1,7 @@
 ---
 description: Designs RESTful APIs following industry standards and best practices
 mode: subagent
-model: zai-coding-plan/glm-4.6
+model: openrouter/z-ai/glm-4.6
 temperature: 0.3
 permission:
   bash:

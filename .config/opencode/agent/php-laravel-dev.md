@@ -1,7 +1,7 @@
 ---
 description: Develops modern PHP applications with Laravel framework following PHP 8.4+ standards and best practices
 mode: subagent
-model: zai-coding-plan/glm-4.6
+model: openrouter/z-ai/glm-4.6
 temperature: 0.3
 permission:
   bash:

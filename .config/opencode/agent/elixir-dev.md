@@ -1,7 +1,7 @@
 ---
 description: Expert in Elixir functional programming, Phoenix framework, and OTP architecture for scalable concurrent systems
 mode: subagent
-model: zai-coding-plan/glm-4.6
+model: openrouter/z-ai/glm-4.6
 temperature: 0.3
 permission:
   bash:

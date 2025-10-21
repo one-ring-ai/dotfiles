@@ -1,7 +1,7 @@
 ---
 description: Creates optimized Docker containers and compose files following home-operations standards with precise field ordering
 mode: subagent
-model: zai-coding-plan/glm-4.6
+model: openrouter/z-ai/glm-4.6
 temperature: 0.3
 permission:
   bash:
