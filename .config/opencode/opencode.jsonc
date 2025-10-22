@@ -3,8 +3,8 @@
   "theme": "one-dark",
   "autoupdate": true,
   // model selection
-  "model": "openrouter/openai/gpt-5-codex",
-  "small_model": "openrouter/z-ai/glm-4.6",
+  "model": "openrouter/@preset/planner-model",
+  "small_model": "openrouter/@preset/coder-model",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
   // pre-configured providers
   "provider": {
@@ -14,6 +14,10 @@
       "id": "openrouter",
       "options": {
         "apiKey": "{file:~/.config/opencode/.secrets/openrouter-key}"
+      },
+      "models": {
+        "@preset/planner-model": {},
+        "@preset/coder-model": {}
       }
     }
   },

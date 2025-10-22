@@ -1,6 +1,6 @@
 ---
 description: Create handoff documentation for a new future session
-model: openrouter/z-ai/glm-4.6
+model: openrouter/@preset/coder-model
 ---
 
 # Create Handoff

@@ -1,7 +1,7 @@
 ---
 description: Expert in OpenTofu (and Terraform) Infrastructure as Code design, implementation, and best practices
 mode: subagent
-model: openrouter/z-ai/glm-4.6
+model: openrouter/@preset/coder-model
 temperature: 0.3
 permission:
   bash:

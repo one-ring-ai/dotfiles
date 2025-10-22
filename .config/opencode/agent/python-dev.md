@@ -1,7 +1,7 @@
 ---
 description: Develops clean, efficient Python code following modern best practices and PEP standards
 mode: subagent
-model: openrouter/z-ai/glm-4.6
+model: openrouter/@preset/coder-model
 temperature: 0.3
 permission:
   bash:

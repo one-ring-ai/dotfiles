@@ -1,7 +1,7 @@
 ---
 description: Code and API documentation specialist focused on comprehensive markdown documentation
 mode: subagent
-model: openrouter/z-ai/glm-4.6
+model: openrouter/@preset/coder-model
 temperature: 0.2
 permission:
   bash:

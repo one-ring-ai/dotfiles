@@ -1,7 +1,7 @@
 ---
 description: Analyzes codebase implementation details. Call the codebase-analyzer agent when you need to find detailed information about specific components. As always, the more detailed your request prompt, the better! :)
 mode: subagent
-model: openrouter/z-ai/glm-4.6
+model: openrouter/@preset/coder-model
 temperature: 0.3
 permission:
   bash:

@@ -1,7 +1,7 @@
 ---
 description: Develops modern React/Next.js applications with advanced patterns, state management, and performance optimization
 mode: subagent
-model: openrouter/z-ai/glm-4.6
+model: openrouter/@preset/coder-model
 temperature: 0.3
 permission:
   bash:

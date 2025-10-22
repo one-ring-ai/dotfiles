@@ -1,6 +1,6 @@
 ---
 description: Create and test a new skill through interactive dialogue
-model: openrouter/z-ai/glm-4.6
+model: openrouter/@preset/coder-model
 ---
 
 # Create Skill

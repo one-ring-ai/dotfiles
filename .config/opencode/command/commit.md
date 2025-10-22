@@ -1,6 +1,6 @@
 ---
 description: Commit changes
-model: openrouter/z-ai/glm-4.6
+model: openrouter/@preset/coder-model
 ---
 
 # Commit Changes

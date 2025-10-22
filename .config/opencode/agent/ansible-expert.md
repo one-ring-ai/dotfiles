@@ -1,7 +1,7 @@
 ---
 description: Expert in Ansible automation, configuration management, and Infrastructure as Code following modern best practices
 mode: subagent
-model: openrouter/z-ai/glm-4.6
+model: openrouter/@preset/coder-model
 temperature: 0.3
 permission:
   bash:
