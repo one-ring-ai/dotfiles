@@ -234,6 +234,7 @@ alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' 
 alias sha1='openssl sha1'
 
 alias clickpaste='sleep 3; xdotool type "$(xclip -o -selection clipboard)"'
+alias coding-plan="find \"/home/coder/.config/opencode/agent\" -type f -name '*.md' -print0 | xargs -0 sed -i 's|openrouter/@preset/coder-model|zai-coding-plan/glm-4.6|g'"
 
 # KITTY - alias to be able to use kitty features when connecting to remote servers(e.g use tmux on remote server)
 alias kssh="kitty +kitten ssh"
