@@ -4,7 +4,7 @@
   "autoupdate": true,
   // model selection
   "model": "openrouter/@preset/planner-model",
-  "small_model": "openrouter/openai/gpt-oss-120b",
+  "small_model": "openrouter/@preset/small-model",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
   // pre-configured providers
   "provider": {
@@ -17,7 +17,8 @@
       },
       "models": {
         "@preset/planner-model": {},
-        "@preset/coder-model": {}
+        "@preset/coder-model": {},
+        "@preset/small-model": {}
       }
     }
   },
