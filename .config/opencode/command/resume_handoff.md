@@ -1,5 +1,6 @@
 ---
 description: Resume work from a handoff document
+agent: orchestrator
 ---
 
 # Resume work from a handoff document

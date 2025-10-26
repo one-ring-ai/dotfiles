@@ -1,5 +1,6 @@
 ---
 description: Conduct comprehensive codebase research by spawning parallel sub-agents to document what exists
+agent: planner
 ---
 
 # Research Codebase

@@ -1,5 +1,6 @@
 ---
 description: Implement an approved technical plan from thoughts/shared/plans/ with tracked progress
+agent: orchestrator
 ---
 
 # Implement Plan
