@@ -1,6 +1,7 @@
 ---
 description: Dedicated git commit specialist following repository standards
 mode: primary
+model: openrouter/@preset/coder-model
 temperature: 0.1
 permission:
   write: deny

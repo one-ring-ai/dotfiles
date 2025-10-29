@@ -1,7 +1,7 @@
 ---
 description: Expert in OpenSCAD modeling for additive manufacturing-ready designs
 mode: subagent
-model: openrouter/@preset/coder-model
+model: openrouter/@preset/planner-model
 temperature: 0.3
 permission:
   bash:

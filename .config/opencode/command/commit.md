@@ -1,7 +1,6 @@
 ---
 description: Commit changes
 agent: commit
-model: openrouter/@preset/coder-model
 ---
 
 # Commit Changes
