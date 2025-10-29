@@ -96,7 +96,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 #######################################################
-# MACHINE SPECIFIC ALIASES
+# CODER SPECIFIC ALIASES
 #######################################################
 
 # aliases for SSH
@@ -105,9 +105,11 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # aliases to change the directory
 alias appdata='cd /mnt/user/appdata'
 
-# alias to sync secrets
+# alias for opencode
 alias copy-secrets='rsync -av --delete /mnt/user/.secrets/ /home/coder/.config/opencode/.secrets'
 alias sync-opencode='rsync -av --delete /mnt/user/github/dotfiles/.config/opencode/ /home/coder/.config/opencode/'
+alias coding-plan="find \"/home/coder/.config/opencode/agent\" -type f -name '*.md' -print0 | xargs -0 sed -i 's|openrouter/@preset/coder-model|zai-coding-plan/glm-4.6|g'"
+alias grok-code="find \"/home/coder/.config/opencode/agent\" -type f -name '*.md' -print0 | xargs -0 sed -i 's|openrouter/@preset/coder-model|opencode/grok-code|g'"
 
 #######################################################
 # GENERAL ALIASES
@@ -234,7 +236,6 @@ alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' 
 alias sha1='openssl sha1'
 
 alias clickpaste='sleep 3; xdotool type "$(xclip -o -selection clipboard)"'
-alias coding-plan="find \"/home/coder/.config/opencode/agent\" -type f -name '*.md' -print0 | xargs -0 sed -i 's|openrouter/@preset/coder-model|zai-coding-plan/glm-4.6|g'"
 
 # KITTY - alias to be able to use kitty features when connecting to remote servers(e.g use tmux on remote server)
 alias kssh="kitty +kitten ssh"
