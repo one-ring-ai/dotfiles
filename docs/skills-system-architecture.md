@@ -330,9 +330,9 @@ Based on skill content, identify 2-4 relevant subagents to test:
 
 Examples:
 - TDD skill → test `javascript-typescript-dev`, `python-dev`, `react-nextjs-dev`
-- Debugging skill → test `codebase-analyzer`, `general`
-- Workflow skill → test `orchestrator`, `build`
-- Meta skill → test `documentation-specialist`, `general`
+- Debugging skill → test `codebase-analyzer`, `generalist-researcher`
+- Meta skill → test `documentation-specialist`, `generalist-researcher`
+
 
 If skill applies_to is "all", test diverse subagents representing different roles.
 
@@ -1758,8 +1758,8 @@ Determine which subagent is appropriate:
 - JavaScript/TypeScript → `javascript-typescript-dev`
 - Python → `python-dev`
 - Documentation → `documentation-specialist`
-- Docker → `docker-engineer`
-- CI/CD → `cicd-devops-engineer`
+- Docker → `docker-specialist`
+- CI/CD → `cicd-devops-specialist`
 
 ### Step 2: Delegate with Task Tool
 

@@ -162,6 +162,14 @@ fi
 - Documentation: `kebab-case.md`
 - Plugins: `kebab-case.js`
 
+### Agent Naming Conventions
+Agent definition files live in `.config/opencode/agent/`. Use these patterns so names stay predictable and match the `subagent_type` you invoke:
+- `*-dev.md` for language or framework implementers (e.g., `javascript-typescript-dev.md`, `react-nextjs-dev.md`, `php-laravel-dev.md`, `elixir-dev.md`)
+- `*-specialist.md` for domain/tool implementers (documentation, design systems, Docker, Ansible, OpenTofu, OpenSCAD, etc.)
+- `*-locator.md`, `*-analyzer.md`, `*-pattern-finder.md` for read-only mapping agents
+- `*-researcher.md` for research/fallback agents (e.g., `generalist-researcher.md`, `web-researcher.md`)
+- Stick with lowercase kebab-case and avoid titles like `engineer` or `expert` in filenames—capture the focus in the description instead
+
 ## 🔄 Conventional Commits (REQUIRED)
 
 **This repository uses semantic-release, which REQUIRES conventional commits.**
