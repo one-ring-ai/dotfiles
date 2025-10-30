@@ -1,6 +1,6 @@
 ---
 description: Commit changes
-agent: commit
+agent: 3-commit
 ---
 
 # Commit Changes

@@ -1,6 +1,6 @@
 ---
 description: Create detailed implementation plans through interactive research and iterative refinement
-agent: planner
+agent: 2-planner
 ---
 
 # Implementation Plan
