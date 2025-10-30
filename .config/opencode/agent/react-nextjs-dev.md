@@ -1,5 +1,5 @@
 ---
-description: Develops modern React/Next.js applications with advanced patterns, state management, and performance optimization
+description: React/Next.js engineer that implements App Router features, modern state patterns, and performance-minded UI for scalable web apps
 mode: subagent
 model: openrouter/@preset/coder-model
 temperature: 0.3

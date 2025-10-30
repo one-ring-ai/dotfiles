@@ -1,5 +1,5 @@
 ---
-description: Analyzes codebase implementation details. Call the codebase-analyzer agent when you need to find detailed information about specific components. As always, the more detailed your request prompt, the better! :)
+description: READ ONLY codebase analyst that traces implementation flow and documents existing behavior with precise file:line references
 mode: subagent
 model: openrouter/@preset/coder-model
 temperature: 0.3

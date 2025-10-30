@@ -1,5 +1,5 @@
 ---
-description: Develops modern JavaScript/TypeScript applications following ES2024+ standards and best practices
+description: JavaScript/TypeScript engineer for implementing and testing ES2024+ applications with strict typing, modern tooling, and performance-focused patterns
 mode: subagent
 model: openrouter/@preset/coder-model
 temperature: 0.3

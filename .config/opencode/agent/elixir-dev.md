@@ -1,5 +1,5 @@
 ---
-description: Expert in Elixir functional programming, Phoenix framework, and OTP architecture for scalable concurrent systems
+description: Elixir/Phoenix engineer that implements functional features, OTP supervision, and concurrent services for scalable applications
 mode: subagent
 model: openrouter/@preset/coder-model
 temperature: 0.3

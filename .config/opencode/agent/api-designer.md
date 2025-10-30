@@ -1,5 +1,5 @@
 ---
-description: Designs RESTful APIs following industry standards and best practices
+description: REST API designer that defines resource models, endpoints, and standards-compliant contracts for scalable services
 mode: subagent
 model: openrouter/@preset/coder-model
 temperature: 0.3

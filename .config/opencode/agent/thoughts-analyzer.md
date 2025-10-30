@@ -1,5 +1,5 @@
 ---
-description: The research equivalent of codebase-analyzer. Use this subagent_type when wanting to deep dive on a research topic. Not commonly needed otherwise.
+description: READ ONLY insights analyst that distills high-value decisions and constraints from thoughts/ research without adding new interpretation
 mode: subagent
 model: openrouter/@preset/coder-model
 temperature: 0.3

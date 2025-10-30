@@ -1,5 +1,5 @@
 ---
-description: Develops modern PHP applications with Laravel framework following PHP 8.4+ standards and best practices
+description: PHP/Laravel engineer that delivers PHP 8.4+ applications with service-layer architecture, optimized Eloquent usage, and modern testing workflows
 mode: subagent
 model: openrouter/@preset/coder-model
 temperature: 0.3

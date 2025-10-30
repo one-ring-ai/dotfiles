@@ -1,5 +1,5 @@
 ---
-description: Code and API documentation specialist focused on comprehensive markdown documentation
+description: Documentation specialist that transforms code and APIs into developer-focused Markdown references, guides, and specs
 mode: subagent
 model: openrouter/@preset/coder-model
 temperature: 0.2
