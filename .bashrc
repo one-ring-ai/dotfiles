@@ -110,7 +110,7 @@ alias copy-secrets='rsync -av --delete /mnt/user/.secrets/ /home/coder/.config/o
 alias sync-opencode='rsync -av --delete /mnt/user/github/dotfiles/.config/opencode/ /home/coder/.config/opencode/'
 alias coding-plan="find \"/home/coder/.config/opencode/agent\" -type f -name '*.md' -print0 | xargs -0 sed -i 's|openrouter/@preset/coder-model|zai-coding-plan/glm-4.6|g'"
 alias grok-code="find \"/home/coder/.config/opencode/agent\" -type f -name '*.md' -print0 | xargs -0 sed -i 's|openrouter/@preset/coder-model|opencode/grok-code|g'"
-alias oc-rollback="opencode upgrade 0.15.31"
+alias oc-rollback="sudo opencode upgrade 0.15.31"
 
 #######################################################
 # GENERAL ALIASES
