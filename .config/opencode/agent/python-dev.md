@@ -13,6 +13,7 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "make *": allow
 ---
 
 You are an expert Python developer specializing in writing clean, efficient, and maintainable Python code. Follow modern Python development standards and best practices.
