@@ -1,7 +1,8 @@
 ---
 description: Primary planner that researches, synthesizes findings, and produces handoff plans without executing work
 mode: primary
-temperature: 0.1
+model: openrouter/@preset/planner-model
+temperature: 0.3
 permission:
   webfetch: deny
   bash:

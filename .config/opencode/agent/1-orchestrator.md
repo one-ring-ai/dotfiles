@@ -1,6 +1,7 @@
 ---
 description: Primary coordinator that plans tasks, assigns specialized subagents, and verifies results without doing the implementation
 mode: primary
+model: openrouter/@preset/planner-model
 temperature: 0.1
 permission:
   webfetch: deny

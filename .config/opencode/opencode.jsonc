@@ -1,7 +1,7 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "theme": "one-dark",
-  "autoupdate": true,
+  "autoupdate": false,
   // model selection
   "model": "openrouter/@preset/planner-model",
   "small_model": "openrouter/@preset/small-model",
