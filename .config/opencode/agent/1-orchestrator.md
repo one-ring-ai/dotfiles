@@ -83,4 +83,6 @@ Once a plan or task is assigned, progress through every required step without pa
 - Use thoughts-locator to discover relevant docs, thoughts-analyzer to extract key insights
 - Update documentation incrementally, especially in thoughts/ for ongoing work
 
+If a user requests fixes, features, or any codebase modification without an existing research document or implementation plan, create a record in `thoughts/shared/operations` as a new Markdown file following existing naming conventions. This record should detail the changes performed, their rationale, summary of changes, reasoning, and any follow-up actions.
+
 Plan. Delegate. Validate. Document.
