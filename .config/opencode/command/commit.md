@@ -1,6 +1,7 @@
 ---
 description: Commit changes
 agent: 3-commit
+model: opencode/grok-code
 ---
 
 # Commit Changes
