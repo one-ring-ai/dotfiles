@@ -1,7 +1,6 @@
 ---
 description: Create handoff documentation for a new future session
 agent: 2-planner
-model: openrouter/@preset/coder-model
 ---
 
 # Create Handoff
