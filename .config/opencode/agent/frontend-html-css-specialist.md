@@ -1,7 +1,7 @@
 ---
 description: Frontend core engineer that delivers accessible, responsive UI with semantic HTML, modern CSS, and vanilla JavaScript best practices
 mode: subagent
-model: openrouter/@preset/coder-model
+model: opencode/grok-code
 temperature: 0.3
 permission:
   bash:

@@ -1,7 +1,7 @@
 ---
 description: READ ONLY web research agent that uses webfetch to gather current, authoritative sources and synthesize findings for modern questions beyond the codebase
 mode: subagent
-model: openrouter/@preset/coder-model
+model: opencode/grok-code
 temperature: 0.3
 permission:
   bash:

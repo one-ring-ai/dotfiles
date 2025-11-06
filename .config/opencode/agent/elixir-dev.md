@@ -1,7 +1,7 @@
 ---
 description: Elixir/Phoenix engineer that implements functional features, OTP supervision, and concurrent services for scalable applications
 mode: subagent
-model: openrouter/@preset/coder-model
+model: opencode/grok-code
 temperature: 0.3
 permission:
   bash:

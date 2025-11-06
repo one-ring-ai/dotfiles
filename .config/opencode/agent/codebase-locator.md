@@ -1,7 +1,7 @@
 ---
 description: READ ONLY codebase locator that surfaces relevant files, directories, and organization patterns for a feature without examining code internals
 mode: subagent
-model: openrouter/@preset/coder-model
+model: opencode/grok-code
 temperature: 0.3
 permission:
   bash:

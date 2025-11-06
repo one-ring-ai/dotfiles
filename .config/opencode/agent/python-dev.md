@@ -1,7 +1,7 @@
 ---
 description: Python engineer that builds type-annotated, PEP-compliant modules with modern tooling, testing, and performance-conscious patterns
 mode: subagent
-model: openrouter/@preset/coder-model
+model: opencode/grok-code
 temperature: 0.3
 permission:
   bash:

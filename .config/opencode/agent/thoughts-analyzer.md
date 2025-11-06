@@ -1,7 +1,7 @@
 ---
 description: READ ONLY insights analyst that distills high-value decisions and constraints from thoughts/ research without adding new interpretation
 mode: subagent
-model: openrouter/@preset/coder-model
+model: opencode/grok-code
 temperature: 0.3
 permission:
   bash:

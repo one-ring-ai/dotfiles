@@ -1,7 +1,7 @@
 ---
 description: React/Next.js engineer that implements App Router features, modern state patterns, and performance-minded UI for scalable web apps
 mode: subagent
-model: openrouter/@preset/coder-model
+model: opencode/grok-code
 temperature: 0.3
 permission:
   bash:

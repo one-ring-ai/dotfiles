@@ -1,7 +1,7 @@
 ---
 description: General-purpose fallback agent that researches, searches code, and executes multi-step tasks when no specialized subagent applies
 mode: subagent
-model: openrouter/@preset/coder-model
+model: opencode/grok-code
 temperature: 0.3
 permission:
   bash:
