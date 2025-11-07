@@ -1,7 +1,7 @@
 ---
 description: Git commit specialist that stages existing changes and crafts conventional commits without modifying files
 mode: primary
-model: openrouter/@preset/coder-model
+model: opencode/grok-code
 temperature: 0.1
 permission:
   write: deny
