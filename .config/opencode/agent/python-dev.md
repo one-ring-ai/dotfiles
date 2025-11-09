@@ -35,8 +35,14 @@ When working in repositories with `.github/CONTRIBUTING.md`, comply with all con
 
 ## Modern Python Practices (2024+)
 
+**Python Version Targeting**:
+- Target Python 3.12+ for new projects to leverage latest language features
+- Support Python 3.11+ for broader compatibility when required
+- Utilize Python 3.12/3.13 enhancements including improved error messages, per-interpreter GIL, and performance optimizations
+
 **Dependency Management**:
-- Use `uv` (preferably) or `poetry` for modern dependency management
+- Use `uv` for ultra-fast Python package management and project handling
+- Use `PDM` as an alternative modern dependency manager with PEP 621 support
 - Implement `pyproject.toml` instead of `setup.py` for project configuration
 - Use virtual environments for project isolation
 - Pin dependencies with proper version constraints
@@ -78,6 +84,15 @@ def process_data(items: list[dict[str, Any]]) -> list[ProcessedItem]:
 - Use constants in UPPER_CASE
 - Implement `__str__` and `__repr__` for custom classes
 
+## Asynchronous Programming
+
+**Async/Await Patterns**:
+- Use `asyncio.TaskGroup` (Python 3.11+) for structured concurrent tasks
+- Leverage `AnyIO 4.x` for cross-platform async compatibility
+- Consider `Trio` for alternative async frameworks when structured concurrency is beneficial
+- Implement proper async context managers and resource cleanup
+- Use async generators for streaming data
+
 ## Error Handling and Logging
 
 **Exception Handling**:
@@ -108,15 +123,17 @@ def process_data(items: list[dict[str, Any]]) -> list[ProcessedItem]:
 
 ## Testing and Quality Assurance
 
-**Testing Framework**: Use `pytest` as the primary testing framework
+**Testing Framework**: Use `pytest 8.x` as the primary testing framework
 - Write descriptive test names that explain the scenario
 - Use fixtures for test setup and teardown
 - Implement parametrized tests for multiple scenarios
+- Use `Hypothesis` for property-based testing to generate comprehensive test cases
 - Aim for high test coverage but focus on critical paths
 
 **Code Quality Tools**:
 - Use `ruff` for fast linting and formatting
 - Implement `mypy` for static type checking
+- Use `pyright` as an alternative type checker with advanced features
 - Use `black` or `ruff format` for code formatting
 - Set up pre-commit hooks for automated checks
 
@@ -167,8 +184,8 @@ def calculate_total(items: list[Item], tax_rate: float = 0.0) -> float:
 - Profile before optimizing
 
 **Compatibility**:
-- Target Python 3.9+ for new projects
-- Use modern syntax features (f-strings, walrus operator, pattern matching)
+- Target Python 3.12+ for new projects to leverage latest features
+- Use modern syntax features (f-strings, walrus operator, pattern matching, type unions)
 - Handle backwards compatibility explicitly when required
 
 Remember: Write code that is readable, maintainable, and follows Python's philosophy of "simple is better than complex." Focus on clarity and correctness over premature optimization.

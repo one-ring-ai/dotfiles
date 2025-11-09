@@ -26,9 +26,11 @@ When working in repositories with `.github/CONTRIBUTING.md`, comply with all con
 ## Modern JavaScript Standards (2024+)
 
 **ECMAScript Features**: Use ES2024+ features including:
+- **Temporal API**: Use `Temporal` for modern date/time handling instead of `Date` for precision and immutability
+- **Records and Tuples**: Leverage immutable data structures for predictable state management
+- **Promise.withResolvers**: Create promises with manual resolve/reject control for advanced async patterns
 - **Pattern Matching**: Use `switch` expressions and proposed pattern matching patterns
 - **Iterator Helpers**: Leverage built-in `Iterator.from()`, `.map()`, `.filter()`, `.toArray()`
-- **Records and Tuples**: Use immutable data structures where appropriate
 - **Private Fields**: Use `#` syntax for true private class members
 - **Optional Chaining**: `?.` and nullish coalescing `??` operators
 - **Top-level await**: Use in modules without wrapper functions
@@ -38,6 +40,7 @@ When working in repositories with `.github/CONTRIBUTING.md`, comply with all con
 - Use `interface` for object shapes, `type` for unions and complex types
 - Implement proper generic constraints and utility types
 - Use `const assertions` and `satisfies` operator for type narrowing
+- Leverage TypeScript 5.4+ features: `const` type parameters for literal inference, decorator metadata API, isolated declarations for incremental compilation, and inferred type predicates for better function return types
 
 ## Code Quality and Style
 
@@ -102,12 +105,37 @@ export default [
 ];
 ```
 
+**Biome Configuration** (alternative/fast linter and formatter):
+```javascript
+export default {
+  files: {
+    include: ["**/*.{js,ts,tsx,json,css,md}"]
+  },
+  linter: {
+    enabled: true,
+    rules: {
+      recommended: true,
+      correctness: "error",
+      suspicious: "warn"
+    }
+  },
+  formatter: {
+    enabled: true,
+    indentStyle: "space",
+    indentWidth: 2,
+    lineWidth: 100
+  }
+};
+```
+
 **Prettier Configuration**:
 - Line width: 80-100 characters
 - Semi-colons: true
 - Single quotes: true
 - Trailing commas: 'es5'
 - Tab width: 2 spaces
+
+**Runtime Alternatives**: Consider Bun or Deno for development workflows offering faster startup times and built-in tooling, especially for new projects or performance-critical applications.
 
 ## Performance and Optimization
 
@@ -117,6 +145,13 @@ export default [
 - Use `IntersectionObserver` for scroll-based functionality
 - Leverage browser caching with proper headers
 - Implement code splitting at route and component levels
+
+**Performance Testing Strategies**:
+- Use Lighthouse CI for automated performance regression testing
+- Implement bundle size monitoring with tools like `webpack-bundle-analyzer` or `rollup-plugin-visualizer`
+- Conduct memory profiling with Chrome DevTools and Heap snapshots
+- Measure Core Web Vitals (LCP, FID, CLS) in CI/CD pipelines
+- Use `performance.mark()` and `performance.measure()` for custom metrics
 
 **Memory Management**:
 - Clean up event listeners and intervals in component cleanup
@@ -146,7 +181,7 @@ async function fetchUserData(id: string): Promise<User | null> {
     
     return await response.json();
   } catch (error) {
-    if (error.name === 'AbortError') {
+    if (error instanceof DOMException && error.name === 'AbortError') {
       console.warn('Request timed out');
       return null;
     }
@@ -158,9 +193,9 @@ async function fetchUserData(id: string): Promise<User | null> {
 ## Testing Standards
 
 **Testing Framework**: Use modern testing tools
-- **Vitest** for unit/integration tests (faster than Jest)
+- **Vitest** for unit/integration tests (fast, Vite-native)
 - **Testing Library** for component testing
-- **Playwright** for end-to-end testing
+- **Playwright** for end-to-end testing and component testing
 
 **Testing Best Practices**:
 - Write tests that focus on behavior, not implementation
@@ -179,10 +214,11 @@ async function fetchUserData(id: string): Promise<User | null> {
 - Use HTTPS everywhere
 
 **Dependency Management**:
-- Regularly audit dependencies with `npm audit`
-- Use `package-lock.json` for reproducible builds
+- Regularly audit dependencies with `npm audit` and consider `npm audit fix`
+- Enable npm provenance for package integrity verification
+- Verify lockfile integrity and use `npm ci` for reproducible installs
 - Keep dependencies up to date for security patches
-- Avoid packages with known vulnerabilities
+- Avoid packages with known vulnerabilities and use tools like `snyk` or `audit-ci` for automated security monitoring
 
 ## Framework-Specific Guidelines
 
@@ -191,6 +227,8 @@ async function fetchUserData(id: string): Promise<User | null> {
 - Implement proper key props for lists
 - Use React.StrictMode in development
 - Follow React hooks rules and dependencies
+- Leverage React 19 features like the `use` hook for async data fetching and improved concurrent rendering
+- Optimize with React Compiler for automatic memoization in Next.js 15/16 applications
 
 **Node.js Development**:
 - Use ES modules with `.mjs` extension or `"type": "module"`
