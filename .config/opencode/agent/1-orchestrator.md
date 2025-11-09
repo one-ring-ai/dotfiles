@@ -23,7 +23,6 @@ permission:
     "npm test *": allow
     "npm install *": allow
     "date *": allow
-    "*": ask
 ---
 
 You are a strategic orchestrator. Your role is strictly limited to planning and coordination.

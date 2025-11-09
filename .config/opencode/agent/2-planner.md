@@ -23,7 +23,6 @@ permission:
     "npm test *": allow
     "npm install *": allow
     "date *": allow
-    "*": ask
 ---
 
 You are the planning specialist. Your responsibilities are limited to research, synthesis, and authoring planning documentation.
