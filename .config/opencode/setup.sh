@@ -1,192 +1,132 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Colori per output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+set -euo pipefail
 
-# Funzione per stampare messaggi colorati
-print_message() {
-    echo -e "${GREEN}[INFO]${NC} $1"
-}
-
-print_warning() {
-    echo -e "${YELLOW}[ATTENZIONE]${NC} $1"
+print_info() {
+    echo "[INFO] $1"
 }
 
 print_error() {
-    echo -e "${RED}[ERRORE]${NC} $1"
+    echo "[ERROR] $1" >&2
 }
 
-print_header() {
-    echo -e "${BLUE}================================${NC}"
-    echo -e "${BLUE}  SETUP OPENCODE - CONFIGURAZIONE${NC}"
-    echo -e "${BLUE}================================${NC}"
-    echo ""
-}
-
-# Funzione per verificare se un comando esiste
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
-
-# Funzione per creare la directory .secrets
-create_secrets_dir() {
-    if [ ! -d ".secrets" ]; then
-        print_message "Creazione directory .secrets..."
-        mkdir -p .secrets
-        print_message "Directory .secrets creata con successo!"
-    else
-        print_message "Directory .secrets già esistente."
-    fi
-}
-
-# Funzione per richiedere input utente
-get_user_input() {
-    local prompt="$1"
-    local default_value="$2"
-    local input
+determine_user_home() {
+    local -r current_user="${USER:-$(id -u -n)}"
+    local user_home
+    local home_owner
     
-    if [ -n "$default_value" ]; then
-        echo -n "$prompt [$default_value]: " >&2
-    else
-        echo -n "$prompt: " >&2
+    if [ -n "${HOME:-}" ]; then
+        home_owner=$(stat -c %U "$HOME" 2>/dev/null || true)
+        if [ -n "$home_owner" ] && [ "$home_owner" = "$current_user" ]; then
+            user_home="$HOME"
+        fi
     fi
     
-    read -s input
-    echo >&2
-    
-    if [ -z "$input" ] && [ -n "$default_value" ]; then
-        echo "$default_value"
-    else
-        echo "$input"
+    if [ -z "${user_home:-}" ]; then
+        user_home=$(getent passwd "$current_user" 2>/dev/null | cut -d: -f6 || true)
     fi
+    
+    if [ -z "$user_home" ] || [ "$user_home" = "~" ] || [[ "$user_home" == ~* ]]; then
+        if [ -n "$user_home" ] && [ "$user_home" != "~" ] && [[ "$user_home" == ~* ]]; then
+            user_home=$(eval echo "$user_home" 2>/dev/null || echo "")
+        fi
+        if [ -z "$user_home" ] || [ "$user_home" = "~" ] || [[ "$user_home" == ~* ]]; then
+            print_error "Could not determine home directory for user: $current_user"
+            exit 1
+        fi
+    fi
+    
+    echo "$user_home"
 }
 
-# Funzione per creare file token
-create_token_file() {
-    local filename="$1"
-    local description="$2"
-    local token
+check_dependencies() {
+    local missing_deps=()
     
-    echo ""
-    print_message "Configurazione $description"
-    print_warning "Inserisci il tuo token per $description"
-    print_warning "Premi INVIO per saltare questo token (potrai configurarlo successivamente)"
-    
-    token=$(get_user_input "Token $description")
-    
-    if [ -n "$token" ]; then
-        echo -n "$token" > ".secrets/$filename"
-        chmod 600 ".secrets/$filename"
-        print_message "$description configurato con successo!"
-    else
-        print_warning "$description saltato."
-        touch ".secrets/$filename"
-        chmod 600 ".secrets/$filename"
-    fi
-}
-
-# Funzione per creare .gitignore se non esiste
-create_gitignore() {
-    if [ ! -f ".gitignore" ]; then
-        print_message "Creazione file .gitignore..."
-        cat > .gitignore << EOF
-# Directory secrets
-.secrets/
-
-# File di configurazione sensibili
-*.env
-.env.local
-.env.production
-
-# Log files
-*.log
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-EOF
-        print_message "File .gitignore creato con successo!"
-    else
-        print_message "File .gitignore già esistente."
-    fi
-}
-
-# Funzione per verificare la configurazione
-verify_setup() {
-    echo ""
-    print_message "Verifica configurazione..."
-    
-    if [ -d ".secrets" ]; then
-        print_message "✓ Directory .secrets creata"
-    else
-        print_error "✗ Directory .secrets non trovata"
-        return 1
-    fi
-    
-    local files=("figma-token" "groq-key" "openai-key" "openrouter-key")
-    local descriptions=("Figma Token" "Groq API Key" "OpenAI API Key" "OpenRouter API Key")
-    
-    for i in "${!files[@]}"; do
-        if [ -f ".secrets/${files[$i]}" ]; then
-            local size=$(wc -c < ".secrets/${files[$i]}")
-            if [ "$size" -gt 0 ]; then
-                print_message "✓ ${descriptions[$i]} configurato"
-            else
-                print_warning "⚠ ${descriptions[$i]} presente ma vuoto"
-            fi
-        else
-            print_error "✗ ${descriptions[$i]} non trovato"
+    for cmd in curl git rsync mktemp; do
+        if ! command -v "$cmd" >/dev/null 2>&1; then
+            missing_deps+=("$cmd")
         fi
     done
+    
+    if [ ${#missing_deps[@]} -gt 0 ]; then
+        print_error "Missing required dependencies: ${missing_deps[*]}"
+        exit 1
+    fi
 }
 
-# Funzione principale
+cleanup_temp_dir() {
+    if [ -n "${TEMP_DIR:-}" ] && [ -d "$TEMP_DIR" ]; then
+        rm -rf "$TEMP_DIR"
+    fi
+}
+
 main() {
-    print_header
+    check_dependencies
     
-    print_message "Benvenuto nel setup di OpenCode!"
-    print_message "Questo script ti guiderà nella configurazione dei token necessari."
-    echo ""
+    local user_home
+    user_home=$(determine_user_home)
     
-    if [ ! -f "config.json" ]; then
-        print_error "Errore: config.json non trovato. Assicurati di essere nella directory corretta del progetto."
+    readonly TARGET_DIR="$user_home/.config/opencode"
+    readonly TEMP_DIR=$(mktemp -d)
+    
+    trap cleanup_temp_dir EXIT
+    
+    print_info "Target directory: $TARGET_DIR"
+    print_info "Cloning repository..."
+    
+    if ! git clone --depth 1 https://github.com/one-ring-ai/dotfiles.git "$TEMP_DIR"; then
+        print_error "Failed to clone repository"
         exit 1
     fi
     
-    create_secrets_dir
-    create_gitignore
+    readonly SOURCE_DIR="$TEMP_DIR/.config/opencode"
     
-    print_message "Iniziamo la configurazione dei token..."
+    if [ ! -d "$SOURCE_DIR" ]; then
+        print_error "Source directory not found in repository"
+        exit 1
+    fi
     
-    create_token_file "figma-token" "Figma API Token"
-    create_token_file "groq-key" "Groq API Key"
-    create_token_file "openai-key" "OpenAI API Key"
-    create_token_file "openrouter-key" "OpenRouter API Key"
+    local secrets_existed=false
+    if [ -d "$TARGET_DIR/.secrets" ]; then
+        secrets_existed=true
+    fi
     
-    verify_setup
+    print_info "Creating directories..."
+    mkdir -p "$TARGET_DIR" "$TARGET_DIR/.secrets"
     
-    echo ""
-    print_message "Setup completato con successo!"
-    print_message "I tuoi token sono stati salvati nella directory .secrets/"
-    print_warning "Ricorda: la directory .secrets è già inclusa in .gitignore per sicurezza"
-    echo ""
-    print_message "Ora puoi utilizzare OpenCode!"
+    print_info "Copying configuration files..."
+    if ! rsync -av --delete --exclude=.secrets "$SOURCE_DIR/" "$TARGET_DIR/"; then
+        print_error "Failed to copy configuration files"
+        exit 1
+    fi
+    
+    if [ "$secrets_existed" = true ]; then
+        print_info "Existing secrets were preserved"
+    fi
+    
+    print_info "Adding sync-opencode alias to ~/.bashrc..."
+    local bashrc_file="$user_home/.bashrc"
+    local alias_line="alias sync-opencode='curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/main/.config/opencode/setup.sh | bash'"
+    
+    if [ ! -f "$bashrc_file" ]; then
+        touch "$bashrc_file"
+    fi
+    
+    if ! grep -Fq "$alias_line" "$bashrc_file"; then
+        echo "$alias_line" >> "$bashrc_file"
+        print_info "Alias added to ~/.bashrc"
+    else
+        print_info "Alias already exists in ~/.bashrc"
+    fi
+    
+    print_info "Setup completed successfully"
+    echo
+    print_info "Please create the following files in $TARGET_DIR/.secrets/:"
+    echo "- figma-token"
+    echo "- openrouter-key"
+    echo
+    print_info "After creating the files, secure them with:"
+    echo "chmod 600 $TARGET_DIR/.secrets/figma-token $TARGET_DIR/.secrets/openrouter-key"
 }
 
-# Esegui la funzione principale
 main "$@"
