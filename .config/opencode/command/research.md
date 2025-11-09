@@ -16,6 +16,17 @@ You are tasked with conducting comprehensive research across the codebase to ans
 - ONLY describe what exists, where it exists, how it works, and how components interact
 - You are creating a technical map/documentation of the existing system
 
+## Research document criteria
+
+Create a research document when:
+- You need to understand how existing code works or how components interact
+- You're investigating patterns, architecture, or implementation details
+- You want to document findings for future reference
+- You're exploring options before creating a plan or ticket
+
+Do NOT create research documents when:
+- A research for the same scope was already created, enhance that instead
+
 ## Initial Setup:
 
 When this command is invoked, respond with:
@@ -82,33 +93,44 @@ Then wait for the user's research query.
    - Highlight patterns, connections, and architectural decisions
    - Answer the user's specific questions with concrete evidence
 
-5. **Gather metadata for the research document:**
-   - Collect metadata directly from git commands (commit hash, branch, etc.)
-   - Filename: `thoughts/shared/research/YYYY-MM-DD-ENG-XXXX-description.md`
-     - Format: `YYYY-MM-DD-ENG-XXXX-description.md` where:
-       - YYYY-MM-DD is today's date
-       - ENG-XXXX is the ticket number (omit if no ticket)
-       - description is a brief kebab-case description of the research topic
-     - Examples:
-       - With ticket: `2025-01-08-ENG-1478-parent-child-tracking.md`
-       - Without ticket: `2025-01-08-authentication-flow.md`
+ 5. **Gather metadata for the research document:**
+     - Collect metadata directly from git commands (commit hash, branch, etc.)
+     - Filename: `thoughts/shared/research/YYYY-MM-DD-description.md`
+       - Format: `YYYY-MM-DD-description.md` where:
+         - YYYY-MM-DD is today's date
+         - description is a brief kebab-case description of the research topic
+       - Examples:
+         - `2025-01-08-parent-child-tracking.md`
+         - `2025-01-08-authentication-flow.md`
+     - **Required YAML frontmatter fields:**
+       - `status`: Current state (draft, in_progress, complete, cancelled)
+       - `created_at`: ISO timestamp when research started
+       - `requester`: Person who requested the research
+       - `context_links`: Array of related URLs or file paths
+       - `related_ticket`: Path or identifier to related ticket if applicable
+       - `related_plan`: Path to related plan if applicable
+       - `related_operation`: Path to related operation if applicable
 
 6. **Generate research document:**
    - Use the metadata gathered in step 4
-   - Structure the document with YAML frontmatter followed by content:
-     ```markdown
-     ---
-     date: [Current date and time with timezone in ISO format]
-     researcher: [Researcher name from thoughts status]
-     git_commit: [Current commit hash]
-     branch: [Current branch name]
-     repository: [Repository name]
-     topic: "[User's Question/Topic]"
-     tags: [research, codebase, relevant-component-names]
-     status: complete
-     last_updated: [Current date in YYYY-MM-DD format]
-     last_updated_by: [Researcher name]
-     ---
+    - Structure the document with YAML frontmatter followed by content:
+      ```markdown
+      ---
+      status: complete
+      created_at: [ISO timestamp when research started]
+      requester: [Person who requested the research]
+      context_links: [Array of related URLs or file paths]
+      related_ticket: [Path or identifier to related ticket if applicable]
+      related_plan: [Path to related plan if applicable]
+      related_operation: [Path to related operation if applicable]
+      date: [Current date and time with timezone in ISO format]
+      git_commit: [Current commit hash]
+      branch: [Current branch name]
+      repository: [Repository name]
+      topic: "[User's Question/Topic]"
+      tags: [research, codebase, relevant-component-names]
+      last_updated: [Current date in YYYY-MM-DD format]
+      ---
 
      # Research: [User's Question/Topic]
 
@@ -210,3 +232,4 @@ Then wait for the user's research query.
   - Update frontmatter when adding follow-up research
   - Use snake_case for multi-word field names (e.g., `last_updated`, `git_commit`)
   - Tags should be relevant to the research topic and components studied
+- **Reference related documents**: Always reference related tickets, plans, or operations in the frontmatter when applicable to maintain traceability

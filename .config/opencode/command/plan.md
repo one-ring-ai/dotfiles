@@ -7,6 +7,14 @@ agent: 2-planner
 
 You are tasked with creating detailed implementation plans through an interactive, iterative process. You should be skeptical, thorough, and work collaboratively with the user to produce high-quality technical specifications.
 
+## When to Create Implementation Plans
+
+Create an implementation plan when:
+- Research findings indicate that code changes are needed
+- Converting research insights into actionable implementation steps
+- Breaking down complex features into manageable phases
+- Documenting the technical approach for implementation tickets
+
 ## Initial Response
 
 When this command is invoked:
@@ -30,7 +38,7 @@ Then wait for the user's input.
 ### Step 1: Context Gathering & Initial Analysis
 
 1. **Read all mentioned files immediately and FULLY**:
-   - Ticket files (e.g., `thoughts/allison/tickets/eng_1234.md`)
+    - Ticket files (e.g., `thoughts/shared/tickets/ticket-description.md`)
    - Research documents
    - Related implementation plans
    - Any JSON/data files mentioned
@@ -161,17 +169,34 @@ Once aligned on approach:
 
 After structure approval:
 
-1. **Write the plan** to `thoughts/shared/plans/YYYY-MM-DD-ENG-XXXX-description.md`
-   - Format: `YYYY-MM-DD-ENG-XXXX-description.md` where:
-     - YYYY-MM-DD is today's date
-     - ENG-XXXX is the ticket number (omit if no ticket)
-     - description is a brief kebab-case description
-   - Examples:
-     - With ticket: `2025-01-08-ENG-1478-parent-child-tracking.md`
-     - Without ticket: `2025-01-08-improve-error-handling.md`
+ 1. **Write the plan** to `thoughts/shared/plans/YYYY-MM-DD-description.md`
+     - Format: `YYYY-MM-DD-description.md` where:
+       - YYYY-MM-DD is today's date
+       - description is a brief kebab-case description
+     - Examples:
+       - `2025-01-08-parent-child-tracking.md`
+       - `2025-01-08-improve-error-handling.md`
+     - **Include YAML frontmatter with required fields:**
+       - `status`: Current state (draft, in_progress, complete, cancelled, implemented)
+       - `created_at`: ISO timestamp when plan was created
+       - `requester`: Person who requested the plan
+       - `context_links`: Array of related URLs or file paths
+       - `related_ticket`: Path or identifier to related ticket if applicable
+       - `related_research`: Path to research document that informed this plan
+       - `related_operation`: Path to operation if this leads to implementation
 2. **Use this template structure**:
 
 ````markdown
+---
+status: [draft|in_progress|complete|cancelled|implemented]
+created_at: [ISO timestamp]
+requester: [Person who requested]
+context_links: [Array of related links]
+related_ticket: [Path or identifier to related ticket if applicable]
+related_research: [Path to research document]
+related_operation: [Path to operation if applicable]
+---
+
 # [Feature/Task Name] Implementation Plan
 
 ## Overview
@@ -261,7 +286,7 @@ After structure approval:
 
 ## References
 
-- Original ticket: `thoughts/allison/tickets/eng_XXXX.md`
+- Original ticket: `[Path to related ticket document]`
 - Related research: `thoughts/shared/research/[relevant].md`
 - Similar implementation: `[file:line]`
 ````
@@ -270,8 +295,8 @@ After structure approval:
 
 1. **Present the draft plan location**:
    ```
-   I've created the initial implementation plan at:
-   `thoughts/shared/plans/YYYY-MM-DD-ENG-XXXX-description.md`
+    I've created the initial implementation plan at:
+    `thoughts/shared/plans/YYYY-MM-DD-description.md`
 
    Please review it and let me know:
    - Are the phases properly scoped?
@@ -321,11 +346,15 @@ After structure approval:
    - Mark planning tasks complete when done
 
 6. **No Open Questions in Final Plan**:
-   - If you encounter open questions during planning, STOP
-   - Research or ask for clarification immediately
-   - Do NOT write the plan with unresolved questions
-   - The implementation plan must be complete and actionable
-   - Every decision must be made before finalizing the plan
+    - If you encounter open questions during planning STOP, research or ask for clarification immediately
+    - Do NOT write the plan with unresolved questions
+    - The implementation plan must be complete and actionable
+    - Every decision must be made before finalizing the plan
+
+7. **Metadata Consistency**:
+    - Maintain consistent YAML frontmatter across all thoughts/ files
+    - Always include required fields for traceability
+    - Reference related documents (research, tickets, operations) to maintain links
 
 ## Success Criteria Guidelines
 
@@ -423,7 +452,7 @@ tasks = [
 User: /implementation_plan
 Assistant: I'll help you create a detailed implementation plan...
 
-User: We need to add parent-child tracking for Claude sub-tasks. See thoughts/allison/tickets/eng_1478.md
+User: We need to add parent-child tracking for Claude sub-tasks. See thoughts/shared/tickets/parent-child-tracking.md
 Assistant: Let me read that ticket file completely first...
 
 [Reads file fully]
