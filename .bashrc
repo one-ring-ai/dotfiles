@@ -107,9 +107,9 @@ alias appdata='cd /mnt/user/appdata'
 
 # alias for opencode
 alias copy-secrets='rsync -av --delete /mnt/user/.secrets/ /home/coder/.config/opencode/.secrets'
-alias sync-opencode='rsync -av --delete /mnt/user/github/dotfiles/.config/opencode/ /home/coder/.config/opencode/'
-alias coding-plan="find \"/home/coder/.config/opencode/agent\" -type f -name '*.md' -print0 | xargs -0 sed -i 's|openrouter/@preset/coder-model|zai-coding-plan/glm-4.6|g'"
-alias grok-code="find \"/home/coder/.config/opencode/agent\" -type f -name '*.md' -print0 | xargs -0 sed -i 's|openrouter/@preset/coder-model|opencode/grok-code|g'"
+alias sync-opencode='curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/main/.config/opencode/setup.sh | bash'
+alias sync-oc-local='rsync -av --delete /mnt/user/github/dotfiles/.config/opencode/ /home/coder/.config/opencode/'
+alias coding-plan="find \"/home/coder/.config/opencode/agent\" -type f -name '*.md' -print0 | xargs -0 sed -i 's|opencode/grok-code|zai-coding-plan/glm-4.6|g'"
 alias oc-rollback="sudo opencode upgrade 0.15.31"
 
 #######################################################
