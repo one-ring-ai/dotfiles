@@ -5,8 +5,6 @@ model: openrouter/@preset/coder-model
 temperature: 0.3
 permission:
   bash:
-    "git": deny
-    "git *": deny
     "git status": allow
     "git status *": allow
     "git diff": allow

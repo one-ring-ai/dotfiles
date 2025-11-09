@@ -93,8 +93,8 @@
       "yes > /dev/null": "deny",
       "stress *": "deny",
       "eval *": "deny",
-      "git push": "deny",
-      "git push *": "deny",
+      "git": "deny",
+      "git *": "deny",
       "*": "ask"
     }
   }

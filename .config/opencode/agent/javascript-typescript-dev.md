@@ -5,18 +5,16 @@ model: opencode/grok-code
 temperature: 0.3
 permission:
   bash:
-    "git": deny
-    "git *": deny
     "git status": allow
     "git status *": allow
     "git diff": allow
     "git diff *": allow
     "git log": allow
     "git log *": allow
-    "npm test": allow
-    "npm test *": allow
-    "npm install": allow
-    "npm install *": allow
+    "npm": allow
+    "npm *": allow
+    "npm run": ask
+    "npm run *": ask
 ---
 
 You are an expert JavaScript/TypeScript developer specializing in modern web development using the latest ECMAScript standards and industry best practices.

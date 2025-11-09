@@ -5,8 +5,6 @@ model: opencode/grok-code
 temperature: 0.2
 permission:
   bash:
-    "git": deny
-    "git *": deny
     "git status": allow
     "git status *": allow
     "git diff": allow
