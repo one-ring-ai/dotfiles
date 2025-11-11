@@ -28,6 +28,11 @@
       "type": "local",
       "command": ["npx", "-y", "figma-developer-mcp", "--figma-api-key={file:~/.config/opencode/.secrets/figma-token}", "--stdio"],
       "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "-y", "@microsoft/playwright-mcp", "--stdio"],
+      "enabled": true
     }
   },
   // default CLI permissions
