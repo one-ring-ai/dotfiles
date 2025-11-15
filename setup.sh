@@ -332,7 +332,20 @@ setup_bash_config() {
         log_error "Bashrc template not found"
         return 1
     fi
-    
+
+    local quickstart_guide="$user_home/quickstart_guide.md"
+    if [ -f "$DOTFILES_DIR/quickstart_guide.md" ]; then
+        if [ -f "$quickstart_guide" ]; then
+            log_info "Backing up existing quickstart_guide.md"
+            mv "$quickstart_guide" "$quickstart_guide.backup.$(date +%Y%m%d_%H%M%S)"
+        fi
+        cp "$DOTFILES_DIR/quickstart_guide.md" "$quickstart_guide"
+        log_success "Quickstart guide copied to home directory"
+    else
+        log_error "Quickstart guide template not found"
+        return 1
+    fi
+
     if [ -f "$DOTFILES_DIR/starship.toml" ]; then
         ln -sf "$DOTFILES_DIR/starship.toml" "$starship_config"
         log_success "Starship configuration linked"

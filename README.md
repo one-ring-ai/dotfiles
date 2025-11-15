@@ -1,28 +1,18 @@
-# One Ring AI Dotfiles
+# Dotfiles Repository
 
 ## Overview
 
-This repository provides a comprehensive shell configuration system designed for VPS template deployment via Terraform. It includes a complete `.bashrc` configuration, Starship prompt, system tools installation, and Claude Code integration to create consistent development environments across multiple servers.
-
-## Table of Contents
-
-- [Quick Installation](#quick-installation)
-- [Terraform Integration](#terraform-integration)
-- [Configuration Files](#configuration-files)
-- [Key Features](#key-features)
-- [VPS Template Usage](#vps-template-usage)
-- [Development Tools](#development-tools)
-- [Uninstallation](#uninstallation)
+This repository provides a comprehensive shell configuration system with OpenCode AI integration for consistent development environments. It includes Bash configurations, Starship prompt, system tools, and OpenCode configs to enhance productivity across different systems.
 
 ## Quick Installation
 
-For manual installation on a single server:
+Install the dotfiles on a new system:
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/main/setup.sh | bash
 ```
 
-Or clone and run:
+Or clone and run locally:
 
 ```bash
 git clone https://github.com/one-ring-ai/dotfiles.git ~/dotfiles
@@ -30,136 +20,98 @@ cd ~/dotfiles
 ./setup.sh
 ```
 
-The setup script automatically:
-- Clones/updates the repository to `~/dotfiles`
-- Detects your package manager and installs dependencies
-- Installs MesloLGS Nerd Font
-- Sets up Starship prompt, FZF, and Zoxide
+After installation, restart your shell or run `source ~/.bashrc` to apply changes.
+
+## Setup Script Behavior
+
+The setup script performs the following actions:
+
+- Clones or updates the dotfiles repository to `~/dotfiles`
+- Detects your package manager and installs required dependencies
+- Installs MesloLGS Nerd Font for enhanced terminal display
+- Sets up Starship prompt, FZF fuzzy finder, and Zoxide smart navigation
 - Creates symbolic links to configuration files
 - Configures Fastfetch for system information display
+- Copies OpenCode configuration to `~/.config/opencode/`
+- Backs up existing configurations before overwriting
 
-## Terraform Integration
+The script is idempotent and safe to run multiple times.
 
-This repository is designed for automated VPS provisioning. The setup script:
+## Configuration Layout
 
-1. **Auto-clones**: Downloads the repository if not present
-2. **Updates automatically**: Runs `git pull` on existing installations  
-3. **User-agnostic**: Works for any user/environment
-4. **Idempotent**: Safe to run multiple times
-5. **Symbolic links**: Configuration updates propagate automatically
+### `.config/opencode/`
 
-### Terraform Usage Example
+Contains OpenCode AI assistant configuration and extensions:
 
-```hcl
-resource "null_resource" "setup_dotfiles" {
-  provisioner "remote-exec" {
-    inline = [
-      "curl -sSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/main/setup.sh | bash",
-      "source ~/.bashrc"
-    ]
-  }
-}
+- `agent/` - AI agent definitions for various development tasks
+- `command/` - Custom command definitions
+- `plugin/` - JavaScript plugins for OpenCode functionality
+- `opencode.jsonc` - Main OpenCode configuration file
+- `AGENTS.md` - Documentation for available agents
+
+### `.config/fastfetch/`
+
+- `config.jsonc` - Fastfetch system information tool configuration with organized sections for hardware, software, and system details
+
+## OpenCode Integration
+
+OpenCode is an AI-powered coding assistant integrated into the shell environment.
+
+- Pre-configured agents for different development tasks (JavaScript, Python, Docker, etc.)
+- Plugin system for extending functionality
+- Custom commands for common operations
+- Secure environment with permission controls
+
+Start OpenCode with `opencode` and explore available agents in `.config/opencode/agent/`.
+
+## Bash Configuration & Aliases
+
+The `.bashrc` provides extensive shell enhancements:
+
+- 200+ productivity aliases for file operations, system administration, and development workflows
+- Enhanced navigation with directory shortcuts and auto-ls on directory change
+- Git shortcuts and functions for common repository operations
+- Safety features using trash-cli instead of permanent deletion
+- Color-coded outputs and improved command history management
+- Integration with development tools and package managers
+
+Key aliases include file listing variants, archive extraction, network utilities, and system monitoring commands.
+
+## Quickstart Guide Access
+
+Access the terminal quickstart guide anytime using the `guide` alias:
+
+```bash
+guide
 ```
 
-## Configuration Files
+This opens `quickstart_guide.md` in your pager, providing essential commands and shortcuts for:
 
-### `.bashrc`
-- **200+ aliases** for enhanced productivity
-- **Custom functions** for file operations, system info, git workflows
-- **Enhanced navigation** with directory shortcuts and auto-ls on cd
-- **Development tools** integration (Docker, Git, package managers)
-- **Safety features** using trash-cli instead of rm
-- **Color-coded outputs** for better readability
+- OpenCode basics and plugin usage
+- tmux terminal multiplexing
+- Zoxide smart directory navigation
+- FZF fuzzy finding
+- Fastfetch system information
+- Git workflows and text processing
 
-### `starship.toml`
-- **Contextual prompt** showing git status, language versions, etc.
-- **Fast performance** with minimal latency
-- **Custom formatting** optimized for development workflows
+The guide is copied to your home directory during setup for offline access.
 
-### `config.jsonc`
-- **Fastfetch configuration** for system information display
-- **Organized sections** for hardware, software, and system details
-- **Color-coded output** matching the overall theme
+## Testing & Validation
 
-### `.claude/` Directory
-- **Claude Code settings** for AI-assisted development
-- **Permission configurations** for secure tool usage
-- **Project-specific instructions** and conventions
+Validate the installation and configurations:
 
-## Key Features
+- Test OpenCode plugins: `bash docs/scripts/test-plugins.sh`
+- Check Bash syntax: `bash -n ~/.bashrc`
+- Verify OpenCode: `opencode --print-logs --log-level DEBUG .`
+- Test setup in isolation: Run `./setup.sh` in a temporary directory
 
-### Shell Enhancements
-- **Smart aliases** that adapt based on available tools
-- **Conditional path exports** for user-specific tools
-- **History management** with timestamps and deduplication
-- **Auto-completion** improvements and case-insensitive matching
+## Contributing
 
-### Development Tools
-- **Git shortcuts** with `gcom()` and `gpush()` functions
-- **Docker cleanup** aliases for container management  
-- **Archive extraction** with universal `extract()` function
-- **Network utilities** for IP detection and port monitoring
-
-### System Administration
-- **Distribution detection** with automatic package manager selection
-- **Service management** shortcuts for common operations
-- **Log monitoring** with multitail integration
-- **Resource monitoring** aliases and functions
-
-### Safety Features
-- **Interactive confirmations** for destructive operations
-- **Trash-cli integration** instead of permanent deletion
-- **Backup creation** before overwriting configurations
-- **Permission validation** before system modifications
-
-## VPS Template Usage
-
-### Folder Structure
-```
-~/dotfiles/
-├── .bashrc           # Main shell configuration
-├── setup.sh          # Installation script
-├── uninstall.sh      # Removal script
-├── config.jsonc      # Fastfetch configuration
-├── starship.toml     # Prompt configuration
-├── .claude/          # Claude Code settings
-│   ├── CLAUDE.md     # Development standards
-│   └── settings.local.json # Tool permissions
-└── .github/          # CI/CD configurations
-```
-
-### Environment Variables
-- `DOTFILESDIR`: Points to `~/dotfiles` for script usage
-- `XDG_*`: Standard directories for configuration files
-- Development tool paths automatically detected and configured
-
-### Update Mechanism
-When Terraform re-runs the setup script:
-1. Repository is updated via `git pull`
-2. Symlinks automatically point to updated files
-3. No manual intervention required
-4. Changes take effect on next shell session
-
-## Development Tools
-
-### Claude Code Integration
-- Pre-configured permissions for common operations
-- Project-specific coding standards and conventions
-- Docker and development tool access controls
-
-### Git Workflow
-- Conventional commit message format
-- Automated backup of existing configurations
-- Branch-aware prompt with status indicators
-
-### Package Management
-- Multi-distribution support (Ubuntu, Arch, Fedora, etc.)
-- Automatic dependency installation
-- AUR helper setup for Arch-based systems
+This repository follows conventional commit standards and uses semantic-release for automated versioning. See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for detailed guidelines.
 
 ## Uninstallation
 
-To remove the configuration:
+Remove all configurations and restore backups:
 
 ```bash
 cd ~/dotfiles
@@ -167,20 +119,15 @@ cd ~/dotfiles
 ```
 
 This will:
-- Remove all symbolic links
-- Restore backed-up configurations
+
+- Remove symbolic links to configuration files
+- Restore backed-up original configurations
 - Uninstall optional dependencies
 - Clean up font installations
 - Remove the dotfiles directory
 
-## Contributing
-
-This repository follows conventional commit messages and includes automated dependency updates via Dependabot. All configurations are designed to be portable across different Unix-like systems.
-
-For issues or improvements, please open an issue or pull request.
-
 ## Acknowledgments
 
-This dotfiles configuration is based on the excellent work by [Chris Titus](https://github.com/ChrisTitusTech) from his [mybash repository](https://github.com/ChrisTitusTech/mybash). We've adapted and extended his configurations for VPS template deployment and Terraform integration while maintaining the core functionality and philosophy of his original work.
+This dotfiles configuration is based on the excellent work by [Chris Titus](https://github.com/ChrisTitusTech) from his [mybash repository](https://github.com/ChrisTitusTech/mybash). We've adapted and extended his configurations for OpenCode integration while maintaining the core functionality and philosophy of his original work.
 
 Special thanks to Chris for creating such a comprehensive and well-documented shell configuration that has served as the foundation for this project.
