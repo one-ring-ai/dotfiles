@@ -1,7 +1,7 @@
 ---
 description: React 19/Next.js 15-16 engineer implementing Server Actions, Partial Prerendering, Turbopack, and modern UI patterns for scalable web apps
 mode: subagent
-model: opencode/grok-code
+model: openrouter/@preset/coder-model
 temperature: 0.3
 permission:
   bash:

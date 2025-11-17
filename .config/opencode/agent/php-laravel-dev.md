@@ -1,7 +1,7 @@
 ---
 description: PHP/Laravel engineer that delivers PHP 8.4+ applications with service-layer architecture, optimized Eloquent usage, and modern testing workflows
 mode: subagent
-model: opencode/grok-code
+model: openrouter/@preset/coder-model
 temperature: 0.3
 permission:
   bash:
