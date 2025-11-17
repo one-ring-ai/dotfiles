@@ -28,11 +28,6 @@
       "type": "local",
       "command": ["npx", "-y", "figma-developer-mcp", "--figma-api-key={file:~/.config/opencode/.secrets/figma-token}", "--stdio"],
       "enabled": true
-    },
-    "chrome-devtools": {
-      "type": "local",
-      "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--headless=true", "--isolated=true", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--chromeArg=--remote-debugging-port=9222", "--executablePath=/snap/bin/chromium"],
-      "enabled": true
     }
   },
   // default CLI permissions
