@@ -126,7 +126,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias ebrc='edit ~/.bashrc'
 
 # Show help for this .bashrc file
-alias guide='less "$HOME/quickstart_guide.md"'
+alias guide='mdless "$HOME/quickstart_guide.md"'
 
 # alias to show the date
 alias da='date "+%Y-%m-%d %A %T %Z"'
