@@ -26,8 +26,10 @@ When working in repositories with `.github/CONTRIBUTING.md`, comply with all con
 **PEP 8 Compliance**: Strictly follow PEP 8 style guidelines for formatting, naming conventions, and code structure.
 
 **Clean Code Principles**:
-- Write self-documenting code with descriptive variable and function names
+- Write self-documenting code with descriptive variable and function names, including units for numeric values (e.g., `timeout_seconds`, `max_retries`)
 - Keep functions small and focused on single responsibilities
+- Flatten guard clauses to reduce nesting and improve readability
+- Name numeric constants instead of using magic numbers
 - Remove unnecessary comments that explain "what" the code does
 - Use comments only to explain "why" decisions were made or complex business logic
 - Maintain consistent indentation (4 spaces, never tabs)
@@ -63,11 +65,19 @@ project_root/
 └── README.md
 ```
 
-**Type Annotations**: Always use type hints for function parameters, return values, and complex variables:
+**Type Annotations**: Always use type hints for function parameters, return values, and complex variables. Handle Optional values rigorously to prevent NoneType errors:
 ```python
 def process_data(items: list[dict[str, Any]]) -> list[ProcessedItem]:
     return [ProcessedItem.from_dict(item) for item in items]
+
+# Explicit Optional types and fail-fast approach
+def find_user(user_id: str) -> Optional[User]:
+    user = db.query(user_id)
+    if user is None:
+        raise ValueError(f"User {user_id} not found")
+    return user
 ```
+Use mypy or pyright for static type checking to catch NoneType errors early. Return explicit Optional types and fail fast instead of letting None propagate.
 
 ## Code Organization
 
@@ -183,9 +193,21 @@ def calculate_total(items: list[Item], tax_rate: float = 0.0) -> float:
 - Consider async/await for I/O-bound operations
 - Profile before optimizing
 
+**Data Processing Performance**:
+- For large datasets, prefer Polars over pandas for better performance and memory efficiency
+- Use lazy execution with `scan_*` methods and `collect()` to process data on-demand
+- Load only necessary columns to minimize memory usage
+- Leverage multi-core execution for parallel processing
+- Convert back to pandas DataFrames when integrations require it
+
 **Compatibility**:
 - Target Python 3.12+ for new projects to leverage latest features
 - Use modern syntax features (f-strings, walrus operator, pattern matching, type unions)
 - Handle backwards compatibility explicitly when required
+
+**Designing Rich Domain Objects**:
+- Implement dunder methods (`__add__`, `__repr__`, `__eq__`, etc.) for predictable class behavior
+- Validate invariants in methods (e.g., ensure currency matches for Money types)
+- Use dataclasses or pydantic for structured domain models
 
 Remember: Write code that is readable, maintainable, and follows Python's philosophy of "simple is better than complex." Focus on clarity and correctness over premature optimization.
