@@ -26,10 +26,10 @@ start-backup         # setup the recurrent sync from the vm to the storagebox (A
 ### file operations
 
 ```bash
-lla                  # List all files with details
-..                   # Go to previous directory
-pwd                  # Print working directory
-find . -name "*.md"  # Find all markdown files in current directory
+mnt                  # cd into /mnt/user
+lla                  # list all files with details
+..                   # go to previous directory
+find . -name "*.md"  # find all markdown files in current directory
 ```
     
 ## opencode
