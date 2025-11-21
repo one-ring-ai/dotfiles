@@ -103,14 +103,32 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # alias SERVERNAME='ssh YOURWEBSITE.com -l USERNAME -p PORTNUMBERHERE'
 
 # aliases to change the directory
-alias appdata='cd /mnt/user/appdata'
+alias mnt='cd /mnt/user'
 
 # alias for opencode
 alias copy-secrets='rsync -av --delete /mnt/user/.secrets/ /home/coder/.config/opencode/.secrets'
 alias sync-opencode='curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/main/.config/opencode/setup.sh | bash'
 alias sync-oc-local='rsync -av --delete /mnt/user/github/dotfiles/.config/opencode/ /home/coder/.config/opencode/'
-alias coding-plan="find \"/home/coder/.config/opencode/agent\" -type f -name '*.md' -print0 | xargs -0 sed -i 's|opencode/grok-code|zai-coding-plan/glm-4.6|g'"
 alias oc-rollback="sudo opencode upgrade 0.15.31"
+
+# alias for initial files setup and recurring backup
+init_vm() {
+    if sh /home/coder/sync-from-storagebox.sh; then
+        printf 'Reminder: run start-backup to keep files backed up going forward\n'
+        rm -f /home/coder/sync-from-storagebox.sh
+    fi
+}
+alias init-vm=init_vm
+start_backup() {
+    local cron_entry
+    cron_entry='*/5 * * * * /home/coder/sync-to-storagebox.sh'
+    if crontab -l 2>/dev/null | command grep -Fxq "$cron_entry"; then
+        return
+    fi
+    (crontab -l 2>/dev/null || true; echo "$cron_entry") | crontab -
+    printf 'start-backup configured to sync files every five minutes\n'
+}
+alias start-backup=start_backup
 
 #######################################################
 # GENERAL ALIASES

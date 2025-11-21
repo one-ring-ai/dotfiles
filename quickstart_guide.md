@@ -13,6 +13,24 @@
 this guide is meant to quickstart you with this setup and give you instruction on how to use tools like opencode.
 
 i'm assuming you're using this in a new environment where you have your permanent storage placed under the path `/mnt/user/` and that your home folder is not persistent. if your hom folder *is* persistent, i advise you to fork this repository and adapt it to your needs.
+
+## everyday aliases
+
+### initial setup
+
+```bash
+init-vm              # download all your files from th storagebox
+start-backup         # setup the recurrent sync from the vm to the storagebox (ALWAYS RUN init-vm BEFORE!!!!)
+```
+
+### file operations
+
+```bash
+lla                  # List all files with details
+..                   # Go to previous directory
+pwd                  # Print working directory
+find . -name "*.md"  # Find all markdown files in current directory
+```
     
 ## opencode
 
@@ -118,15 +136,6 @@ fastfetch        # Display system info
 - Configuration: `starship.toml`
 
 ## Useful Commands
-
-### File Operations
-
-```bash
-lla                  # List all files with details
-..                   # Go to previous directory
-pwd                  # Print working directory
-find . -name "*.md"  # Find all markdown files in current directory
-```
 
 ### Process Management
 
