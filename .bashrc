@@ -142,6 +142,12 @@ init_vm() {
             printf "Error: rsync not found, cannot copy secrets.\n" >&2
         fi
 
+        # Copy docker config
+        if [ -f /mnt/user/appdata/docker/config.json ]; then
+            mkdir -p /home/coder/.docker
+            cp /mnt/user/appdata/docker/config.json /home/coder/.docker/config.json
+        fi
+
         # Cleanup
         rm -f /home/coder/sync-from-storagebox.sh
     fi
