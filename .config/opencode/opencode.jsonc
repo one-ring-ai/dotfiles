@@ -4,7 +4,7 @@
   "autoupdate": false,
   // model selection
   "model": "openrouter/@preset/planner-model",
-  "small_model": "openrouter/@preset/small-model",
+  "small_model": "opencode/grok-code",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
   // pre-configured providers
   "provider": {
