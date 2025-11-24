@@ -114,21 +114,39 @@ alias oc-rollback="sudo opencode upgrade 0.15.31"
 # alias for initial files setup and recurring backup
 init_vm() {
     if sh /home/coder/sync-from-storagebox.sh; then
-        printf 'Reminder: run start-backup to keep files backed up going forward\n'
+        # Dry run verification
+        if ! sh /home/coder/sync-from-storagebox.sh --dry-run > /dev/null; then
+            printf "Verification failed! Files might not be fully synced.\n" >&2
+            return 1
+        fi
+
+        # Configure backup
+        local cron_entry
+        cron_entry='*/5 * * * * /home/coder/sync-to-storagebox.sh'
+        if ! crontab -l 2>/dev/null | command grep -Fxq "$cron_entry"; then
+            (crontab -l 2>/dev/null || true; echo "$cron_entry") | crontab -
+        fi
+
+        # Verify backup configuration
+        if crontab -l 2>/dev/null | grep -F "$cron_entry"; then
+            printf "Backup cronjob configured successfully:\n"
+            crontab -l 2>/dev/null | grep -F "$cron_entry"
+        else
+            printf "Error: Failed to configure backup cronjob.\n" >&2
+        fi
+
+        # Copy secrets
+        if command -v rsync &> /dev/null; then
+            rsync -av --delete /mnt/user/.secrets/ /home/coder/.config/opencode/.secrets
+        else
+            printf "Error: rsync not found, cannot copy secrets.\n" >&2
+        fi
+
+        # Cleanup
         rm -f /home/coder/sync-from-storagebox.sh
     fi
 }
 alias init-vm=init_vm
-start_backup() {
-    local cron_entry
-    cron_entry='*/5 * * * * /home/coder/sync-to-storagebox.sh'
-    if crontab -l 2>/dev/null | command grep -Fxq "$cron_entry"; then
-        return
-    fi
-    (crontab -l 2>/dev/null || true; echo "$cron_entry") | crontab -
-    printf 'start-backup configured to sync files every five minutes\n'
-}
-alias start-backup=start_backup
 
 #######################################################
 # GENERAL ALIASES

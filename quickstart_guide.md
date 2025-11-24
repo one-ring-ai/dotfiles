@@ -19,8 +19,7 @@ i'm assuming you're using this in a new environment where you have your permanen
 ### initial setup
 
 ```bash
-init-vm              # download all your files from th storagebox
-start-backup         # setup the recurrent sync from the vm to the storagebox (ALWAYS RUN init-vm BEFORE!!!!)
+init-vm              # download files, setup backup and copy secrets
 ```
 
 ### file operations
@@ -38,7 +37,7 @@ find . -name "*.md"  # find all markdown files in current directory
 
 *if you're having issues with the new TUI*, you can use `oc-rollback` to rvert to th last stable vrsion before the new TUI.
 
-after, *you need to run* `copy-secrets` to copy your secret keys from `/mnt/user/.secrets` to `/home/coder/.config/opencode/.secrets`
+after, `init-vm` should have copied your secret keys from `/mnt/user/.secrets` to `/home/coder/.config/opencode/.secrets`. if not, just run `copy-secrets` in the terminal
 
 now you can safely start opencode with the command `opencode` and below you can find a through review of our setup
 
