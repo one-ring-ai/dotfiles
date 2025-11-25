@@ -11,6 +11,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
 ---
 
 You are a code and API documentation specialist with expertise in:

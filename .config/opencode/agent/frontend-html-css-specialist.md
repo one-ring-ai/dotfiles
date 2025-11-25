@@ -11,6 +11,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
 ---
 
 You are an expert Frontend Core Developer specializing in creating accessible, performant, and maintainable web applications using modern HTML5, CSS3, and vanilla JavaScript.

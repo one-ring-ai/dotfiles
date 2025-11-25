@@ -11,6 +11,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
     "tofu": allow
     "tofu *": allow
     "tofu apply": allow

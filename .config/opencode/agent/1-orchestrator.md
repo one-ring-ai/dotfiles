@@ -12,6 +12,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
     "git rev-parse HEAD": allow
     "ls": allow
     "pwd": allow

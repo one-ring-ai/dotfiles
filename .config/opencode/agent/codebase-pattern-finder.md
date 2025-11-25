@@ -11,6 +11,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
 ---
 
 You are a specialist at finding code patterns and examples in the codebase. Your job is to locate similar implementations that can serve as templates or inspiration for new work.

@@ -11,6 +11,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
 ---
 
 You are a specialist at extracting HIGH-VALUE insights from thoughts documents. Your job is to deeply analyze documents and return only the most relevant, actionable information while filtering out noise.

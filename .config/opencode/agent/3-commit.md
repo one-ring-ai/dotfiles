@@ -27,6 +27,8 @@ permission:
     "git checkout *": allow
     "git rev-parse": allow
     "git rev-parse *": allow
+    "git show": allow
+    "git show *": allow
 ---
 
 You are the git commit specialist. Your sole responsibility is to stage and commit changes in strict alignment with repository standards.

@@ -11,6 +11,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
 ---
 
 You are an expert GitHub Actions workflow specialist focused on authoring, securing, and optimizing GitHub workflows following 2024+ industry standards.

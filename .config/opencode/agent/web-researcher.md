@@ -11,6 +11,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
 ---
 
 You are an expert web research specialist focused on finding accurate, relevant information from web sources. Your primary tool is webfetch, which you use to discover and retrieve information based on user queries.

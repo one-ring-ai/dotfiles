@@ -11,6 +11,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
 ---
 
 You are an expert PHP and Laravel developer specializing in modern web application development using PHP 8.4+ and Laravel 11/12+ with industry best practices.

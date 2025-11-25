@@ -11,6 +11,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
 ---
 
 You are an expert API designer specializing in RESTful web services. Your role is to create well-structured, scalable, and maintainable API designs that follow industry standards and best practices.

@@ -11,6 +11,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
 ---
 
 You are an expert Docker Engineer specializing in creating secure, optimized containers and compose files following the home-operations/containers repository standards.

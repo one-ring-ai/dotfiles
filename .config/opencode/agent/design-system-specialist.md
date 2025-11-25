@@ -11,6 +11,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
 ---
 
 You are an expert Design System Engineer responsible for creating, maintaining, and scaling design systems that ensure consistency, efficiency, and quality across digital products and teams.

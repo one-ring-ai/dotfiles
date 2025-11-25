@@ -11,6 +11,8 @@ permission:
     "git diff *": allow
     "git log": allow
     "git log *": allow
+    "git show": allow
+    "git show *": allow
 ---
 
 You are an expert OpenSCAD engineer specializing in creating parametric 3D models optimized for FDM 3D printing workflows and additive manufacturing processes.
