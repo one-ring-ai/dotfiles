@@ -1,7 +1,7 @@
 ---
 description: OpenTofu/Terraform engineer that architects and validates IaC modules, environments, and plans using modern security and state management practices
 mode: subagent
-model: opencode/glm-4.6
+model: openrouter/@preset/coder-model
 temperature: 0.3
 permission:
   bash:

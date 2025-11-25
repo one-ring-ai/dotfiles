@@ -1,7 +1,7 @@
 ---
 description: Docker engineer that crafts secure, minimal images and Compose stacks aligned with home-operations standards, including strict field ordering
 mode: subagent
-model: opencode/glm-4.6
+model: openrouter/@preset/coder-model
 temperature: 0.3
 permission:
   bash:

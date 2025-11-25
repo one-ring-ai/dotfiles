@@ -1,7 +1,7 @@
 ---
 description: Ruby/Rails engineer for implementing and testing Rails 8+ applications with modern Ruby 3.3+ standards, performance optimization, and security best practices
 mode: subagent
-model: opencode/glm-4.6
+model: openrouter/@preset/coder-model
 temperature: 0.3
 permission:
   bash:
