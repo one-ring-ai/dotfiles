@@ -1,7 +1,7 @@
 ---
 description: Primary planner that researches, synthesizes findings, and produces handoff plans without executing work
 mode: primary
-model: openrouter/@preset/planner-model
+model: opencode/gpt-5.1-codex
 temperature: 0.3
 permission:
   webfetch: deny

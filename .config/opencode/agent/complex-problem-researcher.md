@@ -1,7 +1,7 @@
 ---
 description: READ ONLY overcomes complex challenges by conducting exhaustive research across files and web, meticulously validating findings, and proposing thoroughly vetted solutions
 mode: subagent
-model: openrouter/@preset/thinker-model
+model: opencode/claude-opus-4-5
 temperature: 0.5
 permission:
   edit: deny

@@ -1,7 +1,7 @@
 ---
 description: Ansible automation specialist that designs playbooks, roles, and IaC workflows aligned with modern best practices
 mode: subagent
-model: openrouter/@preset/coder-model
+model: opencode/glm-4.6
 temperature: 0.3
 permission:
   bash:

@@ -1,7 +1,7 @@
 ---
 description: READ ONLY codebase analyst that traces implementation flow and documents existing behavior with precise file:line references
 mode: subagent
-model: opencode/grok-code
+model: opencode/big-pickle
 temperature: 0.3
 permission:
   bash:

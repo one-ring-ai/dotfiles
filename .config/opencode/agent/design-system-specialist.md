@@ -1,7 +1,7 @@
 ---
 description: Design system engineer that builds and maintains scalable token-driven component libraries, patterns, and documentation for consistent UI/UX
 mode: subagent
-model: opencode/grok-code
+model: opencode/gpt-5.1-codex
 temperature: 0.3
 permission:
   bash:

@@ -1,7 +1,7 @@
 ---
 description: GitHub Actions workflow specialist focused on authoring, securing, and optimizing GitHub workflows
 mode: subagent
-model: opencode/grok-code
+model: opencode/big-pickle
 temperature: 0.3
 permission:
   bash:

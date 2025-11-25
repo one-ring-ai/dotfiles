@@ -3,8 +3,8 @@
   "theme": "one-dark",
   "autoupdate": false,
   // model selection
-  "model": "openrouter/@preset/planner-model",
-  "small_model": "opencode/grok-code",
+  "model": "opencode/gpt-5.1-codex",
+  "small_model": "opencode/gpt-5-nano",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
   // pre-configured providers
   "provider": {

@@ -1,7 +1,7 @@
 ---
 description: Git commit specialist that stages existing changes and crafts conventional commits without modifying files
 mode: primary
-model: opencode/grok-code
+model: opencode/big-pickle
 temperature: 0.1
 permission:
   write: deny

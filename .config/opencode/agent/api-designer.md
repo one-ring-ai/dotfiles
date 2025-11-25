@@ -1,7 +1,7 @@
 ---
 description: REST API designer that defines resource models, endpoints, and standards-compliant contracts for scalable services
 mode: subagent
-model: openrouter/@preset/coder-model
+model: opencode/glm-4.6
 temperature: 0.3
 permission:
   bash:

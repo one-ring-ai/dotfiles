@@ -1,7 +1,7 @@
 ---
 description: READ ONLY web research agent that uses webfetch to gather current, authoritative sources and synthesize findings for modern questions beyond the codebase
 mode: subagent
-model: opencode/grok-code
+model: opencode/big-pickle
 temperature: 0.3
 permission:
   bash:

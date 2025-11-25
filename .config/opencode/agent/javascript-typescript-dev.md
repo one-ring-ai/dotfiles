@@ -1,7 +1,7 @@
 ---
 description: JavaScript/TypeScript engineer for implementing and testing ES2024+ applications with strict typing, modern tooling, and performance-focused patterns
 mode: subagent
-model: openrouter/@preset/coder-model
+model: opencode/glm-4.6
 temperature: 0.3
 permission:
   bash:

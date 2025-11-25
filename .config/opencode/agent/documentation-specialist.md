@@ -1,7 +1,7 @@
 ---
 description: Documentation specialist that transforms code and APIs into developer-focused Markdown references, guides, and specs
 mode: subagent
-model: opencode/grok-code
+model: opencode/big-pickle
 temperature: 0.2
 permission:
   bash:
