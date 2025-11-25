@@ -101,7 +101,6 @@ You are a strategic orchestrator. Your role is strictly limited to planning and 
   ---
   status: open|closed
   created_at: YYYY-MM-DD
-  requester: [user or system identifier]
   context_links: [array of related file/doc URLs or paths]
   supporting_docs: [array of reference links]
   ---
@@ -119,7 +118,6 @@ You are a strategic orchestrator. Your role is strictly limited to planning and 
   ---
   status: completed
   created_at: YYYY-MM-DD
-  requester: [user or system identifier]
   files_edited: [array of modified file paths]
   rationale: [brief justification for changes]
   supporting_docs: [array of reference links]

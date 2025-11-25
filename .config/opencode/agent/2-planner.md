@@ -70,8 +70,6 @@ You are the planning specialist. Your responsibilities are limited to research, 
   ---
   status: open|in_progress|closed
   created_at: YYYY-MM-DD
-  requester: [user or system identifier]
-  assignee: [assigned agent or user]
   context_links: [array of related file/doc URLs or paths]
   ---
   ```
@@ -84,8 +82,6 @@ You are the planning specialist. Your responsibilities are limited to research, 
   ---
   status: completed
   created_at: YYYY-MM-DD
-  requester: [user or system identifier]
-  assignee: [implementing agent]
   files_edited: [array of modified file paths]
   rationale: [brief justification for changes]
   supporting_docs: [array of reference links]
