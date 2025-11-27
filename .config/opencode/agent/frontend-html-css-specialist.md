@@ -1,7 +1,7 @@
 ---
 description: Frontend core engineer that delivers accessible, responsive UI with semantic HTML, modern CSS, and vanilla JavaScript best practices
 mode: subagent
-model: openrouter/@preset/planner-model
+model: opencode/gpt-5.1-codex
 temperature: 0.3
 permission:
   bash:

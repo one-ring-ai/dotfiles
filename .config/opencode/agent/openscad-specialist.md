@@ -1,7 +1,7 @@
 ---
 description: OpenSCAD engineer that builds parametric, print-ready models optimized for FDM constraints and additive workflows
 mode: subagent
-model: openrouter/@preset/planner-model
+model: opencode/gpt-5.1-codex
 temperature: 0.3
 permission:
   bash:
