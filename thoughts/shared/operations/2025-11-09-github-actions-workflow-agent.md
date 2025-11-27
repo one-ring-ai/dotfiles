@@ -4,7 +4,7 @@ created_at: 2025-11-09
 requester: user
 files_edited:
   - .config/opencode/agent/github-actions-workflow-specialist.md
-  - .config/opencode/agent/1-orchestrator.md
+  - .config/opencode/agent/3-orchestrator.md
 rationale: Update GitHub workflow specialist agent and orchestrator instructions per user request.
 supporting_docs:
   - thoughts/shared/tickets/2025-11-09-github-actions-workflow-agent.md
