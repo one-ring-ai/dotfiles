@@ -135,8 +135,8 @@
     "input_clear": "ctrl+c",
     "input_forward_delete": "ctrl+d",
     "input_paste": "ctrl+v",
-    "input_submit": "enter",
-    "input_newline": "shift+enter,ctrl+j",
+    "input_submit": "ctrl+enter",
+    "input_newline": "enter",
     "history_previous": "up",
     "history_next": "down"
   }
