@@ -4,7 +4,6 @@ mode: primary
 model: opencode/gpt-5.1-codex
 temperature: 0.3
 permission:
-  webfetch: deny
   bash:
     "git status": allow
     "git status *": allow
