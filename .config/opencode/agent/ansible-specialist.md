@@ -3,6 +3,8 @@ description: Ansible automation specialist that designs playbooks, roles, and Ia
 mode: subagent
 model: openrouter/@preset/coder-model
 temperature: 0.3
+tools:
+  figma: false
 permission:
   bash:
     "git status": allow

@@ -3,6 +3,12 @@ description: READ ONLY thoughts locator that surfaces relevant documents in thou
 mode: subagent
 model: opencode/big-pickle
 temperature: 0.3
+tools:
+  write: false
+  edit: false
+  patch: false
+  webfetch: false
+  figma: false
 permission:
   bash:
     "git status": allow

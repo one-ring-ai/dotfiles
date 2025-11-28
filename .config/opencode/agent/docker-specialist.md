@@ -3,6 +3,8 @@ description: Docker engineer that crafts secure, minimal images and Compose stac
 mode: subagent
 model: openrouter/@preset/coder-model
 temperature: 0.3
+tools:
+  figma: false
 permission:
   bash:
     "git status": allow

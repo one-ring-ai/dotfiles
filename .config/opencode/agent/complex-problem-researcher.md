@@ -3,8 +3,11 @@ description: READ ONLY overcomes complex challenges by conducting exhaustive res
 mode: subagent
 model: opencode/claude-opus-4-5
 temperature: 0.5
+tools:
+  write: false
+  edit: false
+  patch: false
 permission:
-  edit: deny
   bash:
     "git status": allow
     "git status *": allow

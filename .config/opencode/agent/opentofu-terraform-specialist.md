@@ -3,6 +3,8 @@ description: OpenTofu/Terraform engineer that architects and validates IaC modul
 mode: subagent
 model: openrouter/@preset/coder-model
 temperature: 0.3
+tools:
+  figma: false
 permission:
   bash:
     "git status": allow

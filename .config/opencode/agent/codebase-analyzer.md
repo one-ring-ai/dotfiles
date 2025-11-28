@@ -3,6 +3,12 @@ description: READ ONLY codebase analyst that traces implementation flow and docu
 mode: subagent
 model: opencode/big-pickle
 temperature: 0.3
+tools:
+  write: false
+  edit: false
+  patch: false
+  webfetch: false
+  figma: false
 permission:
   bash:
     "git status": allow

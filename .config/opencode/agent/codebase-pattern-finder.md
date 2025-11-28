@@ -3,6 +3,11 @@ description: READ ONLY pattern finder that locates related implementations and r
 mode: subagent
 model: opencode/big-pickle
 temperature: 0.3
+tools:
+  write: false
+  edit: false
+  patch: false
+  figma: false
 permission:
   bash:
     "git status": allow

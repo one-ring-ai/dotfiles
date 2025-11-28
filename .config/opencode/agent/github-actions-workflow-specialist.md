@@ -3,6 +3,8 @@ description: GitHub Actions workflow specialist focused on authoring, securing, 
 mode: subagent
 model: opencode/big-pickle
 temperature: 0.3
+tools:
+  figma: false
 permission:
   bash:
     "git status": allow

@@ -3,9 +3,13 @@ description: Git commit specialist that stages existing changes and crafts conve
 mode: primary
 model: opencode/big-pickle
 temperature: 0.1
+tools:
+  write: false
+  edit: false
+  patch: false
+  webfetch: false
+  figma: false
 permission:
-  write: deny
-  edit: deny
   bash:
     "git status": allow
     "git status *": allow
