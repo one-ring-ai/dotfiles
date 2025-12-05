@@ -179,7 +179,6 @@ After structure approval:
      - **Include YAML frontmatter with required fields:**
        - `status`: Current state (draft, in_progress, complete, cancelled, implemented)
        - `created_at`: ISO timestamp when plan was created
-       - `requester`: Person who requested the plan
        - `context_links`: Array of related URLs or file paths
        - `related_ticket`: Path or identifier to related ticket if applicable
        - `related_research`: Path to research document that informed this plan
