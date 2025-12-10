@@ -27,6 +27,14 @@
       "type": "local",
       "command": ["npx", "-y", "figma-developer-mcp", "--figma-api-key={file:~/.config/opencode/.secrets/figma-token}", "--stdio"],
       "enabled": true
+    },
+    "trivy": {
+      "type": "local",
+      "command": ["trivy", "mcp"],
+      "enabled": true,
+      "environment": {
+        "TRIVY_CACHE_DIR": "{env:TRIVY_CACHE_DIR|~/.cache/trivy}"
+      }
     }
   },
   // default CLI permissions
