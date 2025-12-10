@@ -17,6 +17,12 @@ related_operation: null
 ## Overview
 Integrate Aqua Trivy via its official MCP server into the shared OpenCode stack, running inside the devcontainer image (`ghcr.io/lucanori/coder-templates:latest`). Provide a dedicated security agent and reproducible installation (pinned Trivy + MCP plugin), enabling filesystem and container image scanning with online DB updates.
 
+## Phase Completion Status
+- [x] Phase 1: Install Trivy CLI and MCP Plugin (devcontainer)
+- [x] Phase 2: Register Trivy MCP in OpenCode config
+- [x] Phase 3: Add Dedicated Security Agent
+- [x] Phase 4: Validation and Docs
+
 ## Current State Analysis
 - OpenCode config (`.config/opencode/opencode.jsonc`) includes only Figma MCP (lines 24-31); prior MCP additions followed the Playwright/Chrome DevTools patterns.
 - Devcontainer (`.devcontainer.json`) runs with Docker socket mounted; VS Code Trivy extension is present, but CLI/MCP installation not guaranteed.
