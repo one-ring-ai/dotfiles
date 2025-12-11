@@ -1,5 +1,5 @@
 {
-    "name": "base",
+    "name": "OpenTofu, Ansible & Nix",
     "image":"ghcr.io/lucanori/coder-templates:latest",
     "customizations": {
         "vscode": {
@@ -10,7 +10,9 @@
                 "redhat.vscode-yaml",
                 "davidanson.vscode-markdownlint",
                 "mads-hartmann.bash-ide-vscode",
-                "eamodio.gitlens"
+                "opentofu.vscode-opentofu",
+                "redhat.ansible",
+                "jnoortheen.nix-ide"
             ],
             "settings": {
                 "workbench.colorTheme": "Obsidian Dark",
@@ -44,17 +46,10 @@
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
     ],
-    "containerEnv": {
-        "OPENROUTER_KEY": "${OPENROUTER_KEY}",
-        "FIGMA_TOKEN": "${FIGMA_TOKEN}",
-        "OPENCODE_KEY": "${OPENCODE_KEY}"
-    },
     "postStartCommand": [
         "bash",
         "-lc",
-        "set -euo pipefail; umask 077; mkdir -p /home/coder/.config/opencode/.secrets /home/coder/.local/share/opencode; OPENROUTER_VAL=$(printenv OPENROUTER_KEY || true); FIGMA_VAL=$(printenv FIGMA_TOKEN || true); OPENCODE_VAL=$(printenv OPENCODE_KEY || true); printf \"%s\" \"$OPENROUTER_VAL\" > /home/coder/.config/opencode/.secrets/openrouter-key; printf \"%s\" \"$FIGMA_VAL\" > /home/coder/.config/opencode/.secrets/figma-token; printf \"{\\n  \\\"opencode\\\": {\\n    \\\"type\\\": \\\"api\\\",\\n    \\\"key\\\": \\\"%s\\\"\\n  }\\n}\\n\" \"$OPENCODE_VAL\" > /home/coder/.local/share/opencode/auth.json"
+        "set -euo pipefail; umask 077; mkdir -p /home/coder/.config/opencode/.secrets /home/coder/.local/share/opencode; OPENROUTER_VAL=$(printenv OPENROUTER_KEY || true); FIGMA_VAL=$(printenv FIGMA_TOKEN || true); OPENCODE_VAL=$(printenv OPENCODE_KEY || true); case \"${OPENROUTER_VAL}\" in '${'* ) OPENROUTER_VAL='';; esac; case \"${FIGMA_VAL}\" in '${'* ) FIGMA_VAL='';; esac; case \"${OPENCODE_VAL}\" in '${'* ) OPENCODE_VAL='';; esac; printf '%s' \"$OPENROUTER_VAL\" > /home/coder/.config/opencode/.secrets/openrouter-key; printf '%s' \"$FIGMA_VAL\" > /home/coder/.config/opencode/.secrets/figma-token; printf '{\n  \"opencode\": {\n    \"type\": \"api\",\n    \"key\": \"%s\"\n  }\n}\n' \"$OPENCODE_VAL\" > /home/coder/.local/share/opencode/auth.json"
     ],
-
     "remoteUser": "coder"
-
 }
