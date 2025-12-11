@@ -231,56 +231,6 @@ fi
     rm -rf "$temp_dir"
 }
 
-install_starship() {
-    if command_exists starship; then
-        log_info "Starship already installed"
-        return 0
-    fi
-    
-    log_info "Installing Starship prompt..."
-    if curl -sS https://starship.rs/install.sh | $PRIVILEGE_CMD sh -s -- -y; then
-        log_success "Starship installed successfully"
-    else
-        log_error "Failed to install Starship"
-        return 1
-    fi
-}
-
-install_fzf() {
-    if command_exists fzf; then
-        log_info "FZF already installed"
-        return 0
-    fi
-    
-    local fzf_dir="$HOME/.fzf"
-    
-    if [ -d "$fzf_dir" ]; then
-        log_info "FZF directory exists, updating..."
-        cd "$fzf_dir" && git pull
-    else
-        log_info "Installing FZF..."
-        git clone --depth 1 https://github.com/junegunn/fzf.git "$fzf_dir"
-    fi
-    
-    "$fzf_dir/install" --all --no-update-rc
-    log_success "FZF installed successfully"
-}
-
-install_zoxide() {
-    if command_exists zoxide; then
-        log_info "Zoxide already installed"
-        return 0
-    fi
-
-    log_info "Installing Zoxide..."
-    if curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh; then
-        log_success "Zoxide installed successfully"
-    else
-        log_error "Failed to install Zoxide"
-        return 1
-    fi
-}
-
 setup_config_directory() {
 
     local user_home
@@ -378,9 +328,6 @@ main() {
     
     install_packages || exit 1
     install_nerd_font
-    install_starship || exit 1
-    install_fzf || exit 1
-    install_zoxide || exit 1
     setup_config_directory
     setup_bash_config || exit 1
     
