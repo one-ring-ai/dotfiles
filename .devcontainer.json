@@ -44,6 +44,11 @@
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
     ],
+    "containerEnv": {
+        "OPENROUTER_KEY": "${OPENROUTER_KEY}",
+        "FIGMA_TOKEN": "${FIGMA_TOKEN}",
+        "OPENCODE_KEY": "${OPENCODE_KEY}"
+    },
     "postStartCommand": [
         "bash",
         "-lc",
