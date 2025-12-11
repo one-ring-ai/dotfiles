@@ -7,7 +7,6 @@ readonly CONFIG_DIR="${HOME}/.config"
 readonly FONT_DIR="${HOME}/.local/share/fonts"
 readonly DOTFILES_REPO="https://github.com/one-ring-ai/dotfiles.git"
 readonly DOTFILES_DIR="${HOME}/dotfiles"
-readonly TRIVY_CACHE_DIR="${HOME}/.cache/trivy"
 
 readonly RED='\033[0;31m'
 readonly GREEN='\033[0;32m'
@@ -282,21 +281,6 @@ install_zoxide() {
     fi
 }
 
-install_trivy() {
-    mkdir -p "$TRIVY_CACHE_DIR"
-
-    if TRIVY_CACHE_DIR="$TRIVY_CACHE_DIR" trivy plugin list | grep -q '^mcp '; then
-        log_info "Trivy mcp plugin already installed"
-    else
-        if TRIVY_CACHE_DIR="$TRIVY_CACHE_DIR" trivy plugin install mcp; then
-            log_success "Trivy mcp plugin installed"
-        else
-            log_warning "Failed to install Trivy mcp plugin"
-        fi
-    fi
-}
-
-
 setup_config_directory() {
 
     local user_home
@@ -397,7 +381,6 @@ main() {
     install_starship || exit 1
     install_fzf || exit 1
     install_zoxide || exit 1
-    install_trivy || exit 1
     setup_config_directory
     setup_bash_config || exit 1
     
