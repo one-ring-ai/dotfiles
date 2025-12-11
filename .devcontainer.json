@@ -45,10 +45,9 @@
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
     ],
     "postStartCommand": [
-        "bash",
-        "-lc",
-        "set -euo pipefail; umask 077; mkdir -p /home/coder/.config/opencode/.secrets /home/coder/.local/share/opencode; OPENROUTER_VAL=${OPENROUTER_KEY:-}; FIGMA_VAL=${FIGMA_TOKEN:-}; OPENCODE_VAL=${OPENCODE_KEY:-}; printf '%s' \"$OPENROUTER_VAL\" > /home/coder/.config/opencode/.secrets/openrouter-key; printf '%s' \"$FIGMA_VAL\" > /home/coder/.config/opencode/.secrets/figma-token; printf '{\\n  \\"opencode\\": {\\n    \\"type\\": \\"api\\",\\n    \\"key\\": \\"%s\\"\\n  }\\n}\\n' \"$OPENCODE_VAL\" > /home/coder/.local/share/opencode/auth.json; [ -z \"$OPENROUTER_VAL\" ] && echo 'warning: OPENROUTER_KEY missing' >&2; [ -z \"$FIGMA_VAL\" ] && echo 'warning: FIGMA_TOKEN missing' >&2; [ -z \"$OPENCODE_VAL\" ] && echo 'warning: OPENCODE_KEY missing' >&2"
+      "bash",
+      "-lc",
+      "set -euo pipefail; umask 077; mkdir -p /home/coder/.config/opencode/.secrets /home/coder/.local/share/opencode; OPENROUTER_VAL=${OPENROUTER_KEY:-}; FIGMA_VAL=${FIGMA_TOKEN:-}; OPENCODE_VAL=${OPENCODE_KEY:-}; printf '%s' \"$OPENROUTER_VAL\" > /home/coder/.config/opencode/.secrets/openrouter-key; printf '%s' \"$FIGMA_VAL\" > /home/coder/.config/opencode/.secrets/figma-token; printf '{\\n  \\\"opencode\\\": {\\n    \\\"type\\\": \\\"api\\\",\\n    \\\"key\\\": \\\"%s\\\"\\n  }\\n}\\n' \"$OPENCODE_VAL\" > /home/coder/.local/share/opencode/auth.json; [ -z \"$OPENROUTER_VAL\" ] && echo 'warning: OPENROUTER_KEY missing' >&2; [ -z \"$FIGMA_VAL\" ] && echo 'warning: FIGMA_TOKEN missing' >&2; [ -z \"$OPENCODE_VAL\" ] && echo 'warning: OPENCODE_KEY missing' >&2"
     ],
     "remoteUser": "coder"
-
 }
