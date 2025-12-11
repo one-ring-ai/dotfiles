@@ -7,7 +7,6 @@ readonly CONFIG_DIR="${HOME}/.config"
 readonly FONT_DIR="${HOME}/.local/share/fonts"
 readonly DOTFILES_REPO="https://github.com/one-ring-ai/dotfiles.git"
 readonly DOTFILES_DIR="${HOME}/dotfiles"
-readonly TRIVY_VERSION="0.55.2"
 readonly TRIVY_CACHE_DIR="${HOME}/.cache/trivy"
 
 readonly RED='\033[0;31m'
@@ -284,54 +283,6 @@ install_zoxide() {
 }
 
 install_trivy() {
-    if command_exists trivy; then
-        local current_version
-        current_version=$(trivy --version | awk 'NR==1 {print $2}')
-        if [ "$current_version" = "$TRIVY_VERSION" ]; then
-            log_info "Trivy $TRIVY_VERSION already installed"
-            return 0
-        fi
-    fi
-
-    log_info "Installing Trivy $TRIVY_VERSION..."
-    local temp_dir archive base_url trivy_binary
-    temp_dir=$(mktemp -d)
-    archive="trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
-    base_url="https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}"
-
-    if ! curl -sS "$base_url/$archive" -o "$temp_dir/$archive"; then
-        log_error "Failed to download Trivy archive"
-        rm -rf "$temp_dir"
-        return 1
-    fi
-
-    if ! curl -sS "$base_url/$archive.sha256" -o "$temp_dir/$archive.sha256"; then
-        log_error "Failed to download Trivy checksum"
-        rm -rf "$temp_dir"
-        return 1
-    fi
-
-    if ! (cd "$temp_dir" && sha256sum -c "$archive.sha256"); then
-        log_error "Checksum verification failed for Trivy"
-        rm -rf "$temp_dir"
-        return 1
-    fi
-
-    tar -xzf "$temp_dir/$archive" -C "$temp_dir"
-    trivy_binary="$temp_dir/trivy"
-
-    if [ ! -f "$trivy_binary" ]; then
-        log_error "Trivy binary not found after extraction"
-        rm -rf "$temp_dir"
-        return 1
-    fi
-
-    if [ -n "${PRIVILEGE_CMD:-}" ]; then
-        $PRIVILEGE_CMD install -m 0755 "$trivy_binary" /usr/local/bin/trivy
-    else
-        install -m 0755 "$trivy_binary" /usr/local/bin/trivy
-    fi
-
     mkdir -p "$TRIVY_CACHE_DIR"
 
     if TRIVY_CACHE_DIR="$TRIVY_CACHE_DIR" trivy plugin list | grep -q '^mcp '; then
@@ -343,9 +294,6 @@ install_trivy() {
             log_warning "Failed to install Trivy mcp plugin"
         fi
     fi
-
-    rm -rf "$temp_dir"
-    log_success "Trivy $TRIVY_VERSION installed successfully"
 }
 
 
