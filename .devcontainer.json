@@ -52,8 +52,9 @@
     "postStartCommand": [
         "bash",
         "-lc",
-        "set -euo pipefail; umask 077; mkdir -p /home/coder/.config/opencode/.secrets /home/coder/.local/share/opencode; printf \"%s\" \"${OPENROUTER_KEY:-}\" > /home/coder/.config/opencode/.secrets/openrouter-key; printf \"%s\" \"${FIGMA_TOKEN:-}\" > /home/coder/.config/opencode/.secrets/figma-token; printf \"{\\n  \\\"opencode\\\": {\\n    \\\"type\\\": \\\"api\\\",\\n    \\\"key\\\": \\\"%s\\\"\\n  }\\n}\\n\" \"${OPENCODE_KEY:-}\" > /home/coder/.local/share/opencode/auth.json"
+        "set -euo pipefail; umask 077; mkdir -p /home/coder/.config/opencode/.secrets /home/coder/.local/share/opencode; OPENROUTER_VAL=$(printenv OPENROUTER_KEY || true); FIGMA_VAL=$(printenv FIGMA_TOKEN || true); OPENCODE_VAL=$(printenv OPENCODE_KEY || true); printf \"%s\" \"$OPENROUTER_VAL\" > /home/coder/.config/opencode/.secrets/openrouter-key; printf \"%s\" \"$FIGMA_VAL\" > /home/coder/.config/opencode/.secrets/figma-token; printf \"{\\n  \\\"opencode\\\": {\\n    \\\"type\\\": \\\"api\\\",\\n    \\\"key\\\": \\\"%s\\\"\\n  }\\n}\\n\" \"$OPENCODE_VAL\" > /home/coder/.local/share/opencode/auth.json"
     ],
+
     "remoteUser": "coder"
 
 }
