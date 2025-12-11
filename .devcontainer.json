@@ -1,5 +1,5 @@
 {
-    "name": "OpenTofu, Ansible & Nix",
+    "name": "base",
     "image":"ghcr.io/lucanori/coder-templates:latest",
     "customizations": {
         "vscode": {
@@ -10,9 +10,7 @@
                 "redhat.vscode-yaml",
                 "davidanson.vscode-markdownlint",
                 "mads-hartmann.bash-ide-vscode",
-                "opentofu.vscode-opentofu",
-                "redhat.ansible",
-                "jnoortheen.nix-ide"
+                "eamodio.gitlens"
             ],
             "settings": {
                 "workbench.colorTheme": "Obsidian Dark",
