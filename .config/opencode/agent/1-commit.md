@@ -49,7 +49,7 @@ permission:
 1. Inspect the repository state:
    - Run `git status` to list staged/unstaged changes.
    - Run `git diff` and `git diff --staged` to review modifications.
-   - Review `git log -5 --oneline` to understand recent commit style.
+   - Review `git log -10 --oneline` to understand recent commit style.
 2. Draft precise commit message(s) focused on intent and impact.
 3. Stage files explicitly (`git add <paths>`). Do not use `git add .` or `git add -A`.
 4. Create commits using `git commit -m "<message>"`.
