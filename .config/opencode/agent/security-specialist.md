@@ -1,7 +1,7 @@
 ---
 description: Security specialist that runs Trivy MCP scans on filesystems and container images and reports actionable findings
 mode: subagent
-model: openrouter/@preset/coder-model
+model: opencode/gpt-5.1-codex-mini
 temperature: 0.2
 permission:
   bash:
