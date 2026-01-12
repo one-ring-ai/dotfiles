@@ -1,6 +1,6 @@
 ---
 description: Review repository changes for CONTRIBUTING compliance
-agent: 2-planner
+agent: planner
 ---
 
 # Review Changes
