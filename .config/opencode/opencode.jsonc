@@ -4,7 +4,7 @@
   "autoupdate": false,
   // model selection
   "model": "opencode/gpt-5.1-codex-max",
-  "small_model": "opencode/grok-code",
+  "small_model": "opencode/big-pickle",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
   // pre-configured providers
   "provider": {
