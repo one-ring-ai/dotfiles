@@ -2,9 +2,12 @@
 description: GitHub Actions workflow specialist focused on authoring, securing, and optimizing GitHub workflows
 mode: subagent
 model: opencode/big-pickle
-temperature: 0.3
+temperature: 0.15
+maxSteps: 100
 tools:
   figma: false
+  next-devtools: false
+  shadcn: false
 permission:
   bash:
     "git status": allow

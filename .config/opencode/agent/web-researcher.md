@@ -3,10 +3,14 @@ description: READ ONLY web research agent that uses webfetch to gather current, 
 mode: subagent
 model: opencode/big-pickle
 temperature: 0.3
+maxSteps: 100
 tools:
   write: false
   edit: false
   patch: false
+  figma: false
+  next-devtools: false
+  shadcn: false
 permission:
   bash:
     "git status": allow

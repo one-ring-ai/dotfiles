@@ -3,6 +3,11 @@ description: Documentation specialist that transforms code and APIs into develop
 mode: subagent
 model: opencode/big-pickle
 temperature: 0.2
+maxSteps: 100
+tools:
+  figma: false
+  next-devtools: false
+  shadcn: false
 permission:
   bash:
     "git status": allow

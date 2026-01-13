@@ -2,7 +2,12 @@
 description: Security specialist that runs Trivy MCP scans on filesystems and container images and reports actionable findings
 mode: subagent
 model: opencode/gpt-5.1-codex-mini
-temperature: 0.2
+temperature: 0.15
+maxSteps: 100
+tools:
+  figma: false
+  next-devtools: false
+  shadcn: false
 permission:
   bash:
     "git status": allow

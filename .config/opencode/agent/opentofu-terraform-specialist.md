@@ -2,9 +2,12 @@
 description: OpenTofu/Terraform engineer that architects and validates IaC modules, environments, and plans using modern security and state management practices
 mode: subagent
 model: opencode/gpt-5.1-codex-mini
-temperature: 0.3
+temperature: 0.15
+maxSteps: 100
 tools:
   figma: false
+  next-devtools: false
+  shadcn: false
 permission:
   bash:
     "git status": allow

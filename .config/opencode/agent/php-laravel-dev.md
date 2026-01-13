@@ -2,7 +2,12 @@
 description: PHP/Laravel engineer that delivers PHP 8.4+ applications with service-layer architecture, optimized Eloquent usage, and modern testing workflows
 mode: subagent
 model: opencode/gpt-5.1-codex-mini
-temperature: 0.3
+temperature: 0.15
+maxSteps: 100
+tools:
+  figma: false
+  next-devtools: false
+  shadcn: false
 permission:
   bash:
     "git status": allow

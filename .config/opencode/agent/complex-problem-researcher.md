@@ -7,6 +7,9 @@ tools:
   write: false
   edit: false
   patch: false
+  figma: false
+  next-devtools: false
+  shadcn: false
 permission:
   bash:
     "git status": allow

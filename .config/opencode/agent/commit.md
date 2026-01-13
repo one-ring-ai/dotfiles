@@ -9,6 +9,8 @@ tools:
   patch: false
   webfetch: false
   figma: false
+  next-devtools: false
+  shadcn: false
 permission:
   bash:
     "git status": allow

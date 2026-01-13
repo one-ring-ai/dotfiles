@@ -3,6 +3,10 @@ description: Frontend core engineer that delivers accessible, responsive UI with
 mode: subagent
 model: opencode/gpt-5.1-codex-max
 temperature: 0.3
+maxSteps: 100
+tools:
+  next-devtools: false
+  shadcn: false
 permission:
   bash:
     "git status": allow

@@ -6,6 +6,8 @@ temperature: 0.15
 maxSteps: 100
 tools:
   figma: false
+  next-devtools: false
+  shadcn: false
 permission:
   bash:
     "git status": allow

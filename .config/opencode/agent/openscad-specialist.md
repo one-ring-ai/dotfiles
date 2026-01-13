@@ -3,8 +3,11 @@ description: OpenSCAD engineer that builds parametric, print-ready models optimi
 mode: subagent
 model: opencode/gpt-5.1-codex-max
 temperature: 0.3
+maxSteps: 100
 tools:
   figma: false
+  next-devtools: false
+  shadcn: false
 permission:
   bash:
     "git status": allow

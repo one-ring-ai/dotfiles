@@ -3,12 +3,15 @@ description: READ ONLY insights analyst that distills high-value decisions and c
 mode: subagent
 model: opencode/big-pickle
 temperature: 0.3
+maxSteps: 150
 tools:
   write: false
   edit: false
   patch: false
   webfetch: false
   figma: false
+  next-devtools: false
+  shadcn: false
 permission:
   bash:
     "git status": allow
