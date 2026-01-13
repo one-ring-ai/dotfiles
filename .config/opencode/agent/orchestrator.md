@@ -42,7 +42,7 @@ permission:
    - Run `git status` and `git diff` to detect uncommitted changes.
    - If changes exist:
      - Ensure `thoughts/shared/status/` directory exists and is added to `.gitignore`.
-     - Create a markdown file in `thoughts/shared/status/` (e.g., `initial_state_<date>.md`) summarizing the nature of these changes (do not dump raw diffs).
+     - Create a markdown file in `thoughts/shared/status/` (e.g., `<date>_<task_name>.md`) summarizing the nature of these changes (do not dump raw diffs).
      - Use this record to distinguish between original user changes and subsequent subagent implementations.
 4. **Delegate** tasks to specialized subagents. try to split tasks into smaller tasks so that a subagent has only one task to perform and spawn multiple in parallel when feasible
 5. **Verify** subagent outputs rigorously:
