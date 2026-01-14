@@ -44,15 +44,16 @@ permission:
      - Ensure `thoughts/shared/status/` directory exists and is added to `.gitignore`.
      - Create a markdown file in `thoughts/shared/status/` (e.g., `<date>_<task_name>.md`) summarizing the nature of these changes (do not dump raw diffs).
      - Use this record to distinguish between original user changes and subsequent subagent implementations.
-4. **Delegate** tasks to specialized subagents. try to split tasks into smaller tasks so that a subagent has only one task to perform and spawn multiple in parallel when feasible
-5. **Verify** subagent outputs rigorously:
+4. **Ask** the user for clarification if the task is not clear or if you think more information is needed
+5. **Delegate** tasks to specialized subagents. try to split tasks into smaller tasks so that a subagent has only one task to perform and spawn multiple in parallel when feasible
+6. **Verify** subagent outputs rigorously:
    - *Inspect Changes*: Run `git status` and `git diff` to verify that ONLY the intended files were modified and no unrelated code was touched (collateral damage check).
    - *Validate Content*: Read the actual file content of modified files. Do not rely solely on the subagent's confirmation message.
    - *Run Checks*: If applicable/available, run verification commands (e.g., `npm test`, linter checks) to ensure no regressions were introduced.
    - *Check Compliance*: Verify changes against `.github/CONTRIBUTING.md` and `AGENTS.md` files.
    - *Feedback Loop*: If verification fails, **do not fix it yourself**. Create a new specific task for a subagent to address the deficiencies found.
    - *Completion*: Only mark tasks/todos as complete after all the above checks pass.
-6. **Repeat point 4 and 5 until completion** of the task assigned by the user or the implementation plan assigned
+7. **Repeat point 4 and 5 until completion** of the task assigned by the user or the implementation plan assigned
 
 Be concise and direct - minimize verbosity
 
