@@ -16,14 +16,23 @@ determine_user_home() {
     local home_owner
     
     if [ -n "${HOME:-}" ]; then
-        home_owner=$(stat -c %U "$HOME" 2>/dev/null || true)
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            home_owner=$(stat -f %Su "$HOME" 2>/dev/null || true)
+        else
+            home_owner=$(stat -c %U "$HOME" 2>/dev/null || true)
+        fi
+
         if [ -n "$home_owner" ] && [ "$home_owner" = "$current_user" ]; then
             user_home="$HOME"
         fi
     fi
     
     if [ -z "${user_home:-}" ]; then
-        user_home=$(getent passwd "$current_user" 2>/dev/null | cut -d: -f6 || true)
+        if command -v getent >/dev/null 2>&1; then
+            user_home=$(getent passwd "$current_user" 2>/dev/null | cut -d: -f6 || true)
+        else
+            user_home=$(eval echo "~$current_user")
+        fi
     fi
     
     if [ -z "$user_home" ] || [ "$user_home" = "~" ] || [[ "$user_home" == ~* ]]; then
@@ -104,29 +113,26 @@ main() {
         print_info "Existing secrets were preserved"
     fi
     
-    print_info "Adding sync-opencode alias to ~/.bashrc..."
-    local bashrc_file="$user_home/.bashrc"
+    local shell_rc="$user_home/.bashrc"
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        shell_rc="$user_home/.zshrc"
+    fi
+
+    print_info "Adding sync-opencode alias to $shell_rc..."
     local alias_line="alias sync-opencode='curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/main/.config/opencode/setup.sh | bash'"
     
-    if [ ! -f "$bashrc_file" ]; then
-        touch "$bashrc_file"
+    if [ ! -f "$shell_rc" ]; then
+        touch "$shell_rc"
     fi
     
-    if ! grep -Fq "$alias_line" "$bashrc_file"; then
-        echo "$alias_line" >> "$bashrc_file"
-        print_info "Alias added to ~/.bashrc"
+    if ! grep -Fq "$alias_line" "$shell_rc"; then
+        echo "$alias_line" >> "$shell_rc"
+        print_info "Alias added to $shell_rc"
     else
-        print_info "Alias already exists in ~/.bashrc"
+        print_info "Alias already exists in $shell_rc"
     fi
     
     print_info "Setup completed successfully"
-    echo
-    print_info "Please create the following files in $TARGET_DIR/.secrets/:"
-    echo "- figma-token"
-    echo "- openrouter-key"
-    echo
-    print_info "After creating the files, secure them with:"
-    echo "chmod 600 $TARGET_DIR/.secrets/figma-token $TARGET_DIR/.secrets/openrouter-key"
 }
 
 main "$@"
