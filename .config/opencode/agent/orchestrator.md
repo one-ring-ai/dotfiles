@@ -69,6 +69,7 @@ Be concise and direct - minimize verbosity
 - Use the correct path: `thoughts/shared/operations/` for operation documents
 - Use descriptive filenames follwing this format: `YYYY-MM-DD-description.md` where *YYYY-MM-DD* is today's date and *description* is a brief kebab-case description
 - Write in clear, structured Markdown with accurate references to code and web sources
+- Use npx markdownlint-cli to validate markdown documents
 
 ### Operation records
 
