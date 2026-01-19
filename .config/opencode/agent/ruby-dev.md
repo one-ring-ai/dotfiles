@@ -1,7 +1,7 @@
 ---
 description: Ruby/Rails engineer for implementing and testing Rails 8+ applications with modern Ruby 3.3+ standards, performance optimization, and security best practices
 mode: subagent
-model: opencode/gpt-5.1-codex-mini
+model: opencode/big-pickle
 temperature: 0.15
 maxSteps: 100
 tools:

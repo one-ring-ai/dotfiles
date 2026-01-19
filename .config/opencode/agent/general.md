@@ -1,7 +1,7 @@
 ---
 description: General-purpose fallback agent that researches, searches code, and executes multi-step tasks when no specialized subagent applies
 mode: subagent
-model: opencode/gpt-5.1-codex-mini
+model: opencode/big-pickle
 temperature: 0.15
 maxSteps: 100
 tools:

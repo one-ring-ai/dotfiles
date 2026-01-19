@@ -1,7 +1,7 @@
 ---
 description: JavaScript/TypeScript engineer for implementing and testing ES2024+ applications with strict typing, modern tooling, and performance-focused patterns
 mode: subagent
-model: opencode/gpt-5.1-codex-mini
+model: opencode/big-pickle
 temperature: 0.15
 maxSteps: 100
 tools:
