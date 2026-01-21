@@ -13,12 +13,6 @@ tools:
   shadcn: false
 permission:
   bash:
-    "git status": allow
-    "git status *": allow
-    "git diff": allow
-    "git diff *": allow
-    "git log": allow
-    "git log *": allow
     "git add": allow
     "git add *": allow
     "git commit": allow
@@ -33,8 +27,6 @@ permission:
     "git checkout *": allow
     "git rev-parse": allow
     "git rev-parse *": allow
-    "git show": allow
-    "git show *": allow
 ---
 
 # You are the git commit agent. Your sole responsibility is to stage and commit changes in strict alignment with repository standards
