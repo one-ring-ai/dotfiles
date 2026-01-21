@@ -37,20 +37,18 @@
     },
     "next-devtools": {
       "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "next-devtools-mcp@latest"
-      ],
+      "command": ["npx", "-y", "next-devtools-mcp@latest"],
       "enabled": true
     },
     "shadcn": {
       "type": "local",
-      "command": [
-        "npx",
-        "shadcn@latest",
-        "mcp"
-      ],
+      "command": ["npx", "-y", "shadcn@latest", "mcp"],
+      "enabled": true
+    },
+    // add "--headless=true" to the command if you can't use a GUI
+    "chrome-devtools": {
+      "type": "local",
+      "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
       "enabled": true
     }
   },
