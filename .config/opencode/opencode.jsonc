@@ -56,8 +56,10 @@
   },
   // default CLI permissions
   "permission": {
+    "external_directory":"deny",
+    "doom_loop": "deny",
     "bash": {
-      "rm *": "ask",
+      "*": "ask",
       "rm -rf /": "deny",
       "rm -rf ~": "deny",
       "find / -delete": "deny",
@@ -72,7 +74,6 @@
       "mkfs.* /dev/nvme*": "deny",
       "mkfs.* /dev/loop*": "deny",
       ":(){ :|:& };:": "deny",
-      "sudo *": "ask",
       "sudo su *": "deny",
       "sudo -i": "deny",
       "sudo -u#-1": "deny",
@@ -89,13 +90,9 @@
       "cat /root/.ssh/id_rsa": "deny",
       "cat ~/.ssh/authorized_keys": "deny",
       "cat /proc/self/environ": "deny",
-      "cat .env": "ask",
-      "wget *": "ask",
       "wget * | sh": "deny",
-      "curl *": "ask",
       "curl * | bash": "deny",
       "curl * | sh": "deny",
-      "curl * -o /tmp/*": "ask",
       "nc -e *": "deny",
       "bash -i >& /dev/tcp/*": "deny",
       "python -c * /dev/tcp/*": "deny",
@@ -107,7 +104,6 @@
       "echo * >> /etc/hosts": "deny",
       "docker run --privileged *": "deny",
       "docker run -v /:/host*": "deny",
-      "docker exec *": "ask",
       "shutdown *": "deny",
       "reboot": "deny",
       "poweroff": "deny",
@@ -117,9 +113,14 @@
       "yes > /dev/null": "deny",
       "stress *": "deny",
       "eval *": "deny",
-      "git": "deny",
-      "git *": "deny",
-      "*": "allow"
+      "git status": "allow",
+      "git status *": "allow",
+      "git diff": "allow",
+      "git diff *": "allow",
+      "git log": "allow",
+      "git log *": "allow",
+      "git show": "allow",
+      "git show *": "allow"
     }
   }
 }
