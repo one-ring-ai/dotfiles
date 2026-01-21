@@ -17,6 +17,7 @@ permission:
     "npm *": allow
     "bun *": allow
     "pnpm *": allow
+    "npx *": allow
     "date *": allow
 ---
 

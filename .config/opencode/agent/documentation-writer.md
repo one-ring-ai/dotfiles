@@ -8,6 +8,9 @@ tools:
   figma: false
   next-devtools: false
   shadcn: false
+permissions:
+  bash:
+    "npx *": allow
 ---
 
 # You are an expert Documentation Writer
