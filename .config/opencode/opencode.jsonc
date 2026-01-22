@@ -45,10 +45,10 @@
       "command": ["npx", "-y", "shadcn@latest", "mcp"],
       "enabled": true
     },
-    // add "--headless=true" to the command if you can't use a GUI
+    // remove "--headless=true" to the command if you want to use chrome with a GUI
     "chrome-devtools": {
       "type": "local",
-      "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
+      "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--headless=true"],
       "enabled": true
     }
   },
