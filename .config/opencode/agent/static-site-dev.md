@@ -1,7 +1,7 @@
 ---
 description: Static website developer (SSG) using Next.js Static Exports or pure React
 mode: subagent
-model: opencode/big-pickle
+model: opencode/gpt-5.1-codex-mini
 temperature: 0.3
 ---
 

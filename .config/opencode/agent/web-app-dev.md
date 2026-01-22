@@ -1,7 +1,7 @@
 ---
 description: Web Application developer (SSR/Node.js) using Next.js/React for dynamic, complex systems
 mode: subagent
-model: opencode/big-pickle
+model: opencode/gpt-5.1-codex-mini
 temperature: 0.3
 ---
 

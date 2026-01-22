@@ -1,7 +1,7 @@
 ---
 description: REST API designer and developer
 mode: subagent
-model: opencode/gpt-5.1-codex-mini
+model: opencode/big-pickle
 temperature: 0.15
 maxSteps: 100
 tools:
