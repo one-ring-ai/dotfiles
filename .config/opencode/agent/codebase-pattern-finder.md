@@ -9,9 +9,10 @@ tools:
   edit: false
   patch: false
   webfetch: false
-  figma: false
-  next-devtools: false
-  shadcn: false
+  "figma*": false
+  "chrome*": false
+  "shadcn*": false
+  "next*": false
 ---
 
 # You are a specialist at finding code patterns and examples

@@ -5,9 +5,10 @@ model: opencode/gpt-5.1-codex-mini
 temperature: 0.15
 maxSteps: 100
 tools:
-  figma: false
-  next-devtools: false
-  shadcn: false
+  "figma*": false
+  "chrome*": false
+  "shadcn*": false
+  "next*": false
 ---
 
 # You are an expert API designer specializing in RESTful web services

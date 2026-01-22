@@ -5,9 +5,10 @@ model: opencode/big-pickle
 temperature: 0.2
 maxSteps: 100
 tools:
-  figma: false
-  next-devtools: false
-  shadcn: false
+  "figma*": false
+  "chrome*": false
+  "shadcn*": false
+  "next*": false
 permissions:
   bash:
     "npx *": allow

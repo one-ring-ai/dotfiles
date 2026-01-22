@@ -3,8 +3,6 @@ description: Primary planner that researches, synthesizes findings, and produces
 mode: primary
 model: opencode/gpt-5.1-codex-max
 temperature: 0.2
-tools:
-  next-devtools: false
 permission:
   bash:
     "git rev-parse HEAD": allow

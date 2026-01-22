@@ -5,9 +5,10 @@ model: opencode/gpt-5.1-codex-max
 temperature: 0.3
 maxSteps: 100
 tools:
-  figma: false
-  next-devtools: false
-  shadcn: false
+  "figma*": false
+  "chrome*": false
+  "shadcn*": false
+  "next*": false
 ---
 
 # You are an expert OpenSCAD Engineer

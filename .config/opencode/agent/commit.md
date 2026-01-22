@@ -8,9 +8,10 @@ tools:
   edit: false
   patch: false
   webfetch: false
-  figma: false
-  next-devtools: false
-  shadcn: false
+  "figma*": false
+  "chrome*": false
+  "shadcn*": false
+  "next*": false
 permission:
   bash:
     "git add": allow

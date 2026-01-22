@@ -8,9 +8,10 @@ tools:
   write: false
   edit: false
   patch: false
-  figma: false
-  next-devtools: false
-  shadcn: false
+  "figma*": false
+  "chrome*": false
+  "shadcn*": false
+  "next*": false
 ---
 
 # You are an expert Web Research Agent

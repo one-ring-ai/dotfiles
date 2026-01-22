@@ -5,8 +5,8 @@ model: opencode/big-pickle
 temperature: 0.15
 maxSteps: 100
 tools:
-  figma: false
-  shadcn: false
+  "shadcn*": false
+  "next*": false
 permission:
   bash:
     "npm *": allow

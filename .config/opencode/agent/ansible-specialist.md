@@ -5,9 +5,10 @@ model: opencode/big-pickle
 temperature: 0.15
 maxSteps: 100
 tools:
-  figma: false
-  next-devtools: false
-  shadcn: false
+  "figma*": false
+  "chrome*": false
+  "shadcn*": false
+  "next*": false
 ---
 
 # You are an expert Ansible engineer specializing in configuration management and automation
