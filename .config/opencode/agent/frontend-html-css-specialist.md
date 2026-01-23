@@ -31,6 +31,8 @@ wrapped in a specific legacy context.
    the `codesearch` tool to verify if a newer, better native method exists. use
    your judgment to decide when a task is non-trivial enough to warrant this
    check (skipping it for obvious basics).
+6. **Use available tools** like `chrome-devtools` or `figma` (when a figma project
+   does exists) to verify your work.
 
 ## Essential Guidelines (2026 Standards)
 

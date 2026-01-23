@@ -30,5 +30,5 @@ like Authentication, Database Mutations, Real-time updates, and robust SSR.
 6. **auth**: OAuth-based
    authentication require careful env management and secure handling of
    secrets.
-7. **No-comments policy**: Source files must stay free of inline comments and
-   dead/debug code; document decisions in Markdown instead.
+7. **Use available tools** like `chrome-devtools`, `next-devtools`, `shadcn`
+   or `figma` (when a figma project does exists) to verify your work.
