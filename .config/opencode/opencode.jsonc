@@ -118,7 +118,10 @@
       "git log": "allow",
       "git log *": "allow",
       "git show": "allow",
-      "git show *": "allow"
+      "git show *": "allow",
+      "ls *": "allow",
+      "mkdir *": "allow",
+      "docker buildx *": "allow"
     }
   }
 }
