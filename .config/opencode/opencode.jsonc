@@ -121,7 +121,13 @@
       "git show *": "allow",
       "ls *": "allow",
       "mkdir *": "allow",
-      "docker buildx *": "allow"
+      "docker buildx *": "allow",
+      "cd *": "allow",
+      "head *": "allow",
+      "tail *": "allow",
+      "cat *": "allow",
+      "less *": "allow",
+      "more *": "allow",
     }
   }
 }
