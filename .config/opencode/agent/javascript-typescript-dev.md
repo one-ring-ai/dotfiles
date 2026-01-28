@@ -10,6 +10,9 @@ tools:
 permission:
   bash:
     "npm *": allow
+    "pnpm *": allow
+    "bun *": allow
+    "npx *": allow
 ---
 
 # You are an expert JavaScript/TypeScript Developer
