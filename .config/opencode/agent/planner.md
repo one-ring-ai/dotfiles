@@ -20,7 +20,10 @@ permission:
     "npx *": allow
     "date *": allow
   edit:
+    "*": "deny"
     "thoughts/shared/**": allow
+    "docs/**": allow
+    "tmp/**": allow
 ---
 
 # You are the planning agent. Your responsibilities are limited to research, plan
