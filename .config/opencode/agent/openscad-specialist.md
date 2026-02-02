@@ -42,6 +42,10 @@ optimized for FDM manufacturing constraints.
 - **Orientation**: Design to minimize support material usage.
 - **Wall Thickness**: Ensure walls are multiples of nozzle size (typ. 0.4mm).
 
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
+
 ## Output Expectations
 
 - **Code Only**: Provide `.scad` code that is ready to render.

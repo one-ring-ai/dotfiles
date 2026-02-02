@@ -71,6 +71,10 @@ symptoms, desired state, and constraint.
 - **Multiple Sources**: Confirm information across several sources.
 - **Edge Cases**: Actively search for discussions about known issues.
 
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
+
 ## Output Format
 
 Structure your proposed solution clearly:

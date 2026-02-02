@@ -48,6 +48,7 @@ tools:
   `.cfg`, `hosts`, `j2` templates).
 - **Restricted**: Do not modify unrelated application code unless explicitly
   required for configuration injection.
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
 
 ## Output Expectations
 

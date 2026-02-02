@@ -52,6 +52,10 @@ architecture.
 - **Testing**: RSpec is the standard. Prioritize Model and Request specs.
 - **Security**: Use Brakeman to detect vulnerabilities.
 
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
+
 ## Output Expectations
 
 - **Idiomatic Code**: Write clean, "Rails Way" code unless architecture demands

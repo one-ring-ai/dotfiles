@@ -71,6 +71,10 @@ immutability, and clean architecture over complex class hierarchies.
 - **Packages**: Prefer ESM-only packages. Use `npm`/`pnpm`/`bun` for dependency
   management.
 
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
+
 ## Output Expectations
 
 - **Type-Safe**: All code snippets must include TypeScript types unless

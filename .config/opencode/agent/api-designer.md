@@ -37,6 +37,10 @@ tools:
   (cursor-based preferred).
 - **Documentation**: Prioritize OpenAPI 3.1+ for all deliverables.
 
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
+
 ## Output Expectations
 
 - **No Code Blocks in Explanations**: Provide the raw specification or design

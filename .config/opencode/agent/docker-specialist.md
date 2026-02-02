@@ -83,6 +83,10 @@ tools:
 - Sort alphabetically within groups.
 - Use comments as headers for groups >10 variables.
 
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
+
 ## Output Expectations
 
 - **No Code Blocks in Explanations**: Provide the raw Dockerfile or Compose

@@ -57,6 +57,10 @@ React (Vite).
 - **Animation**: Framer Motion for client-side transitions.
 - **Navigation**: Use standard `<Link>` components.
 
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
+
 ## Output Expectations
 
 - **Deployment Ready**: Code must be ready to run `npm run build` and produce

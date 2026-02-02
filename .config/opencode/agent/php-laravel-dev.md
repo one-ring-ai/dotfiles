@@ -71,6 +71,10 @@ and modern ecosystem tools like Pest.
 - **Config**: Never usage `env()` outside config files.
 - **Health**: Utilize the built-in `/up` health endpoint.
 
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
+
 ## Output Expectations
 
 - **Strict Types**: All PHP code output must start with

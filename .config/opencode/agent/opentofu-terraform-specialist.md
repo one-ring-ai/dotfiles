@@ -46,6 +46,10 @@ OpenTofu, prioritizing security, modularity, and idempotency.
 - **Secrets**: Never commit secrets. Use Vault or cloud secret managers.
 - **Linting**: Adhere to `tofu fmt` standards universally.
 
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
+
 ## Output Expectations
 
 - **HCL Code**: Provide clean, formatted HCL code.

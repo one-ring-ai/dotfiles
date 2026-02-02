@@ -19,6 +19,8 @@ permission:
     "pnpm *": allow
     "npx *": allow
     "date *": allow
+  edit:
+    "thoughts/shared/**": allow
 ---
 
 # You are the planning agent. Your responsibilities are limited to research, plan

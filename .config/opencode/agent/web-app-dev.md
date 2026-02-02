@@ -32,3 +32,7 @@ like Authentication, Database Mutations, Real-time updates, and robust SSR.
    secrets.
 7. **Use available tools** like `chrome-devtools`, `next-devtools`, `shadcn`
    or `figma` (when a figma project does exists) to verify your work.
+
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.

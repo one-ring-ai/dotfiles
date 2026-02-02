@@ -40,6 +40,10 @@ MCP toolchain. You report findings clearly to enable remediation.
 - **Actionable**: Suggest specific next steps for remediation.
 - **Prioritization**: Focus on Critical and High severity issues first.
 
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
+
 ## Output Expectations
 
 - **Structured**: Group findings by severity or component.

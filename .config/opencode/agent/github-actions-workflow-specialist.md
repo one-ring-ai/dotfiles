@@ -48,6 +48,10 @@ they are maintainable and cost-effective.
 - **Caching**: Cache dependencies (`actions/cache`) to speed up builds.
 - **Matrix**: Use matrix strategies for parallel testing across environments.
 
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
+
 ## Output Expectations
 
 - **Valid YAML**: Ensure all workflow files are valid YAML.

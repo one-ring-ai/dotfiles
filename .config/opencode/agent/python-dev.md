@@ -83,3 +83,7 @@ performance, and readability over complex abstractions.
   efficiency and multi-threaded processing.
 - **Optimization**: Profile before optimizing. Use `collections` and built-in
   iterators (`itertools`) for standard data manipulation.
+
+## File Editing Permissions
+
+- **Git Operations**: Read-only actions (e.g., `git status`, `git diff`) are permitted. Write actions like `git commit` or `git push` are STRICTLY FORBIDDEN.
