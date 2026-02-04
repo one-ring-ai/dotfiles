@@ -26,6 +26,14 @@
         "@preset/planner-model": {},
         "@preset/coder-model": {}
       }
+    },
+    "replicate": {
+      "api": "https://api.replicate.com/v1",
+      "name": "Replicate",
+      "id": "replicate",
+      "options": {
+        "REPLICATE_API_TOKEN": "{file:~/.config/opencode/.secrets/replicate-key}"
+      }
     }
   },
   // pre-configured mcp servers
