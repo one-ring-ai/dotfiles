@@ -1,4 +1,4 @@
-import { tool, schema } from '@opencode-ai/plugin';
+import { tool } from '@opencode-ai/plugin';
 import { writeFile, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
 
@@ -83,19 +83,19 @@ async function downloadImage(url: string, filePath: string): Promise<{ size: num
 export default tool({
   name: 'replicate-flux-image',
   description: 'Generate images using Replicate flux-2-max model',
-  args: schema.object({
-    prompt: schema.string().trim().min(1),
-    aspect_ratio: schema.enum(ASPECT_RATIO_OPTIONS).default('1:1'),
-    resolution: schema.enum(RESOLUTION_OPTIONS).default('1 MP'),
-    width: schema.number().int().min(256).max(2048).optional(),
-    height: schema.number().int().min(256).max(2048).optional(),
-    input_images: schema.array(schema.string().url()).max(8).default([]),
-    output_format: schema.enum(OUTPUT_FORMAT_OPTIONS).default('webp'),
-    output_quality: schema.number().int().min(0).max(100).default(80),
-    safety_tolerance: schema.number().int().min(1).max(5).default(2),
-    seed: schema.number().int().min(1).max(4294967295).optional(),
+  schema: tool.schema.object({
+    prompt: tool.schema.string().trim().min(1),
+    aspect_ratio: tool.schema.enum(ASPECT_RATIO_OPTIONS).default('1:1'),
+    resolution: tool.schema.enum(RESOLUTION_OPTIONS).default('1 MP'),
+    width: tool.schema.number().int().min(256).max(2048).optional(),
+    height: tool.schema.number().int().min(256).max(2048).optional(),
+    input_images: tool.schema.array(tool.schema.string().url()).max(8).default([]),
+    output_format: tool.schema.enum(OUTPUT_FORMAT_OPTIONS).default('webp'),
+    output_quality: tool.schema.number().int().min(0).max(100).default(80),
+    safety_tolerance: tool.schema.number().int().min(1).max(5).default(2),
+    seed: tool.schema.number().int().min(1).max(4294967295).optional(),
   }),
-  execute: async function(context, args: ToolArgs): Promise<ToolResult> {
+  execute: async function(args: ToolArgs, context): Promise<ToolResult> {
     const token = process.env.REPLICATE_API_TOKEN;
     if (!token) {
       throw new Error('REPLICATE_API_TOKEN environment variable is required');
