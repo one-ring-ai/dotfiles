@@ -1,6 +1,8 @@
 import { tool } from '@opencode-ai/plugin';
 import { writeFile, mkdir } from 'fs/promises';
+import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
+import { homedir } from 'os';
 
 const RESOLUTION_OPTIONS = ['match_input_image', '0.5 MP', '1 MP', '2 MP', '4 MP'] as const;
 const ASPECT_RATIO_OPTIONS = ['match_input_image', 'custom', '1:1', '16:9', '3:2', '2:3', '4:5', '5:4', '9:16', '3:4', '4:3'] as const;
@@ -96,17 +98,32 @@ export default tool({
     seed: tool.schema.number().int().min(1).max(4294967295).optional(),
   }),
   execute: async function(args: ToolArgs, context): Promise<ToolResult> {
-    const token = process.env.REPLICATE_API_TOKEN;
+    const envToken = (process.env.REPLICATE_API_TOKEN ?? '').trim();
+    let token = envToken;
     if (!token) {
-      throw new Error('REPLICATE_API_TOKEN environment variable is required');
+      const keyPath = join(homedir(), '.config', 'opencode', '.secrets', 'replicate-key');
+      try {
+        const fileContent = readFileSync(keyPath, 'utf-8');
+        token = fileContent.trim();
+      } catch {
+        throw new Error('REPLICATE_API_TOKEN environment variable is required');
+      }
+      if (!token) {
+        throw new Error('REPLICATE_API_TOKEN environment variable is required');
+      }
     }
 
-    const aspectRatio = args.aspect_ratio;
-    const resolution = args.resolution;
-    const outputFormat = args.output_format;
-    const outputQuality = args.output_quality;
-    const safetyTolerance = args.safety_tolerance;
-    const inputImages = args.input_images;
+    const aspectRatio = args.aspect_ratio || '1:1';
+    const resolution = args.resolution || '1 MP';
+    const outputFormat = args.output_format || 'webp';
+    const outputQuality = args.output_quality ?? 100;
+    const safetyTolerance = args.safety_tolerance ?? 5;
+    const inputImages = args.input_images ?? [];
+
+    const prompt = (args.prompt ?? '').trim();
+    if (!prompt) {
+      throw new Error('Prompt cannot be empty');
+    }
 
     if (aspectRatio === 'custom') {
       if (!args.width || !args.height) {
@@ -115,7 +132,7 @@ export default tool({
     }
 
     const input: Record<string, any> = {
-      prompt: args.prompt,
+      prompt,
       aspect_ratio: aspectRatio,
       output_format: outputFormat,
       output_quality: outputQuality,
@@ -147,7 +164,11 @@ export default tool({
     });
 
     if (!startResponse.ok) {
-      throw new Error(`Failed to start prediction: ${startResponse.statusText}`);
+      const errorBody = await startResponse.json().catch(() => null);
+      if (errorBody && typeof errorBody.detail === 'string') {
+        throw new Error(`Failed to start prediction: ${startResponse.status} ${startResponse.statusText} - ${errorBody.detail}`);
+      }
+      throw new Error(`Failed to start prediction: ${startResponse.status} ${startResponse.statusText}`);
     }
 
     const prediction = await startResponse.json();
