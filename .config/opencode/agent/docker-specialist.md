@@ -1,7 +1,7 @@
 ---
 description: Docker engineer
 mode: subagent
-model: opencode/big-pickle
+model: opencode/kimi-k2.5-free
 temperature: 0.15
 maxSteps: 100
 tools:

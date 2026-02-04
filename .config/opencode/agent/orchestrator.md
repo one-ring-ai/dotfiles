@@ -3,22 +3,6 @@ description: Primary coordinator that plans tasks, assigns specialized subagents
 mode: primary
 model: opencode/gpt-5.1-codex-max
 temperature: 0.1
-permission:
-  bash:
-    "git rev-parse HEAD": allow
-    "ls": allow
-    "pwd": allow
-    "cd": allow
-    "find": allow
-    "grep": allow
-    "docker ps": allow
-    "docker logs *": allow
-    "docker inspect *": allow
-    "npm *": allow
-    "bun *": allow
-    "pnpm *": allow
-    "npx *": allow
-    "date *": allow
 ---
 
 # You are the orchestrator agent
