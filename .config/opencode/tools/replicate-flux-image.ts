@@ -1,0 +1,200 @@
+import { tool, schema } from '@opencode-ai/plugin';
+import { writeFile, mkdir } from 'fs/promises';
+import { join, dirname } from 'path';
+
+const RESOLUTION_OPTIONS = ['match_input_image', '0.5 MP', '1 MP', '2 MP', '4 MP'] as const;
+const ASPECT_RATIO_OPTIONS = ['match_input_image', 'custom', '1:1', '16:9', '3:2', '2:3', '4:5', '5:4', '9:16', '3:4', '4:3'] as const;
+const OUTPUT_FORMAT_OPTIONS = ['webp', 'jpg', 'png'] as const;
+
+type ResolutionOption = typeof RESOLUTION_OPTIONS[number];
+type AspectRatioOption = typeof ASPECT_RATIO_OPTIONS[number];
+type OutputFormatOption = typeof OUTPUT_FORMAT_OPTIONS[number];
+
+interface ToolArgs {
+  prompt: string;
+  aspect_ratio: AspectRatioOption;
+  resolution: ResolutionOption;
+  width?: number;
+  height?: number;
+  input_images: string[];
+  output_format: OutputFormatOption;
+  output_quality: number;
+  safety_tolerance: number;
+  seed?: number;
+}
+
+interface PredictionResponse {
+  id: string;
+  status: string;
+  error?: string;
+  output?: string | string[];
+}
+
+interface ToolResult {
+  id: string;
+  status: string;
+  url: string;
+  path: string;
+  size: number;
+  started: string;
+  completed: string;
+}
+
+async function sleep(milliseconds: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+function roundToMultipleOf32(value: number): number {
+  return Math.round(value / 32) * 32;
+}
+
+function clampToRange(value: number, min: number, max: number): number {
+  return Math.max(min, Math.min(max, value));
+}
+
+async function pollPredictionStatus(predictionId: string, token: string): Promise<PredictionResponse> {
+  const response = await fetch(`https://api.replicate.com/v1/predictions/${predictionId}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to poll prediction status: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+async function downloadImage(url: string, filePath: string): Promise<{ size: number }> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to download image: ${response.statusText}`);
+  }
+
+  const buffer = await response.arrayBuffer();
+  await mkdir(dirname(filePath), { recursive: true });
+  await writeFile(filePath, Buffer.from(buffer));
+
+  return { size: buffer.byteLength };
+}
+
+export default tool({
+  name: 'replicate-flux-image',
+  description: 'Generate images using Replicate flux-2-max model',
+  args: schema.object({
+    prompt: schema.string().trim().min(1),
+    aspect_ratio: schema.enum(ASPECT_RATIO_OPTIONS).default('1:1'),
+    resolution: schema.enum(RESOLUTION_OPTIONS).default('1 MP'),
+    width: schema.number().int().min(256).max(2048).optional(),
+    height: schema.number().int().min(256).max(2048).optional(),
+    input_images: schema.array(schema.string().url()).max(8).default([]),
+    output_format: schema.enum(OUTPUT_FORMAT_OPTIONS).default('webp'),
+    output_quality: schema.number().int().min(0).max(100).default(80),
+    safety_tolerance: schema.number().int().min(1).max(5).default(2),
+    seed: schema.number().int().min(1).max(4294967295).optional(),
+  }),
+  execute: async function(context, args: ToolArgs): Promise<ToolResult> {
+    const token = process.env.REPLICATE_API_TOKEN;
+    if (!token) {
+      throw new Error('REPLICATE_API_TOKEN environment variable is required');
+    }
+
+    const aspectRatio = args.aspect_ratio;
+    const resolution = args.resolution;
+    const outputFormat = args.output_format;
+    const outputQuality = args.output_quality;
+    const safetyTolerance = args.safety_tolerance;
+    const inputImages = args.input_images;
+
+    if (aspectRatio === 'custom') {
+      if (!args.width || !args.height) {
+        throw new Error('Both width and height are required when aspect_ratio is custom');
+      }
+    }
+
+    const input: Record<string, any> = {
+      prompt: args.prompt,
+      aspect_ratio: aspectRatio,
+      output_format: outputFormat,
+      output_quality: outputQuality,
+      safety_tolerance: safetyTolerance,
+    };
+
+    if (aspectRatio !== 'custom') {
+      input.resolution = resolution;
+    } else {
+      input.width = roundToMultipleOf32(clampToRange(args.width!, 256, 2048));
+      input.height = roundToMultipleOf32(clampToRange(args.height!, 256, 2048));
+    }
+
+    if (inputImages.length > 0) {
+      input.input_images = inputImages;
+    }
+
+    if (args.seed !== undefined) {
+      input.seed = args.seed;
+    }
+
+    const startResponse = await fetch('https://api.replicate.com/v1/models/black-forest-labs/flux-2-max/predictions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ input }),
+    });
+
+    if (!startResponse.ok) {
+      throw new Error(`Failed to start prediction: ${startResponse.statusText}`);
+    }
+
+    const prediction = await startResponse.json();
+    const predictionId = prediction.id;
+    const started = new Date().toISOString();
+
+    let currentPrediction = prediction;
+    const timeout = 300000;
+    const startTime = Date.now();
+
+    while (!['succeeded', 'failed', 'canceled'].includes(currentPrediction.status)) {
+      if (Date.now() - startTime > timeout) {
+        throw new Error('Prediction timed out after 5 minutes');
+      }
+
+      await sleep(2000);
+      currentPrediction = await pollPredictionStatus(predictionId, token);
+    }
+
+    if (currentPrediction.status === 'failed' || currentPrediction.status === 'canceled') {
+      const error = currentPrediction.error || 'Unknown error';
+      throw new Error(`Prediction ${currentPrediction.status}: ${error}`);
+    }
+
+    let outputUrl: string;
+    if (typeof currentPrediction.output === 'string') {
+      outputUrl = currentPrediction.output;
+    } else if (Array.isArray(currentPrediction.output) && currentPrediction.output.length > 0) {
+      outputUrl = currentPrediction.output[0];
+    } else {
+      throw new Error('No output URL found in prediction response');
+    }
+
+    const outputFileName = `replicate-flux-image.${outputFormat}`;
+    const outputPath = join(context.directory, 'replicate-output', outputFileName);
+
+    const { size } = await downloadImage(outputUrl, outputPath);
+    const completed = new Date().toISOString();
+
+    return {
+      id: predictionId,
+      status: currentPrediction.status,
+      url: outputUrl,
+      path: outputPath,
+      size,
+      started,
+      completed,
+    };
+  },
+});
