@@ -65,7 +65,7 @@
     "external_directory":"deny",
     "doom_loop": "deny",
     "bash": {
-      "*": "ask",
+      "*": "allow",
       "rm -rf /": "deny",
       "rm -rf ~": "deny",
       "find / -delete": "deny",
@@ -119,6 +119,7 @@
       "yes > /dev/null": "deny",
       "stress *": "deny",
       "eval *": "deny",
+      "git *": "deny",
       "git status": "allow",
       "git status *": "allow",
       "git diff": "allow",
@@ -127,15 +128,15 @@
       "git log *": "allow",
       "git show": "allow",
       "git show *": "allow",
-      "ls *": "allow",
-      "mkdir *": "allow",
+      "git rev-parse HEAD": "allow",
+      "docker *": "ask",
+      "docker ps": "allow",
+      "docker logs *": "allow",
+      "docker inspect *": "allow",
+      "docker build *": "allow",
       "docker buildx *": "allow",
-      "cd *": "allow",
-      "head *": "allow",
-      "tail *": "allow",
-      "cat *": "allow",
-      "less *": "allow",
-      "more *": "allow",
+      "docker compose ps": "allow",
+      "docker compose logs *": "allow" 
     }
   }
 }
