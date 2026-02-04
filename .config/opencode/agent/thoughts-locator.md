@@ -1,7 +1,7 @@
 ---
 description: READ ONLY thoughts locator that surfaces relevant documents in thoughts/ by topic and category without interpreting their contents
 mode: subagent
-model: opencode/big-pickle
+model: opencode/kimi-k2.5-free
 temperature: 0.3
 maxSteps: 150
 tools:

@@ -1,7 +1,7 @@
 ---
 description: READ ONLY insights analyst that distills high-value decisions and constraints from thoughts/ research without adding new interpretation
 mode: subagent
-model: opencode/big-pickle
+model: opencode/kimi-k2.5-free
 temperature: 0.3
 maxSteps: 150
 tools:
