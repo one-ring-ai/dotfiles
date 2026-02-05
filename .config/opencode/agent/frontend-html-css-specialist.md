@@ -1,7 +1,7 @@
 ---
 description: Frontend developer using HTML5/CSS3/Vanilla JS without external frameworks
 mode: subagent
-model: opencode/gpt-5.1-codex-mini
+model: opencode/kimi-k2.5-free
 temperature: 0.3
 maxSteps: 100
 tools:
