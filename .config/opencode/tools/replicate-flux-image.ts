@@ -32,16 +32,6 @@ interface PredictionResponse {
   output?: string | string[];
 }
 
-interface ToolResult {
-  id: string;
-  status: string;
-  url: string;
-  path: string;
-  size: number;
-  started: string;
-  completed: string;
-}
-
 async function sleep(milliseconds: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
@@ -85,19 +75,19 @@ async function downloadImage(url: string, filePath: string): Promise<{ size: num
 export default tool({
   name: 'replicate-flux-image',
   description: 'Generate images using Replicate flux-2-max model',
-  schema: tool.schema.object({
-    prompt: tool.schema.string().trim().min(1),
-    aspect_ratio: tool.schema.enum(ASPECT_RATIO_OPTIONS).default('1:1'),
-    resolution: tool.schema.enum(RESOLUTION_OPTIONS).default('1 MP'),
-    width: tool.schema.number().int().min(256).max(2048).optional(),
-    height: tool.schema.number().int().min(256).max(2048).optional(),
-    input_images: tool.schema.array(tool.schema.string().url()).max(8).default([]),
-    output_format: tool.schema.enum(OUTPUT_FORMAT_OPTIONS).default('webp'),
-    output_quality: tool.schema.number().int().min(0).max(100).default(80),
-    safety_tolerance: tool.schema.number().int().min(1).max(5).default(2),
-    seed: tool.schema.number().int().min(1).max(4294967295).optional(),
-  }),
-  execute: async function(args: ToolArgs, context): Promise<ToolResult> {
+  args: {
+    prompt: tool.schema.string().trim().min(1).describe('Required text prompt'),
+    aspect_ratio: tool.schema.enum(ASPECT_RATIO_OPTIONS).default('1:1').describe("Aspect ratio, one of: match_input_image, custom, 1:1, 16:9, 3:2, 2:3, 4:5, 5:4, 9:16, 3:4, 4:3"),
+    resolution: tool.schema.enum(RESOLUTION_OPTIONS).default('1 MP').describe('Resolution preset, one of: match_input_image, 0.5 MP, 1 MP, 2 MP, 4 MP (ignored when aspect_ratio=custom)'),
+    width: tool.schema.number().int().min(256).max(2048).optional().describe('Custom width (pixels, 256-2048, int, only when aspect_ratio=custom; rounded to nearest 32)'),
+    height: tool.schema.number().int().min(256).max(2048).optional().describe('Custom height (pixels, 256-2048, int, only when aspect_ratio=custom; rounded to nearest 32)'),
+    input_images: tool.schema.array(tool.schema.string().url()).max(8).default([]).describe('Up to 8 image URLs (jpeg/png/gif/webp) for img2img/style'),
+    output_format: tool.schema.enum(OUTPUT_FORMAT_OPTIONS).default('webp').describe('Output format: webp, jpg, or png'),
+    output_quality: tool.schema.number().int().min(0).max(100).default(100).describe('Output quality 0-100 (for webp/jpg)'),
+    safety_tolerance: tool.schema.number().int().min(1).max(5).default(5).describe('Safety tolerance 1-5 (1 strict, 5 permissive)'),
+    seed: tool.schema.number().int().min(1).max(4294967295).optional().describe('Seed 1-4294967295 for reproducible output'),
+  },
+  execute: async function(args: ToolArgs, context): Promise<string> {
     const envToken = (process.env.REPLICATE_API_TOKEN ?? '').trim();
     let token = envToken;
     if (!token) {
@@ -202,13 +192,14 @@ export default tool({
       throw new Error('No output URL found in prediction response');
     }
 
-    const outputFileName = `replicate-flux-image.${outputFormat}`;
+    const baseName = predictionId ? `replicate-flux-image-${predictionId}` : `replicate-flux-image-${Date.now()}`;
+    const outputFileName = `${baseName}.${outputFormat}`;
     const outputPath = join(context.directory, 'replicate-output', outputFileName);
 
     const { size } = await downloadImage(outputUrl, outputPath);
     const completed = new Date().toISOString();
 
-    return {
+    const result = {
       id: predictionId,
       status: currentPrediction.status,
       url: outputUrl,
@@ -217,5 +208,7 @@ export default tool({
       started,
       completed,
     };
+
+    return JSON.stringify(result);
   },
 });
