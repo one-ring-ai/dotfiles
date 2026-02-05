@@ -1,7 +1,7 @@
 ---
 description: READ ONLY pattern finder that locates related implementations and returns file-referenced code snippets and usage conventions for reuse
 mode: subagent
-model: opencode/big-pickle
+model: opencode/kimi-k2.5
 temperature: 0.3
 maxSteps: 150
 tools:

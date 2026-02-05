@@ -4,14 +4,21 @@
   "autoupdate": true,
   "compaction": {
     "auto": true,
-    "prune": true
+    "prune": true,
   },
   "watcher": {
-    "ignore": ["node_modules/**", "dist/**", ".git/**", "vendor/**", "venv/**", ".venv/**"]
+    "ignore": [
+      "node_modules/**",
+      "dist/**",
+      ".git/**",
+      "vendor/**",
+      "venv/**",
+      ".venv/**",
+    ],
   },
   // model selection
   "model": "opencode/gpt-5.1-codex-max",
-  "small_model": "opencode/big-pickle",
+  "small_model": "opencode/kimi-k2.5",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
   // pre-configured providers
   "provider": {
@@ -20,49 +27,55 @@
       "name": "Openrouter",
       "id": "openrouter",
       "options": {
-        "apiKey": "{file:~/.config/opencode/.secrets/openrouter-key}"
+        "apiKey": "{file:~/.config/opencode/.secrets/openrouter-key}",
       },
       "models": {
         "@preset/planner-model": {},
-        "@preset/coder-model": {}
-      }
+        "@preset/coder-model": {},
+      },
     },
     "replicate": {
       "api": "https://api.replicate.com/v1",
       "name": "Replicate",
       "id": "replicate",
       "options": {
-        "REPLICATE_API_TOKEN": "{file:~/.config/opencode/.secrets/replicate-key}"
-      }
-    }
+        "REPLICATE_API_TOKEN": "{file:~/.config/opencode/.secrets/replicate-key}",
+      },
+    },
   },
   // pre-configured mcp servers
   "mcp": {
     "figma": {
       "type": "local",
-      "command": ["npx", "-y", "figma-developer-mcp", "--figma-api-key={file:~/.config/opencode/.secrets/figma-token}", "--stdio"],
-      "enabled": true
+      "command": [
+        "npx",
+        "-y",
+        "figma-developer-mcp",
+        "--figma-api-key={file:~/.config/opencode/.secrets/figma-token}",
+        "--stdio",
+      ],
+      "enabled": true,
     },
     "next-devtools": {
       "type": "local",
       "command": ["npx", "-y", "next-devtools-mcp@latest"],
-      "enabled": true
+      "enabled": true,
     },
     "shadcn": {
       "type": "local",
       "command": ["npx", "-y", "shadcn@latest", "mcp"],
-      "enabled": true
+      "enabled": true,
     },
     // remove "--headless=true" to the command if you want to use chrome with a GUI
     "chrome-devtools": {
       "type": "local",
       "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--headless=true"],
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
   // default CLI permissions
   "permission": {
-    "external_directory":"deny",
+    "external_directory": "deny",
     "doom_loop": "deny",
     "bash": {
       "*": "allow",
@@ -136,7 +149,7 @@
       "docker build *": "allow",
       "docker buildx *": "allow",
       "docker compose ps": "allow",
-      "docker compose logs *": "allow" 
-    }
-  }
+      "docker compose logs *": "allow",
+    },
+  },
 }

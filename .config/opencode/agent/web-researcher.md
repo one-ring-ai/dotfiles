@@ -1,7 +1,7 @@
 ---
 description: READ ONLY web researcher that finds authoritative sources to answer general questions and specific questions about code
 mode: subagent
-model: opencode/big-pickle
+model: opencode/kimi-k2.5
 temperature: 0.3
 maxSteps: 100
 tools:
