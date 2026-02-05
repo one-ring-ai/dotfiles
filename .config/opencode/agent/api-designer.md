@@ -1,7 +1,7 @@
 ---
 description: REST API designer and developer
 mode: subagent
-model: opencode/kimi-k2.5-free
+model: opencode/kimi-k2.5
 temperature: 0.15
 maxSteps: 100
 tools:

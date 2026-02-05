@@ -1,7 +1,7 @@
 ---
 description: General-purpose fallback agent, use when no specialized subagent applies
 mode: subagent
-model: opencode/kimi-k2.5-free
+model: opencode/kimi-k2.5
 temperature: 0.15
 maxSteps: 100
 tools:
