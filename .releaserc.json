@@ -23,11 +23,25 @@
     ],
     "@semantic-release/release-notes-generator",
     [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "bash docs/scripts/build-setup-assets.sh"
+      }
+    ],
+    [
       "@semantic-release/github",
       {
         "successComment": false,
         "failComment": false,
-        "releasedLabels": false
+        "releasedLabels": false,
+        "assets": [
+          {
+            "path": "artifacts/setup.sh"
+          },
+          {
+            "path": "artifacts/setup.sh.sha256"
+          }
+        ]
       }
     ]
   ]
