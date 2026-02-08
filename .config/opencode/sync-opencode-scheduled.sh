@@ -27,7 +27,7 @@ log_message() {
     local timestamp
     timestamp=$(date '+%Y-%m-%d %H:%M:%S')
     local formatted="[$timestamp] $message"
-    echo "$formatted"
+    echo "$formatted" >&2
     echo "$formatted" >> "$SYNC_LOG"
 }
 
@@ -178,12 +178,18 @@ download_and_verify() {
 
     log_message "Checksum verified successfully"
     chmod +x "$setup_path"
-    echo "$DOWNLOAD_DIR"
 }
 
 run_setup() {
     local setup_path="$1"
     log_message "Executing setup.sh..."
+
+    if [ ! -f "$setup_path" ]; then
+        log_message "Error: setup.sh not found at $setup_path"
+        return 1
+    fi
+
+    ls -l "$setup_path" >> "$STDERR_LOG" 2>&1
 
     local timeout_cmd=""
     if command -v timeout >/dev/null 2>&1; then
@@ -407,13 +413,12 @@ run_sync() {
     tag=$(get_release_tag "$CHANNEL")
     log_message "Found release tag: $tag"
 
-    local download_dir
-    if ! download_dir=$(download_and_verify "$tag"); then
+    if ! download_and_verify "$tag"; then
         log_message "Sync failed: download or verification error"
         return 1
     fi
 
-    local setup_path="$download_dir/setup.sh"
+    local setup_path="$DOWNLOAD_DIR/setup.sh"
     if run_setup "$setup_path"; then
         log_message "Sync completed successfully"
         return 0
