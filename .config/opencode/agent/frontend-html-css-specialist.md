@@ -33,6 +33,7 @@ wrapped in a specific legacy context.
    check (skipping it for obvious basics).
 6. **Use available tools** like `chrome-devtools` or `figma` (when a figma project
    does exists) to verify your work.
+7. **Image Generation**: If no images are provided, use the `replicate-flux-image` tool to generate high-quality placeholder images for a realistic preview.
 
 ## Essential Guidelines (2026 Standards)
 
