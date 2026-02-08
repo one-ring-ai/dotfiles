@@ -93,6 +93,23 @@ Script: `~/.config/opencode/sync-opencode-scheduled.sh`
 ~/.config/opencode/sync-opencode-scheduled.sh --schedule-status
 ```
 
+## Logs and cache
+
+- Logs: `~/.local/state/sync-opencode/{sync.log,cron.log,stdout.log,stderr.log}`
+- Quick view:
+
+```bash
+tail -n 50 ~/.local/state/sync-opencode/{sync.log,stderr.log}
+```
+
+- Downloads: each run stores assets in a per-run folder under
+  `~/.local/state/sync-opencode/downloads/run.*`. They are not auto-removed;
+  you can clear old runs when no sync is active:
+
+```bash
+rm -rf ~/.local/state/sync-opencode/downloads/run.*
+```
+
 ## Safety notes
 
 - Checksums must pass before execution; empty downloads fail fast.
