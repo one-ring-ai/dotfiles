@@ -144,40 +144,41 @@ download_and_verify() {
     local tag="$1"
     local setup_url="https://github.com/one-ring-ai/dotfiles/releases/download/$tag/setup.sh"
     local checksum_url="https://github.com/one-ring-ai/dotfiles/releases/download/$tag/setup.sh.sha256"
-    local setup_path="$DOWNLOAD_DIR/setup.sh"
-    local checksum_path="$DOWNLOAD_DIR/setup.sh.sha256"
-
-    rm -f "$setup_path" "$checksum_path"
+    local run_dir
+    run_dir=$(mktemp -d "$DOWNLOAD_DIR/run.XXXXXX")
+    local setup_path="$run_dir/setup.sh"
+    local checksum_path="$run_dir/setup.sh.sha256"
 
     log_message "Downloading setup.sh from release $tag..."
     if ! curl -fL --retry 3 --retry-delay 2 -o "$setup_path" "$setup_url" 2>/dev/null; then
         log_message "Error: Failed to download setup.sh"
-        rm -f "$setup_path" "$checksum_path"
+        rm -rf "$run_dir"
         return 1
     fi
 
     if [ ! -s "$setup_path" ]; then
         log_message "Error: Downloaded setup.sh is empty"
-        rm -f "$setup_path" "$checksum_path"
+        rm -rf "$run_dir"
         return 1
     fi
 
     log_message "Downloading checksum file..."
     if ! curl -fL --retry 3 --retry-delay 2 -o "$checksum_path" "$checksum_url" 2>/dev/null; then
         log_message "Error: Failed to download checksum file"
-        rm -f "$setup_path" "$checksum_path"
+        rm -rf "$run_dir"
         return 1
     fi
 
     log_message "Verifying checksum..."
-    if ! (cd "$DOWNLOAD_DIR" && sha256_verify setup.sh.sha256); then
+    if ! (cd "$run_dir" && sha256_verify setup.sh.sha256); then
         log_message "Error: Checksum verification failed"
-        rm -f "$setup_path" "$checksum_path"
+        rm -rf "$run_dir"
         return 1
     fi
 
     log_message "Checksum verified successfully"
     chmod +x "$setup_path"
+    echo "$run_dir"
 }
 
 run_setup() {
@@ -413,12 +414,13 @@ run_sync() {
     tag=$(get_release_tag "$CHANNEL")
     log_message "Found release tag: $tag"
 
-    if ! download_and_verify "$tag"; then
+    local download_dir
+    download_dir=$(download_and_verify "$tag") || {
         log_message "Sync failed: download or verification error"
         return 1
-    fi
+    }
 
-    local setup_path="$DOWNLOAD_DIR/setup.sh"
+    local setup_path="$download_dir/setup.sh"
     if run_setup "$setup_path"; then
         log_message "Sync completed successfully"
         return 0
