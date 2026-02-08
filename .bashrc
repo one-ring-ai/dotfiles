@@ -100,59 +100,19 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 #######################################################
 
 # aliases for SSH
-# alias SERVERNAME='ssh YOURWEBSITE.com -l USERNAME -p PORTNUMBERHERE'
+alias db1='ssh root@100.115.209.165'
+alias manager1='ssh root@100.115.124.145'
+alias manager2='ssh root@100.115.231.151'
+alias manager3='ssh root@100.115.190.198'
+alias worker1='ssh root@100.115.6.139'
+alias worker2='ssh root@100.115.5.168'
+alias worker3='ssh root@100.115.160.62'
 
 # aliases to change the directory
 alias mnt='cd /mnt/user'
 
 # alias for opencode
-alias copy-secrets='rsync -av --delete /mnt/user/.secrets/ /home/coder/.config/opencode/.secrets'
 alias sync-opencode='curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/main/.config/opencode/setup.sh | bash'
-alias sync-oc-local='rsync -av --delete /mnt/user/github/dotfiles/.config/opencode/ /home/coder/.config/opencode/'
-alias oc-rollback="sudo opencode upgrade 0.15.31"
-
-# alias for initial files setup and recurring backup
-init_vm() {
-    if sh /home/coder/sync-from-storagebox.sh; then
-        # Dry run verification
-        if ! sh /home/coder/sync-from-storagebox.sh --dry-run > /dev/null; then
-            printf "Verification failed! Files might not be fully synced.\n" >&2
-            return 1
-        fi
-
-        # Configure backup
-        local cron_entry
-        cron_entry='*/5 * * * * /home/coder/sync-to-storagebox.sh'
-        if ! crontab -l 2>/dev/null | command grep -Fxq "$cron_entry"; then
-            (crontab -l 2>/dev/null || true; echo "$cron_entry") | crontab -
-        fi
-
-        # Verify backup configuration
-        if crontab -l 2>/dev/null | grep -F "$cron_entry"; then
-            printf "Backup cronjob configured successfully:\n"
-            crontab -l 2>/dev/null | grep -F "$cron_entry"
-        else
-            printf "Error: Failed to configure backup cronjob.\n" >&2
-        fi
-
-        # Copy secrets
-        if command -v rsync &> /dev/null; then
-            rsync -av --delete /mnt/user/.secrets/ /home/coder/.config/opencode/.secrets
-        else
-            printf "Error: rsync not found, cannot copy secrets.\n" >&2
-        fi
-
-        # Copy docker config
-        if [ -f /mnt/user/appdata/docker/config.json ]; then
-            mkdir -p /home/coder/.docker
-            cp /mnt/user/appdata/docker/config.json /home/coder/.docker/config.json
-        fi
-
-        # Cleanup
-        rm -f /home/coder/sync-from-storagebox.sh
-    fi
-}
-alias init-vm=init_vm
 
 #######################################################
 # GENERAL ALIASES
