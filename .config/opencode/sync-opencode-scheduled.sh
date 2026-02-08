@@ -5,6 +5,7 @@ set -euo pipefail
 export PATH="/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:${PATH:-}"
 
 readonly STATE_DIR="$HOME/.local/state/sync-opencode"
+readonly DOWNLOAD_DIR="$STATE_DIR/downloads"
 readonly SYNC_LOG="$STATE_DIR/sync.log"
 readonly CRON_LOG="$STATE_DIR/cron.log"
 readonly STDOUT_LOG="$STATE_DIR/stdout.log"
@@ -40,6 +41,7 @@ rotate_log() {
 
 init_state_dir() {
     mkdir -p "$STATE_DIR"
+    mkdir -p "$DOWNLOAD_DIR"
     rotate_log "$SYNC_LOG"
     rotate_log "$CRON_LOG"
     rotate_log "$STDOUT_LOG"
@@ -140,41 +142,43 @@ except:
 
 download_and_verify() {
     local tag="$1"
-    local temp_dir
-    temp_dir=$(mktemp -d)
     local setup_url="https://github.com/one-ring-ai/dotfiles/releases/download/$tag/setup.sh"
     local checksum_url="https://github.com/one-ring-ai/dotfiles/releases/download/$tag/setup.sh.sha256"
+    local setup_path="$DOWNLOAD_DIR/setup.sh"
+    local checksum_path="$DOWNLOAD_DIR/setup.sh.sha256"
+
+    rm -f "$setup_path" "$checksum_path"
 
     log_message "Downloading setup.sh from release $tag..."
-    if ! curl -fL --retry 3 --retry-delay 2 -o "$temp_dir/setup.sh" "$setup_url" 2>/dev/null; then
+    if ! curl -fL --retry 3 --retry-delay 2 -o "$setup_path" "$setup_url" 2>/dev/null; then
         log_message "Error: Failed to download setup.sh"
-        rm -rf "$temp_dir"
+        rm -f "$setup_path" "$checksum_path"
         return 1
     fi
 
-    if [ ! -s "$temp_dir/setup.sh" ]; then
+    if [ ! -s "$setup_path" ]; then
         log_message "Error: Downloaded setup.sh is empty"
-        rm -rf "$temp_dir"
+        rm -f "$setup_path" "$checksum_path"
         return 1
     fi
 
     log_message "Downloading checksum file..."
-    if ! curl -fL --retry 3 --retry-delay 2 -o "$temp_dir/setup.sh.sha256" "$checksum_url" 2>/dev/null; then
+    if ! curl -fL --retry 3 --retry-delay 2 -o "$checksum_path" "$checksum_url" 2>/dev/null; then
         log_message "Error: Failed to download checksum file"
-        rm -rf "$temp_dir"
+        rm -f "$setup_path" "$checksum_path"
         return 1
     fi
 
     log_message "Verifying checksum..."
-    if ! (cd "$temp_dir" && sha256_verify setup.sh.sha256); then
+    if ! (cd "$DOWNLOAD_DIR" && sha256_verify setup.sh.sha256); then
         log_message "Error: Checksum verification failed"
-        rm -rf "$temp_dir"
+        rm -f "$setup_path" "$checksum_path"
         return 1
     fi
 
     log_message "Checksum verified successfully"
-    chmod +x "$temp_dir/setup.sh"
-    echo "$temp_dir"
+    chmod +x "$setup_path"
+    echo "$DOWNLOAD_DIR"
 }
 
 run_setup() {
@@ -403,20 +407,18 @@ run_sync() {
     tag=$(get_release_tag "$CHANNEL")
     log_message "Found release tag: $tag"
 
-    local temp_dir
-    if ! temp_dir=$(download_and_verify "$tag"); then
+    local download_dir
+    if ! download_dir=$(download_and_verify "$tag"); then
         log_message "Sync failed: download or verification error"
         return 1
     fi
 
-    local setup_path="$temp_dir/setup.sh"
+    local setup_path="$download_dir/setup.sh"
     if run_setup "$setup_path"; then
         log_message "Sync completed successfully"
-        rm -rf "$temp_dir"
         return 0
     else
         log_message "Sync failed: setup execution error"
-        rm -rf "$temp_dir"
         return 1
     fi
 }

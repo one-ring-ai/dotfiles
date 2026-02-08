@@ -8,6 +8,8 @@ files_edited:
   - .releaserc.json
   - .github/workflows/release.yml
   - .gitignore
+  - README.md
+  - docs/release-assets-and-scheduler.md
 rationale: Enable release checksum assets and scheduled verified sync for OpenCode configs
 supporting_docs:
   - thoughts/shared/plans/2026-02-08-release-checksum-assets.md
@@ -27,6 +29,10 @@ supporting_docs:
 - Introduced a scheduled sync wrapper that downloads release assets with
   checksum verification, handles cron/launchd install/remove/status, and added
   schedule flags to `setup.sh` while preserving the default sync flow.
+- Switched the scheduled sync downloads to a persistent state directory
+  (`~/.local/state/sync-opencode/downloads`) instead of ephemeral temp folders
+  to avoid removal during cron execution, keeping checksum verification and the
+  existing locking/logging behavior unchanged.
 
 ## Technical reasoning
 
@@ -40,6 +46,8 @@ supporting_docs:
 - `setup.sh` now parses schedule flags, runs the standard sync to place the
   wrapper, and delegates scheduling so user-level cron/launchd entries call the
   verified wrapper with the chosen channel and interval.
+- Persistent download location prevents cron from losing the fetched `setup.sh`
+  while still cleaning/replacing the pair of download files per run.
 
 ## Impact assessment
 
