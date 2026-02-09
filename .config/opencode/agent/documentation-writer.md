@@ -9,7 +9,7 @@ tools:
   "chrome*": false
   "shadcn*": false
   "next*": false
-permissions:
+permission:
   bash:
     "npx *": allow
 ---
