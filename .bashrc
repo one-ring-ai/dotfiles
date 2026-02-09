@@ -629,6 +629,6 @@ if [ -d "$HOME/.opencode/bin" ]; then
 fi
 
 # Load local/private configurations (not tracked by git)
-if [ -f "$HOME/.bash_private" ]; then
-    . "$HOME/.bash_private"
+if [ -f "$HOME/.bashrc_private" ]; then
+    . "$HOME/.bashrc_private"
 fi
