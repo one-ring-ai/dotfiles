@@ -96,17 +96,8 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 #######################################################
-# CODER SPECIFIC ALIASES
+# CUSTOM ALIASES
 #######################################################
-
-# aliases for SSH
-alias db1='ssh root@100.115.209.165'
-alias manager1='ssh root@100.115.124.145'
-alias manager2='ssh root@100.115.231.151'
-alias manager3='ssh root@100.115.190.198'
-alias worker1='ssh root@100.115.6.139'
-alias worker2='ssh root@100.115.5.168'
-alias worker3='ssh root@100.115.160.62'
 
 # aliases to change the directory
 alias mnt='cd /mnt/user'
@@ -635,4 +626,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # opencode (if available)
 if [ -d "$HOME/.opencode/bin" ]; then
     export PATH="$HOME/.opencode/bin:$PATH"
+fi
+
+# Load local/private configurations (not tracked by git)
+if [ -f "$HOME/.bash_private" ]; then
+    . "$HOME/.bash_private"
 fi

@@ -2,3 +2,4 @@
 tmp/
 thoughts/shared/status/
 artifacts/
+.bashrc_private
