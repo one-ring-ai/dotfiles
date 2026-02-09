@@ -52,7 +52,7 @@ Script: `~/.config/opencode/sync-opencode-scheduled.sh`
 
 - Custom interval examples:
   - Seconds: `--interval 7200` (every 2h, converted to cron)
-  - Cron spec: `--interval "15 * * * *"`
+  - Cron spec: `--interval "*/5 * * * *"`
 - Remove:
 
 ```bash
