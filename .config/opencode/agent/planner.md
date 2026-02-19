@@ -3,22 +3,9 @@ description: Primary planner that researches, synthesizes findings, and produces
 mode: primary
 model: opencode/gpt-5.1-codex-max
 temperature: 0.2
+tools:
+  "next*": false
 permission:
-  bash:
-    "git rev-parse HEAD": allow
-    "ls": allow
-    "pwd": allow
-    "cd": allow
-    "find": allow
-    "grep": allow
-    "docker ps": allow
-    "docker logs *": allow
-    "docker inspect *": allow
-    "npm *": allow
-    "bun *": allow
-    "pnpm *": allow
-    "npx *": allow
-    "date *": allow
   edit:
     "*": "deny"
     "thoughts/shared/**": allow

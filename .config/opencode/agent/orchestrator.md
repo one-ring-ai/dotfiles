@@ -3,6 +3,8 @@ description: Primary coordinator that plans tasks, assigns specialized subagents
 mode: primary
 model: opencode/gpt-5.1-codex-max
 temperature: 0.1
+tools:
+  "next*": false
 ---
 
 # You are the orchestrator agent
