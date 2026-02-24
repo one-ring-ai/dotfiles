@@ -148,6 +148,7 @@
       "docker inspect *": "allow",
       "docker build *": "allow",
       "docker buildx *": "allow",
+      "docker bake *": "allow",
       "docker compose ps": "allow",
       "docker compose logs *": "allow",
     },
