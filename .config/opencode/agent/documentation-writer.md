@@ -59,6 +59,13 @@ between code and understanding.
   refactoring code.
 - **Validation**: After writing or editing any markdown file, you MUST validate
   it using `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`.
+- **Lint Config Guardrail**: Before running `markdownlint-cli`, ensure
+  `.markdownlint.json` and `.markdownlintignore` exist at repository root and
+  are aligned with:
+  - `https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json`
+  - `https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore`
+  If files are missing or differ, update them first, then execute the lint
+  command.
 
 ### File Organization (Standard Layout)
 
