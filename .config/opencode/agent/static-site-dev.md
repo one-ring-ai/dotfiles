@@ -29,7 +29,7 @@ React (Vite).
 6. **Performance**: Optimize images and assets for pure static delivery.
 7. **Use available tools** like `chrome-devtools`, `next-devtools`, `shadcn`
    or `figma` (when a figma project does exists) to verify your work.
-8. **Image Generation**: If no images are provided, use the `replicate-flux-image` tool to generate high-quality placeholder images for a realistic preview.
+8. **Image Generation**: If no images are provided, load the `replicate-recraft-svg` skill and generate SVG placeholders with a direct Replicate Bash API call.
 
 ## Essential Guidelines (2026 Standards)
 

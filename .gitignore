@@ -5,3 +5,4 @@ artifacts/
 .bashrc_private
 node_modules/
 .config/opencode/node_modules/
+replicate-output/
