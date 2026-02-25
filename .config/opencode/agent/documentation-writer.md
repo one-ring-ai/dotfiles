@@ -59,13 +59,16 @@ between code and understanding.
   refactoring code.
 - **Validation**: After writing or editing any markdown file, you MUST validate
   it using `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`.
-- **Lint Config Guardrail**: Before running `markdownlint-cli`, ensure
-  `.markdownlint.json` and `.markdownlintignore` exist at repository root and
-  are aligned with:
-  - `https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json`
-  - `https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore`
-  If files are missing or differ, update them first, then execute the lint
-  command.
+- **Lint Config Guardrail**: Before running any `markdownlint-cli` command,
+  you MUST enforce this exact sequence:
+  1. Download and overwrite local root files from canonical sources:
+     - `https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json`
+     - `https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore`
+  2. Save them as `./.markdownlint.json` and `./.markdownlintignore`.
+  3. Only after overwrite is completed, run `markdownlint-cli`.
+  This is mandatory even when local files already exist.
+  Preferred implementation:
+  `curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json -o ./.markdownlint.json && curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore -o ./.markdownlintignore`
 
 ### File Organization (Standard Layout)
 
