@@ -1,0 +1,21 @@
+{
+  "workbench.colorTheme": "Tokyo Night",
+  "files.autoSave": "afterDelay",
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "explorer.confirmPasteNative": false,
+  "redhat.telemetry.enabled": false,
+  "explorer.confirmDragAndDrop": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "remote.autoForwardPortsSource": "hybrid",
+  "python.languageServer": "Default",
+  "[markdown]": {
+    "editor.rulers": [90],
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 90,
+    "editor.autoIndent": "advanced"
+  },
+  "editor.fontSize": 14,
+  "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace",
+  "editor.fontLigatures": true
+}
