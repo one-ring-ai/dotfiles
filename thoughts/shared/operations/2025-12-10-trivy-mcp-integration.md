@@ -19,16 +19,19 @@ Trivy MCP provides AI-native security scanning capabilities that integrate with 
 # Impact Assessment
 
 ## Security Posture
+
 - Enhanced vulnerability detection across codebase and container images
 - AI-driven security analysis integrated into development workflow
 - Automated security scanning during development process
 
 ## Development Workflow
+
 - Security-specialist agent gains access to comprehensive security tooling
 - Seamless integration with existing OpenCode agent ecosystem
 - Minimal overhead with configurable caching and offline modes
 
 ## System Resources
+
 - Trivy cache directory: `$HOME/.cache/trivy`
 - MCP server runs as background process
 - Configurable resource usage through Trivy configuration
@@ -36,6 +39,7 @@ Trivy MCP provides AI-native security scanning capabilities that integrate with 
 # Validation Steps
 
 ## Installation Verification
+
 ```bash
 # Verify Trivy installation
 trivy --version
@@ -51,6 +55,7 @@ TRIVY_CACHE_DIR="$HOME/.cache/trivy" trivy image alpine:3.19
 ```
 
 ## OpenCode Integration Test
+
 ```bash
 # Test security-specialist agent access
 opencode --print-logs --log-level DEBUG .
@@ -59,11 +64,13 @@ opencode --print-logs --log-level DEBUG .
 # Usage Notes
 
 ## Cache Configuration
+
 - Default cache directory: `$HOME/.cache/trivy`
 - Set `TRIVY_CACHE_DIR` environment variable to customize location
 - Cache persists between scans for improved performance
 
 ## Sample Commands
+
 ```bash
 # Filesystem scan with custom cache
 TRIVY_CACHE_DIR="$HOME/.cache/trivy" trivy fs .
@@ -76,20 +83,25 @@ trivy mcp --help
 ```
 
 ## Offline Operation
+
 When network connectivity is limited, use offline flags:
+
 ```bash
 trivy fs . --offline-scan --skip-db-update
 trivy image alpine:3.19 --offline-scan --skip-db-update
 ```
 
 ## MCP Usage Expectation
+
 The security-specialist agent can now:
+
 - Perform contextual vulnerability analysis
 - Generate security remediation recommendations
 - Scan both source code and container images
 - Provide AI-driven security insights through MCP protocol
 
 ## Configuration Notes
+
 - MCP server automatically configured in OpenCode stack
 - Security-specialist agent includes Trivy-specific capabilities
 - Setup script handles installation and initial configuration

@@ -36,6 +36,7 @@ Follow the **Conventional Commits specification** for all commit messages:
 **Format**: `<type>[optional scope]: <description>`
 
 ### Commit Types
+
 - `feat`: New feature for the user
 - `fix`: Bug fix for the user
 - `docs`: Documentation changes
@@ -49,7 +50,8 @@ Follow the **Conventional Commits specification** for all commit messages:
 - `revert`: Reverts a previous commit
 
 ### Examples
-```
+
+```text
 feat(auth): add OAuth2 login support
 fix(api): resolve timeout issue in user endpoint
 docs: update deployment instructions

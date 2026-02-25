@@ -9,6 +9,7 @@ This repository contains shell configurations, OpenCode integration, and develop
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Git
 - Bash shell
 - Node.js (for OpenCode plugins)
@@ -17,6 +18,7 @@ This repository contains shell configurations, OpenCode integration, and develop
 ### Setup Your Development Environment
 
 1. **Fork the repository**
+
    ```bash
    # Fork on GitHub, then clone your fork
    git clone https://github.com/YOUR_USERNAME/dotfiles.git
@@ -24,11 +26,13 @@ This repository contains shell configurations, OpenCode integration, and develop
    ```
 
 2. **Add upstream remote**
+
    ```bash
    git remote add upstream https://github.com/ORIGINAL_OWNER/dotfiles.git
    ```
 
 3. **Test the setup locally**
+
    ```bash
    # Test the setup script (dry run first)
    ./setup.sh --help
@@ -38,6 +42,7 @@ This repository contains shell configurations, OpenCode integration, and develop
    ```
 
 4. **Create a feature branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -47,6 +52,7 @@ This repository contains shell configurations, OpenCode integration, and develop
 Understanding the repository structure is crucial for effective contributions:
 
 ### Root Level
+
 - `setup.sh` - Main installation script
 - `uninstall.sh` - Cleanup script
 - `.bashrc` - Bash configuration
@@ -54,7 +60,9 @@ Understanding the repository structure is crucial for effective contributions:
 - `AGENTS.md` - Agent documentation
 
 ### `.config/opencode/`
+
 OpenCode integration configuration and plugins:
+
 - `agent/` - AI agent definitions (`.md` files)
 - `command/` - Custom command definitions
 - `plugin/` - JavaScript plugins for OpenCode
@@ -62,21 +70,27 @@ OpenCode integration configuration and plugins:
 - `opencode.jsonc` - Main OpenCode configuration
 
 ### `.config/fastfetch/`
+
 - `config.jsonc` - Fastfetch system information tool configuration
 
 ### `.github/`
+
 GitHub automation and configuration:
+
 - `workflows/` - CI/CD workflows
 - `dependabot.yml` - Automated dependency updates
 
 ### `docs/`
+
 Documentation and testing:
+
 - `scripts/` - Test scripts and utilities
 - `*.md` - Technical documentation
 
 ## 📝 Code Style Guidelines
 
 ### Bash Scripts
+
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail  # Always use these options
@@ -95,6 +109,7 @@ function install_dependencies() {
 ```
 
 **Requirements:**
+
 - Always use `set -euo pipefail`
 - Use readonly variables for constants
 - Quote all variables: `"$variable"` not `$variable`
@@ -102,6 +117,7 @@ function install_dependencies() {
 - Functions must be declared before use
 
 ### JavaScript (OpenCode Plugins)
+
 ```javascript
 // ES modules only
 export default {
@@ -121,6 +137,7 @@ export default {
 ```
 
 **Requirements:**
+
 - ES modules syntax only
 - Use async/await for asynchronous operations
 - Clear, descriptive function and variable names
@@ -138,6 +155,7 @@ export default {
 - Follow semantic organization and file structure
 
 **Examples:**
+
 ```bash
 # ❌ BAD - With comments
 # Check if package is installed
@@ -157,13 +175,16 @@ fi
 ```
 
 ### File Naming Conventions
+
 - Scripts: `kebab-case.sh` (e.g., `setup-script.sh`)
 - Config files: `kebab-case` or `camelCase` depending on tool requirements
 - Documentation: `kebab-case.md`
 - Plugins: `kebab-case.js`
 
 ### Agent Naming Conventions
+
 Agent definition files live in `.config/opencode/agent/`. Use these patterns so names stay predictable and match the `subagent_type` you invoke:
+
 - `*-dev.md` for language or framework implementers (e.g., `javascript-typescript-dev.md`, `react-nextjs-dev.md`, `php-laravel-dev.md`, `elixir-dev.md`)
 - `*-specialist.md` for domain/tool implementers (documentation, design systems, Docker, Ansible, OpenTofu, OpenSCAD, etc.)
 - `*-locator.md`, `*-analyzer.md`, `*-pattern-finder.md` for read-only mapping agents
@@ -175,7 +196,8 @@ Agent definition files live in `.config/opencode/agent/`. Use these patterns so 
 **This repository uses semantic-release, which REQUIRES conventional commits.**
 
 ### Format
-```
+
+```text
 <type>[optional scope]: <description>
 
 [optional body]
@@ -184,6 +206,7 @@ Agent definition files live in `.config/opencode/agent/`. Use these patterns so 
 ```
 
 ### Commit Types
+
 - `feat`: New feature for the user
 - `fix`: Bug fix for the user  
 - `docs`: Documentation changes only
@@ -197,6 +220,7 @@ Agent definition files live in `.config/opencode/agent/`. Use these patterns so 
 - `revert`: Reverts a previous commit
 
 ### Examples
+
 ```bash
 feat(opencode): add new plugin system
 fix(setup): resolve permission issues in installation
@@ -211,6 +235,7 @@ revert: undo previous plugin changes
 ```
 
 ### Commit Message Rules
+
 - Use imperative mood ("add" not "adds" or "added")
 - Don't capitalize first letter
 - No period at the end
@@ -219,6 +244,7 @@ revert: undo previous plugin changes
 - Use body for detailed explanations when needed
 
 ### Impact on Releases
+
 - `feat` commits trigger minor version bump
 - `fix` commits trigger patch version bump  
 - Commits with `BREAKING CHANGE:` footer trigger major version bump
@@ -227,6 +253,7 @@ revert: undo previous plugin changes
 ## 🧪 Testing
 
 ### Testing OpenCode Plugins
+
 ```bash
 # Run all plugin tests
 bash docs/scripts/test-plugins.sh
@@ -236,6 +263,7 @@ opencode --print-logs --log-level DEBUG .
 ```
 
 ### Validating Bash Scripts
+
 ```bash
 # Syntax check
 bash -n script-name.sh
@@ -245,6 +273,7 @@ shellcheck script-name.sh
 ```
 
 ### Testing Setup Process
+
 ```bash
 # Test setup in temporary directory
 mkdir /tmp/test-dotfiles
@@ -256,6 +285,7 @@ git clone YOUR_FORK_URL .
 ## 🔀 Pull Request Process
 
 ### Branching Strategy
+
 - `main` - Production branch (protected)
 - `beta` - Beta releases branch
 - `alpha` - Alpha releases branch
@@ -263,6 +293,7 @@ git clone YOUR_FORK_URL .
 - `fix/*` - Bug fix branches
 
 ### PR Requirements
+
 1. **Conventional commits** - All commits must follow conventional commit format
 2. **Tests passing** - All tests must pass
 3. **No comments** - Code must follow no-comments policy
@@ -270,6 +301,7 @@ git clone YOUR_FORK_URL .
 5. **Documentation** - Update relevant documentation
 
 ### PR Template
+
 ```markdown
 ## Description
 Brief description of changes
@@ -295,6 +327,7 @@ Brief description of changes
 ## 🚀 Release Process
 
 ### Automated Releases
+
 This repository uses **semantic-release** for fully automated releases:
 
 - **Commits to `main`** → Production releases
@@ -302,16 +335,19 @@ This repository uses **semantic-release** for fully automated releases:
 - **Commits to `alpha`** → Alpha releases
 
 ### Release Triggers
+
 - `feat` commits → Minor version (1.x.0)
 - `fix` commits → Patch version (1.0.x)
 - `BREAKING CHANGE:` → Major version (2.0.0)
 
 ### Branch Strategy
-```
+
+```text
 main (production) ← beta ← alpha ← feature branches
 ```
 
 ### What Happens Automatically
+
 1. Analyzes commit messages since last release
 2. Determines next version number
 3. Generates changelog
@@ -322,16 +358,19 @@ main (production) ← beta ← alpha ← feature branches
 ## 🤝 Additional Guidelines
 
 ### Before Contributing
+
 - Read existing code to understand patterns
 - Check existing issues for similar work
 - Start with good first issues if new to project
 
 ### Code Review Process
+
 - All PRs require review
 - Focus on code quality, style, and functionality
 - Ensure conventional commits are properly formatted
 
 ### Getting Help
+
 - Check existing documentation in `docs/`
 - Review existing code patterns
 - Ask questions in PR discussions
