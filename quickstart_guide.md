@@ -6,7 +6,6 @@
 - [tmux](#tmux)
 - [Additional Tools](#additional-tools)
 - [Useful Commands](#useful-commands)
-- [Next Steps](#next-steps)
 
 ## creator's note
 
@@ -30,12 +29,12 @@ lla                  # list all files with details
 ..                   # go to previous directory
 find . -name "*.md"  # find all markdown files in current directory
 ```
-    
+
 ## opencode
 
 ### before starting
 
-*if you're having issues with the new TUI*, you can use `oc-rollback` to rvert to th last stable vrsion before the new TUI.
+*if you're having issues with the new TUI*, you can use `oc-rollback` to revert to the last stable version before the new TUI.
 
 after, `init-vm` should have copied your secret keys from `/mnt/user/.secrets` to `/home/coder/.config/opencode/.secrets`. if not, just run `copy-secrets` in the terminal
 
@@ -45,25 +44,21 @@ now you can safely start opencode with the command `opencode` and below you can 
 
 we have 3 main agents:
 
-**3-orchestrator** is the agent that you should use to do stuff or to implement plans (more on this later)
+**orchestrator** is the agent that you should use to do stuff or to implement plans (more on this later)
 
-**2-planner** is the agent that you should run for creating plans and do research on your codebase 
+**planner** is the agent that you should run for creating plans and do research on your codebase
 
-**1-commit** is the only agent able to run git commands that are not read-only (still, i don't feel like it should run commands like git push or similar). it's meant to help you with the git cli and automate git commits
+**commit** is the only agent able to run git commands that are not read-only (still, i don't feel like it should run commands like git push or similar). it's meant to help you with the git cli and automate git commits
 
-we have a lot of subagents, and you can guess each one task and proficiency by it's name and description. feel free to open a PR if you feel like the system prompt given to a particular subagent or agent could b improved.
+we have a lot of subagents, and you can guess each one task and proficiency by it's name and description. feel free to open a PR if you feel like the system prompt given to a particular subagent or agent could be improved.
 
 ### commands
 
 commands are pre-made prompts useful for repeating tasks.
 we have:
-- `/commit` - this command call the agent *1-commit* and give the task to gather infos about your edits and do sensible commits based on your commit message history and rules defined by a contributing file 
-- `/create_handoff` - you should use this one when you are in the middle of implementing somthing but you cannot end that task now. it will create a document telling what's being done and what's left (though we're not really using these anymore thanks to the new *operations* thoughts)
-- `/implement_plan` - this is the third step of our tested spec driven development and must pair with the agent *3-orchestrator*. after the command has run, you should feed the orchestrator with a plan and the orchestrator will make sure to complete each step of that plan
-- `/plan` - this is the second step of our tested spec driven development and must pair with the agent *2-planner*. you can use this with or without a research (in case you're starting fresh or are working on a simple task) and you should explain to the planner agent what end result you expect to obtain. you'll end with a plan explaining each step needed to reach your implementation goal. you should proceed with the *implement_plan* command
-- `/research` - this is the first step of our tested spec driven development and must pair with the agent *2-planner*. you should use this when you're working on an existing codebase (it's pointless to run a research when starting fresh) and you should task the planner to research a sction of interest. you'll end with a research citing files, code lines, documentation and everything that an agent should know about that code implementation you asked for. next, you should proceed with the *plan* command
-- `/resume_handoff` - this pairs with the *create_handoff* and should be used with the *3-orchestrator*. this just resume the handoff created and will try to complete each step left.
-- `/review` - this should be used with the *2-planner* agent, and should be used just before using the *commit* command. it instruct the agent to look into contributing rules and make sure you're respecting them. it's just a check to make sure full adherence to rules before committing changes (i also advise you not to track reviews with git, they would just pollute your documentation. i may be move the review folder somewhere else in the future)
+
+- `/commit` this command call the agent *1-commit* and give the task to gather infos about your edits and do sensible commits based on your commit message history and rules defined by a contributing file
+- `/review` this should be used with the *2-planner* agent, and should be used just before using the *commit* command. it instruct the agent to look into contributing rules and make sure you're respecting them. it's just a check to make sure full adherence to rules before committing changes (i also advise you not to track reviews with git, they would just pollute your documentation. i may be move the review folder somewhere else in the future)
 
 ### plugin
 
@@ -74,9 +69,9 @@ we use only one plugin that stops agents to read files named `.env` for obvious 
 this file defines models, custom models, mcp server and command we do not want ai to run. if you are in YOLO mood, you can change `"*": "ask"` into `"*": "allow"` to let ai run almost any command without asking for permissions (be careful with that)
 
 some notes about models we use:
-- our main model is **GPT 5 codex**, it's the one we use for the agents *3-orchestrator* and *2-planner*. we found that, beside being really slow at times, it's the best at following rules, has less verbosity than almost any other model and has great performance when planning and coordinating subagents
-- our small model is a mixture of **grok code fast 1** and **glm 4.6**. we found that, while **glm 4.6** gave us better results overall, **grok code fast 1**, by being free and with limited loss of quality, it's overall the best small model to use atm
-- we have some exceptions were we use **glm 4.6** or **GPT 5 codex** as the subagent model for reasons like proficency in specific coding languages and / or better rules adherence for specific languages or task 
+
+- our main model is **GPT codex**, it's the one we use for the agents *orchestrator* and *planner*. we found that, beside being really slow at times, it's the best at following rules, has less verbosity than almost any other model and has great performance when planning and coordinating subagents
+- our subagent model is **Kimi K2.5**. we have some exceptions were we use **GPT codex** as the subagent model for reasons like proficiency in specific coding languages and / or better rules adherence for specific languages or task
 
 ## tmux
 
