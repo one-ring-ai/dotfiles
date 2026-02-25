@@ -1,7 +1,7 @@
 ---
 description: Primary planner that researches, synthesizes findings, and produces handoff plans without executing work
 mode: primary
-model: opencode/gpt-5.1-codex-max
+model: opencode/gpt-5.3-codex
 temperature: 0.2
 tools:
   "next*": false
