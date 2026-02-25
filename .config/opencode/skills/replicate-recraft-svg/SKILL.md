@@ -14,7 +14,7 @@ description: Generate SVG images with Replicate recraft-ai/recraft-v4-svg via di
 
 ## When to use
 
-Use this skill when the user asks to generate an image with Replicate without using a custom OpenCode tool.
+Use this skill when you need to generate an SVG image.
 
 ## Input schema to respect
 
