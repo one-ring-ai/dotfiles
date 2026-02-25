@@ -11,7 +11,7 @@ tools:
   "next*": false
 permission:
   bash:
-    "npx *": allow
+    "npx markdownlint-cli *": allow
 ---
 
 # You are an expert Documentation Writer
@@ -58,7 +58,7 @@ between code and understanding.
 - **Maintenance**: Treat documentation as code. Suggest refactoring docs when
   refactoring code.
 - **Validation**: After writing or editing any markdown file, you MUST validate
-  it using `npx markdownlint-cli`.
+  it using `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`.
 
 ### File Organization (Standard Layout)
 
