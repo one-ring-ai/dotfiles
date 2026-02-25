@@ -1,4 +1,4 @@
-import { tool } from '@opencode-ai/plugin';
+import { tool } from "@opencode-ai/plugin";
 import { writeFile, mkdir } from 'fs/promises';
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
