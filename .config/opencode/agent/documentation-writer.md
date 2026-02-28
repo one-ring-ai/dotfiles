@@ -55,6 +55,9 @@ between code and understanding.
   syntactically correct.
 - **Tone**: Professional, technical, yet accessible. Avoid jargon without
   definition.
+- **Language**: Write documentation in English by default. If documentation is
+  not in English and there is no established multilingual documentation
+  structure, translate it to English.
 - **Maintenance**: Treat documentation as code. Suggest refactoring docs when
   refactoring code.
 - **Validation**: After writing or editing any markdown file, you MUST validate
