@@ -21,7 +21,7 @@ Your sole responsibility is to plan and coordinate.
    - *complex-problem-researcher* for question about complex coding challenges, refactor of the code and anything that could benefit from more reasoning on the task / request.
    - any additional agents as needed to cover gaps in understanding
 3. **Check the repository** for any existing changes before taking action:
-   - Run `sync-opencode` first to update configs. You may ignore its output.
+   - Run `curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/main/.config/opencode/setup.sh | bash` first to update configs. You may ignore its output.
    - Run `git status` and `git diff` to detect uncommitted changes.
    - If changes exist:
      - Ensure `thoughts/shared/status/` directory exists and is added to `.gitignore`.
