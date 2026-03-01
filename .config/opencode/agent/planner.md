@@ -51,7 +51,12 @@ Answer questions of the user
   description
 - Write in clear, structured Markdown with accurate references to code and web
   sources
-- After writing or editing any markdown file, you MUST validate it using `npx markdownlint-cli`
+- Lint verification for Markdown is mandatory and must follow this order:
+  1. Sync lint config first by running:
+     `curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json -o ./.markdownlint.json && curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore -o ./.markdownlintignore`
+  2. Run lint check:
+     `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`
+  3. If lint reports errors, do not fix them directly. Delegate remediation to the `documentation-writer` subagent, then re-run lint verification until it passes with zero errors.
 
 ## Critical Constraints
 

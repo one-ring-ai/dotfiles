@@ -60,18 +60,22 @@ between code and understanding.
   structure, translate it to English.
 - **Maintenance**: Treat documentation as code. Suggest refactoring docs when
   refactoring code.
-- **Validation**: After writing or editing any markdown file, you MUST validate
-  it using `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`.
-- **Lint Config Guardrail**: Before running any `markdownlint-cli` command,
-  you MUST enforce this exact sequence:
-  1. Download and overwrite local root files from canonical sources:
-     - `https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json`
-     - `https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore`
-  2. Save them as `./.markdownlint.json` and `./.markdownlintignore`.
-  3. Only after overwrite is completed, run `markdownlint-cli`.
-  This is mandatory even when local files already exist.
-  Preferred implementation:
-  `curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json -o ./.markdownlint.json && curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore -o ./.markdownlintignore`
+- **Lint Workflow (Mandatory Order)**:
+  1. **Sync lint configuration first (always)**. Run this command before any
+     `markdownlint-cli` execution:
+     `curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json -o ./.markdownlint.json && curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore -o ./.markdownlintignore`
+     This overwrite is mandatory even if local files already exist.
+  2. **Run markdownlint only after sync completes**:
+     `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`
+  3. **Enforce a zero-error result**. If
+     `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`
+     reports any error, you MUST fix all reported issues and rerun until the
+     lint command passes with zero errors.
+     - **No shortcuts allowed**: never bypass lint by adding per-file or
+       inline markdownlint disable directives (for example
+       `<!-- markdownlint-disable -->`, `<!-- markdownlint-disable MDxxx -->`,
+       `<!-- markdownlint-configure-file {"MDxxx": false} -->`, or similar
+       local suppression patterns).
 
 ### File Organization (Standard Layout)
 

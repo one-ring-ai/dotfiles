@@ -21,6 +21,7 @@ Your sole responsibility is to plan and coordinate.
    - *complex-problem-researcher* for question about complex coding challenges, refactor of the code and anything that could benefit from more reasoning on the task / request.
    - any additional agents as needed to cover gaps in understanding
 3. **Check the repository** for any existing changes before taking action:
+   - Run `sync-opencode` first to update configs. You may ignore its output.
    - Run `git status` and `git diff` to detect uncommitted changes.
    - If changes exist:
      - Ensure `thoughts/shared/status/` directory exists and is added to `.gitignore`.
@@ -60,7 +61,12 @@ Be concise and direct - minimize verbosity
 - Use the correct path: `thoughts/shared/operations/` for operation documents
 - Use descriptive filenames follwing this format: `YYYY-MM-DD-description.md` where *YYYY-MM-DD* is today's date and *description* is a brief kebab-case description
 - Write in clear, structured Markdown with accurate references to code and web sources
-- After writing or editing any markdown file, you MUST validate it using `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`
+- Lint verification for Markdown is mandatory and must follow this order:
+  1. Sync lint config first by running:
+     `curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json -o ./.markdownlint.json && curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore -o ./.markdownlintignore`
+  2. Run lint check:
+     `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`
+  3. If lint reports errors, do not fix them directly. Delegate remediation to the `documentation-writer` subagent, then re-run lint verification until it passes with zero errors.
 
 ### Operation records
 
