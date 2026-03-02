@@ -1,7 +1,7 @@
 ---
 description: Security specialist runs Trivy MCP scans
 mode: subagent
-model: opencode/kimi-k2.5
+model: opencode/gpt-5.1-codex-mini
 temperature: 0.15
 maxSteps: 100
 tools:

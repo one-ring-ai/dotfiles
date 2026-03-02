@@ -1,7 +1,7 @@
 ---
 description: Documentation writer for both human engineers and AI agents
 mode: subagent
-model: opencode/kimi-k2.5
+model: opencode/gpt-5.1-codex-mini
 temperature: 0.2
 maxSteps: 100
 tools:
