@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "tokyonight",
+  "default_agent": "orchestrator",
   "autoupdate": true,
   "compaction": {
     "auto": true,
