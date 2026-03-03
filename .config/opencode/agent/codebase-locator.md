@@ -1,7 +1,7 @@
 ---
 description: READ ONLY codebase locator that surfaces relevant files, directories, and organization patterns for a feature without examining code internals
 mode: subagent
-model: opencode/gpt-5.1-codex-mini
+model: opencode/kimi-k2.5
 temperature: 0.3
 maxSteps: 150
 tools:
