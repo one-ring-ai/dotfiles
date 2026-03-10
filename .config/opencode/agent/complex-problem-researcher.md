@@ -8,9 +8,8 @@ tools:
   edit: false
   patch: false
   "figma*": false
-  "chrome*": false
   "shadcn*": false
-  "next*": false
+  "laravel*": false
 ---
 
 # Complex Problem Researcher

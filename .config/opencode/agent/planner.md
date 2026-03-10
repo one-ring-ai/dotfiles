@@ -4,7 +4,8 @@ mode: primary
 model: opencode/gpt-5.3-codex
 temperature: 0.2
 tools:
-  "next*": false
+  "shadcn*": false
+  "laravel*": false
 permission:
   edit:
     "*": "deny"

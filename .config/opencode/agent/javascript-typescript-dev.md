@@ -6,7 +6,7 @@ temperature: 0.15
 maxSteps: 100
 tools:
   "shadcn*": false
-  "next*": false
+  "laravel*": false
 permission:
   bash:
     "npm *": allow

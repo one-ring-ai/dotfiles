@@ -8,7 +8,6 @@ tools:
   "figma*": false
   "chrome*": false
   "shadcn*": false
-  "next*": false
 ---
 
 # You are an expert PHP and Laravel Developer

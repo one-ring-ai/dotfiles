@@ -56,9 +56,9 @@
       ],
       "enabled": true,
     },
-    "next-devtools": {
+    "laravel-boost": {
       "type": "local",
-      "command": ["npx", "-y", "next-devtools-mcp@latest"],
+      "command": ["vendor/bin/sail", "artisan", "boost:mcp"],
       "enabled": true,
     },
     "shadcn": {

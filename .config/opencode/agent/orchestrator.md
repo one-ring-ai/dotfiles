@@ -4,7 +4,8 @@ mode: primary
 model: opencode/gpt-5.1-codex-max
 temperature: 0.1
 tools:
-  "next*": false
+  "shadcn*": false
+  "laravel*": false
 ---
 
 # You are the orchestrator agent

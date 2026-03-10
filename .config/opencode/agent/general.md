@@ -8,7 +8,7 @@ tools:
   "figma*": false
   "chrome*": false
   "shadcn*": false
-  "next*": false
+  "laravel*": false
 ---
 
 # You are the General-Purpose Agent

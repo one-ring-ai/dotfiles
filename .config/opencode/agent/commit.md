@@ -11,7 +11,7 @@ tools:
   "figma*": false
   "chrome*": false
   "shadcn*": false
-  "next*": false
+  "laravel*": false
 permission:
   bash:
     "git add": allow

@@ -12,7 +12,7 @@ tools:
   "figma*": false
   "chrome*": false
   "shadcn*": false
-  "next*": false
+  "laravel*": false
 ---
 
 # You are a specialist at extracting HIGH-VALUE insights from thoughts documents
