@@ -20,29 +20,6 @@
   "model": "opencode/gpt-5.1-codex-max",
   "small_model": "opencode/kimi-k2.5",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
-  // pre-configured providers
-  "provider": {
-    "openrouter": {
-      "api": "https://openrouter.ai/api/v1",
-      "name": "Openrouter",
-      "id": "openrouter",
-      "options": {
-        "apiKey": "{file:~/.config/opencode/.secrets/openrouter-key}",
-      },
-      "models": {
-        "@preset/planner-model": {},
-        "@preset/coder-model": {},
-      },
-    },
-    "replicate": {
-      "api": "https://api.replicate.com/v1",
-      "name": "Replicate",
-      "id": "replicate",
-      "options": {
-        "REPLICATE_API_TOKEN": "{file:~/.config/opencode/.secrets/replicate-key}",
-      },
-    },
-  },
   // pre-configured mcp servers
   "mcp": {
     "figma": {
@@ -54,11 +31,6 @@
         "--figma-api-key={file:~/.config/opencode/.secrets/figma-token}",
         "--stdio",
       ],
-      "enabled": true,
-    },
-    "laravel-boost": {
-      "type": "local",
-      "command": ["vendor/bin/sail", "artisan", "boost:mcp"],
       "enabled": true,
     },
     "shadcn": {
