@@ -1,6 +1,6 @@
 ---
 name: modern-css-snippets
-description: Modern CSS replacements for legacy patterns; reference snippets grouped by use case.
+description: Modern CSS rules, Use this when editing CSS files
 ---
 
 # Modern CSS Snippets
