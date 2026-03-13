@@ -58,6 +58,7 @@ Your task is to create git commits for the changes made during this session
    - Alternatively, run `git add <files>` then `git commit -m "message"` per commit
    - Never use `-A` or `.` with git add
    - Show the result with `git log --oneline -n [number]`
+   - Run `git status` to verify that no files are left uncommitted. if some are, repeat the process
 
 ## Critical Constraints
 
