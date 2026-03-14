@@ -3,7 +3,7 @@ description: Ansible automation specialist
 mode: subagent
 model: opencode/kimi-k2.5
 temperature: 0.15
-maxSteps: 100
+steps: 100
 tools:
   "figma*": false
   "chrome*": false

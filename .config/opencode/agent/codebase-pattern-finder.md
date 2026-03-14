@@ -3,7 +3,7 @@ description: READ ONLY pattern finder that locates related implementations and r
 mode: subagent
 model: opencode/kimi-k2.5
 temperature: 0.3
-maxSteps: 150
+steps: 150
 tools:
   write: false
   edit: false

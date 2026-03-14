@@ -3,7 +3,7 @@ description: READ ONLY codebase analyst that traces implementation flow and docu
 mode: subagent
 model: opencode/kimi-k2.5
 temperature: 0.3
-maxSteps: 150
+steps: 150
 tools:
   write: false
   edit: false

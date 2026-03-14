@@ -3,7 +3,7 @@ description: READ ONLY web researcher that finds authoritative sources to answer
 mode: subagent
 model: opencode/kimi-k2.5
 temperature: 0.3
-maxSteps: 100
+steps: 100
 tools:
   write: false
   edit: false

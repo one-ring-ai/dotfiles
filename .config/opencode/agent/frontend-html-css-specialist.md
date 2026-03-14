@@ -3,7 +3,7 @@ description: Frontend developer using HTML5/CSS3/Vanilla JS without external fra
 mode: subagent
 model: opencode/kimi-k2.5
 temperature: 0.3
-maxSteps: 100
+steps: 100
 tools:
   next-devtools: false
   shadcn: false
