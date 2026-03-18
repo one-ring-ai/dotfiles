@@ -103,7 +103,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 alias mnt='cd /mnt/user'
 
 # alias for opencode
-alias sync-opencode='curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/main/.config/opencode/setup.sh | bash'
+alias sync-opencode='curl -fsSL https://raw.githubusercontent.com/digitalygo/opencode-setup/main/setup.sh | bash'
 
 #######################################################
 # GENERAL ALIASES
