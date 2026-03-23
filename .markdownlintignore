@@ -7,3 +7,5 @@ thoughts/
 .venv/
 **/.venv/
 *.DS_Store
+vendor/
+**/vendor/
